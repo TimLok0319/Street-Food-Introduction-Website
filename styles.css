@@ -1,0 +1,36 @@
+body{
+    font-family: 'Oswald', sans-serif;
+}
+
+nav{
+    background-color: #582C4D;
+}
+
+.navbar-brand{
+    color : white;
+    padding-right: 20px;
+}
+
+.navbar .nav-link{
+    color: white;
+    margin-left: 10px;
+
+}
+.navbar .nav-link.active{
+    color: white;
+    background-color: #301729 ;
+    border-radius: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.navbar-toggler.navbar-toggler:collapsed{
+    background-color:white;
+}
+
+.navbar-toggler-icon{
+    background-image: url("images/hamburger-icon.png");
+}
+
+
