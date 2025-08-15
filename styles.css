@@ -12,7 +12,7 @@ nav{
     background-color: #39765f;
     padding-bottom: 12px !important;
     padding-top: 12px!important;
-    
+    margin-bottom: -35px!important;
 }
 
 .navbar-brand{
@@ -68,29 +68,44 @@ nav{
 
 .hero-section {
     position: relative;
-    height: 100vh;
     background-size: cover; 
     background-position: center;
+    background-image:url(images/street.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    align-items: flex-start;
+    height : 70vh;
     color: white;
     flex : 1;
-    max-width: 1400px;
-    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center
 }
 
-.hero-para{
-    font-size: 30px;
-    color: #FEFAE0;
+.hero-section h1{
+    font-size: 140px;
+    font-weight: 1000;
+    color: white;
     padding-top: 30px;
 }
 
-main{
-    background-image: url(images/street.png);
-
+.hero-section h4{
+    font-size:50px;
 }
+
+.hero-section button{
+    width:400px;
+    background-color: #2ca57b;
+    font-size: 25px;
+    font-weight: bold;
+    border: none!important;
+}
+
+.hero-section button:hover{
+    background-color: #197152;
+}
+
 
 
 
