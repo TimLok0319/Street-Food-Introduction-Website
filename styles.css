@@ -1,5 +1,11 @@
+main{
+    flex:1;
+    display : flex;
+}
+
 body{
     font-family: 'Oswald', sans-serif;
+    margin: 0;
 }
 
 nav{
@@ -18,13 +24,21 @@ nav{
     color: white;
     font-size: 23px;
     font-weight: 450;
-    margin-left: 15px;
+    padding-left: 15px;
+}
+
+.nav-item{
+    padding-left: 15px;
+}
+
+.navbar .nav-link:hover{
+    color :#0c1602
+
 }
 .navbar .nav-link.active{
     color: white;
     background-color: #152700 ;
     border-radius: 15px;
-    padding-left:15px;
 }
 
 .navbar-toggler.navbar-toggler:collapsed{
@@ -45,7 +59,25 @@ nav{
     color: white;
     font-size: 23px;
     font-weight: 450;
-    padding-left: 15px;
+    padding-left: 30px;
+}
+
+.account:hover{
+    color:#0c1602;
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    background-image: url('images/street.png');
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    flex : 1;
 }
 
 
