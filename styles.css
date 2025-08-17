@@ -1,18 +1,24 @@
 main{
     flex:1;
     display : flex;
+    flex-direction: column;
 }
 
 body{
     font-family: 'Oswald', sans-serif;
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
+
+/*----------------------------------------------------------------Navbar----------------------------------------------------------------*/
 
 nav{
     background-color: #39765f;
     padding-bottom: 12px !important;
     padding-top: 12px!important;
-    margin-bottom: -35px!important;
 }
 
 .navbar-brand{
@@ -54,18 +60,19 @@ nav{
 
 }
 
+
 .account{
     text-decoration: none;
     color: white;
     font-size: 23px;
     font-weight: 450;
-    padding-left: 30px;
 }
 
 .account:hover{
     color:#0c1602;
 }
 
+/*----------------------------------------------------------------Homepage----------------------------------------------------------------*/
 .hero-section {
     position: relative;
     background-size: cover; 
@@ -74,44 +81,62 @@ nav{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
-    height : 70vh;
+    min-height : 70vh;
     color: white;
-    flex : 1;
-    text-align: center;
+    text-align: center;    
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center
 }
 
 .hero-section h1{
-    font-size: 140px;
+    font-size: clamp(4.5rem, 10vw, 10rem);
     font-weight: 1000;
     color: white;
     padding-top: 30px;
 }
 
 .hero-section h4{
-    font-size:50px;
+    font-size: clamp(1.5rem, 1vw, 3rem);
+    font-weight: 350;
 }
 
 .hero-section button{
-    width:400px;
+    width:90%;
+    max-width: 400px;
     background-color: #2ca57b;
     font-size: 25px;
     font-weight: bold;
     border: none!important;
+    display: flexbox;
+    margin:10px auto;
 }
 
 .hero-section button:hover{
     background-color: #197152;
 }
 
+.hero-section button:active{
+    background-color: #197152!important;
+    transform: translateY(1px);
+}
 
+main .temp
+{
+    min-height: 70vh;
+}
+/*----------------------------------------------------------------Start Here----------------------------------------------------------------*/
 
+/*----------------------------------------------------------------Footer----------------------------------------------------------------*/
 
+.footer
+{
+    background-color: #39765f;
+    text-align: center;
+    padding-bottom: 10px;
+    align-items: center;
+}
 
-
-
-
-
-
+body > * {
+    width: 100%;
+}
