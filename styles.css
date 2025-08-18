@@ -121,6 +121,36 @@ nav{
     transform: translateY(1px);
 }
 
+.food-recommendation{
+    background-color: #fffdf0;
+}
+
+.food-recommendation .container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+}
+
+.food-recommendation .container h1{
+    color: #000000;
+    font-size: 5rem;
+}
+
+.food-recommendation .container .card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.food-recommendation .container .card{
+    width: rem;
+    margin-right: 50px;
+}
+
 main .temp
 {
     min-height: 70vh;
