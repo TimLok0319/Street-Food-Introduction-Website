@@ -104,16 +104,23 @@ nav{
 .hero-section button{
     width:90%;
     max-width: 400px;
-    background-color: #2ca57b;
+    background-color: rgba(255, 255, 255, 0.157);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255,255,255,0.4);
+    border-left: 1px solid rgba(255,255,255,0.4);
+    border-bottom: none ;
+    border-right: none;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.089);
     font-size: 25px;
     font-weight: bold;
-    border: none!important;
     display: flexbox;
     margin:10px auto;
+
 }
 
 .hero-section button:hover{
     background-color: #197152;
+    border: none;
 }
 
 .hero-section button:active{
@@ -129,26 +136,45 @@ nav{
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding-top: 5rem;
+    padding-top: 4rem;
     padding-bottom: 5rem;
-
 }
 
 .food-recommendation .container h1{
     color: #000000;
-    font-size: 5rem;
+    font-size: clamp(3.5rem, 10vw, 10rem);
+    font-weight: 800;
+}
+
+.food-recommendation .container .card-title{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.food-recommendation .container .card-text{
+    font-size: 20px;
 }
 
 .food-recommendation .container .card-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 20px;
+}
+
+.food-recommendation .container .card-container .list-group{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+@media (max-width: 991px) {
+    .food-recommendation .container .card-container{
+        flex-direction: column;
+    }
 }
 
 .food-recommendation .container .card{
     width: rem;
-    margin-right: 50px;
+    margin: 20px;
 }
 
 main .temp
