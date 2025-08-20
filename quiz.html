@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse"  id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">HOME</a>
+          <a class="nav-link" aria-current="page" href="#">HOME</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">FOOD GALLERY</a>
@@ -35,7 +35,7 @@
           <a class="nav-link" href="#">MY FAVOURITE</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">QUIZ</a>
+          <a class="nav-link active" href="#">QUIZ</a>
         </li>
       </ul>
 
@@ -49,10 +49,177 @@
   </div>
 </nav>
 
-<!-- Strart Here -->
+<!-- Start Here -->
+<div class="container my-5">
+  <div id="quizCard" class="card shadow-lg p-4 mx-auto text-center" style="max-width: 600px; border-radius: 20px;">
+    <h2 class="mb-4">🍜 Penang Street Food Quiz</h2>
 
+    <!-- Login Section -->
+    <div id="loginSection">
+      <p>Log in to track your progress (or leave blank to play as Guest):</p>
+      <input id="email" type="email" class="form-control mb-3" placeholder="Enter your email">
+      <button class="btn btn-primary w-100" onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizSection" style="display:none;">
+      <h4 id="questionText" class="mb-3"></h4>
+      <div id="answerButtons" class="mt-3"></div>
+      <button id="nextBtn" class="btn btn-success w-100 mt-3">Next</button>
+      <p class="mt-2 text-muted" id="progressText"></p>
+    </div>
+
+    <!-- Result Section -->
+    <div id="resultSection" style="display:none;">
+      <h4 id="finalScore"></h4>
+      <h5 class="mt-3">🏆 Rankings</h5>
+      <ol id="rankingList" class="text-start"></ol>
+      <button class="btn btn-secondary mt-3" onclick="restartQuiz()">Play Again</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- jQuery + Quiz Script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+const quizData = [
+  {
+    question: "What noodles are used in Char Kway Teow?",
+    answers: ["Yellow Mee", "Flat Rice Noodles", "Bee Hoon", "Instant Noodles"],
+    correct: 1
+  },
+  {
+    question: "Penang Assam Laksa is famous for its taste of…",
+    answers: ["Coconut milk", "Tamarind (sour)", "Sweet soy sauce", "Curry powder"],
+    correct: 1
+  },
+  {
+    question: "Which ingredient makes Cendol green?",
+    answers: ["Pandan", "Matcha", "Mint", "Spinach"],
+    correct: 0
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let email = "";
+let userName = "";
+
+// Elements
+const loginSection = $("#loginSection");
+const quizSection = $("#quizSection");
+const resultSection = $("#resultSection");
+const questionText = $("#questionText");
+const answerButtons = $("#answerButtons");
+const nextBtn = $("#nextBtn");
+const finalScore = $("#finalScore");
+const rankingList = $("#rankingList");
+const progressText = $("#progressText");
+
+function startQuiz() {
+  email = $("#email").val().trim();
+
+  if (!email) {
+    userName = "Guest";
+  } else {
+    // Try to fetch previous record
+    let users = JSON.parse(localStorage.getItem("penangQuizUsers") || "{}");
+    if (!users[email]) {
+      // New user, store as record
+      users[email] = { name: email.split("@")[0], scores: [] };
+      localStorage.setItem("penangQuizUsers", JSON.stringify(users));
+    }
+    userName = users[email].name;
+  }
+
+  loginSection.hide();
+  quizSection.show();
+  currentQuestion = 0;
+  score = 0;
+  showQuestion();
+}
+
+function showQuestion() {
+  let q = quizData[currentQuestion];
+  questionText.text((currentQuestion + 1) + ". " + q.question);
+  progressText.text(`Question ${currentQuestion + 1} of ${quizData.length}`);
+
+  answerButtons.empty();
+  q.answers.forEach((ans, index) => {
+    answerButtons.append(`
+      <button class="btn btn-outline-primary w-100 mb-2" onclick="selectAnswer(${index})">
+        ${ans}
+      </button>
+    `);
+  });
+  nextBtn.hide();
+}
+
+function selectAnswer(index) {
+  if (index === quizData[currentQuestion].correct) {
+    score++;
+    $(`#answerButtons button:eq(${index})`).removeClass("btn-outline-primary").addClass("btn-success");
+  } else {
+    $(`#answerButtons button:eq(${index})`).removeClass("btn-outline-primary").addClass("btn-danger");
+  }
+  $("#answerButtons button").prop("disabled", true);
+  nextBtn.show();
+}
+
+nextBtn.click(() => {
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+  } else {
+    showResults();
+  }
+});
+
+function showResults() {
+  quizSection.hide();
+  resultSection.show();
+
+  finalScore.text(`${userName}, you got ${score} out of ${quizData.length} 🎉`);
+
+  if (userName !== "Guest") {
+    // Save score under email
+    let users = JSON.parse(localStorage.getItem("penangQuizUsers") || "{}");
+    users[email].scores.push(score);
+    localStorage.setItem("penangQuizUsers", JSON.stringify(users));
+
+    // Build rankings (highest score of each user)
+    let rankings = [];
+    for (let userEmail in users) {
+      let user = users[userEmail];
+      let bestScore = Math.max(...user.scores);
+      rankings.push({ name: user.name, score: bestScore });
+    }
+
+    rankings.sort((a, b) => b.score - a.score);
+
+    // Show top 5 with medals
+    rankingList.empty();
+    rankings.slice(0, 5).forEach((r, i) => {
+      let medal = "";
+      if (i === 0) medal = "🥇 ";
+      else if (i === 1) medal = "🥈 ";
+      else if (i === 2) medal = "🥉 ";
+      rankingList.append(`<li>${medal}${r.name} - ${r.score}/${quizData.length}</li>`);
+    });
+  } else {
+    rankingList.html("<li>Guest scores are not saved. Log in with email to join the rankings!</li>");
+  }
+}
+
+function restartQuiz() {
+  resultSection.hide();
+  loginSection.show();
+}
+</script>
 
 <!-- End Here -->
+
 <footer class="footer text-center text-white py-4">
 <div class="container">
   <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
