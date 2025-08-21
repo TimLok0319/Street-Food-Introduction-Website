@@ -81,7 +81,7 @@ nav{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height : 70vh;
+    min-height : 100vh;
     color: white;
     text-align: center;    
     display: flex;
@@ -97,7 +97,7 @@ nav{
 }
 
 .hero-section h4{
-    font-size: clamp(1.5rem, 1vw, 3rem);
+    font-size: clamp(1.5rem, 1.5vw, 3rem);
     font-weight: 350;
 }
 
@@ -111,11 +111,10 @@ nav{
     border-bottom: none ;
     border-right: none;
     box-shadow: 3px 3px 3px rgba(0,0,0,0.089);
-    font-size: 25px;
+    font-size: 35px;
     font-weight: bold;
     display: flexbox;
     margin:10px auto;
-
 }
 
 .hero-section button:hover{
@@ -128,8 +127,26 @@ nav{
     transform: translateY(1px);
 }
 
+#stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: top;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+
+.hero-section h2{
+    font-size: clamp(3.3rem,10vw,5rem);
+    font-weight: 900;
+}
+
+.hero-section h3{
+    font-size: clamp(1rem,5vw,2rem);
+}
+
 .food-recommendation{
-    background-color: #fffdf0;
+    background-color: #f0fff4;
 }
 
 .food-recommendation .container{
