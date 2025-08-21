@@ -1,0 +1,811 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Details - Penang One Better</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity=
+     "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Luckiest+Guy&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img src="images/brand-logo.png" height="50" width="180"></a>
+            <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="food_gallery.html">FOOD GALLERY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FIND A RESTAURANT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my_favourite.html">MY FAVOURITE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">QUIZ</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Food Details Section -->
+    <main>
+        <section class="food-details-section" style="background-color: #FEFAE0; padding: 50px 0;">
+            <div class="container">
+                <!-- Back Button -->
+                <div class="mb-4">
+                    <button class="btn btn-outline-success" id="back-btn">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Food Gallery
+                    </button>
+                </div>
+
+                <!-- Food Details Content -->
+                <div id="food-details-content">
+                    <!-- Content will be loaded here -->
+                </div>
+
+                <!-- Share Section -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title mb-3">Share This Food</h5>
+                                
+                                <!-- Food Tips from API -->
+                                <div class="food-tips mb-3" id="food-tips" style="display: none;">
+                                    <div class="alert alert-info">
+                                        <h6><i class="bi bi-lightbulb me-2"></i>Random Food Tip</h6>
+                                        <p id="food-tip-content" class="mb-1">Loading tip...</p>
+                                        <button class="btn btn-outline-info btn-sm" id="new-tip-btn">
+                                            <i class="bi bi-arrow-clockwise me-1"></i>New Tip
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="share-buttons">
+                                    <button type="button" class="btn btn-success me-2" id="share-whatsapp">
+                                        <i class="bi bi-whatsapp"></i> WhatsApp
+                                    </button>
+                                    <button type="button" class="btn btn-info text-white me-2" id="share-twitter">
+                                        <i class="bi bi-twitter"></i> Twitter
+                                    </button>
+                                    <button type="button" class="btn btn-success me-2" id="add-to-favorites">
+                                        <i class="bi bi-heart"></i> Add to Favorites
+                                    </button>
+                                    <button type="button" class="btn btn-warning text-dark" id="copy-link">
+                                        <i class="bi bi-link-45deg"></i> Copy Link
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Foods Section -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h4 class="mb-4">More Penang Foods You Might Like</h4>
+                        <div id="related-foods" class="row">
+                            <!-- Related foods will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Error Message -->
+    <div id="error-message" class="container mt-5" style="display: none;">
+        <div class="alert alert-warning text-center">
+            <h4>Food not found</h4>
+            <p>We couldn't find the food details. Please go back to the food gallery and try again.</p>
+            <a href="food_gallery.html" class="btn btn-success">Back to Food Gallery</a>
+        </div>
+    </div>
+
+    <footer class="footer text-center text-white py-4">
+        <div class="container">
+            <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="https://github.com/TimLok0319/Street-Food-Introduction-Website" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        let currentFood = null;
+        let allFoods = [];
+
+        $(document).ready(function() {
+            loadFoodDetails();
+            loadFoodTip(); // Load food tip from API
+
+            // Event handlers
+            $('#back-btn').click(function() {
+                window.location.href = 'food_gallery.html';
+            });
+
+            $('#share-whatsapp').click(shareOnWhatsApp);
+            $('#share-twitter').click(shareOnTwitter);
+            $('#add-to-favorites').click(addToFavorites);
+            $('#copy-link').click(copyLink);
+            $('#new-tip-btn').click(loadFoodTip); // Load new tip
+        });
+
+        function loadFoodDetails() {
+            // Get food data from localStorage
+            const selectedFood = localStorage.getItem('selectedFood');
+            const allFoodsData = localStorage.getItem('allFoods');
+
+            if (!selectedFood) {
+                showError();
+                return;
+            }
+
+            try {
+                currentFood = JSON.parse(selectedFood);
+                allFoods = JSON.parse(allFoodsData) || [];
+                renderFoodDetails(currentFood);
+                loadRelatedFoods();
+            } catch (error) {
+                console.error('Error parsing food data:', error);
+                showError();
+            }
+        }
+
+        function renderFoodDetails(food) {
+            const ratingStars = generateRatingStars(food.rating);
+            
+            const detailsHtml = `
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="food-image-container">
+                            <img src="${food.image}" class="img-fluid rounded shadow-lg" alt="${food.name}"
+                                 style="width: 100%; height: 400px; object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/400x400?text=Penang+Food'">
+                        </div>
+                        <div class="mt-3 text-center">
+                            <div class="rating-large">
+                                ${ratingStars}
+                                <span class="fs-4 fw-bold ms-2">${food.rating}/5</span>
+                            </div>
+                            <p class="text-muted mt-2">Rated by food enthusiasts</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="food-info">
+                            <h1 class="display-5 fw-bold mb-3">${food.name}</h1>
+                            <div class="mb-4">
+                                <span class="badge bg-primary me-2 fs-6">🇲🇾 Penang Street Food</span>
+                                <span class="badge bg-warning text-dark me-2 fs-6">${food.category}</span>
+                                <span class="badge bg-success fs-6">✨ Authentic Local</span>
+                            </div>
+                            <p class="lead mb-4">${food.description}</p>
+                            
+                            <div class="row mb-4">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="info-item">
+                                        <i class="bi bi-clock-history text-primary me-2"></i>
+                                        <strong>History:</strong> ${food.history}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="info-item">
+                                        <i class="bi bi-lightbulb text-warning me-2"></i>
+                                        <strong>Facts:</strong> ${food.facts}
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="info-item">
+                                        <i class="bi bi-people text-success me-2"></i>
+                                        <strong>Culture:</strong> ${food.culture}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="info-item">
+                                        <i class="bi bi-fire text-warning me-2"></i>
+                                        <strong>Calories:</strong> ${food.calories} per serving
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="info-item">
+                                        <i class="bi bi-currency-dollar text-success me-2"></i>
+                                        <strong>Price Range:</strong> ${food.price_range}
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${food.best_locations ? `
+                                <div class="mb-4">
+                                    <h5><i class="bi bi-geo-alt-fill text-danger me-2"></i>Best Locations in Penang:</h5>
+                                    <div class="locations-list">
+                                        ${food.best_locations.map(location => `
+                                            <span class="badge bg-light text-dark me-2 mb-2 p-2">${location}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="my-5">
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="mb-4"><i class="bi bi-list-check me-2"></i>Ingredients</h3>
+                        <div class="ingredients-grid">
+                            ${food.ingredients.map((ingredient, index) => `
+                                <div class="ingredient-card">
+                                    <span class="ingredient-number">${index + 1}</span>
+                                    <span class="ingredient-name">${ingredient}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('#food-details-content').html(detailsHtml);
+            
+            // Update page title
+            document.title = `${food.name} - Penang One Better`;
+        }
+
+        function loadRelatedFoods() {
+            if (!currentFood || !allFoods.length) return;
+
+            // Get related foods (same category, excluding current food)
+            const relatedFoods = allFoods
+                .filter(food => food.category === currentFood.category && food.id !== currentFood.id)
+                .slice(0, 3); // Show max 3 related foods
+
+            if (relatedFoods.length === 0) {
+                // If no foods in same category, show random foods
+                const randomFoods = allFoods
+                    .filter(food => food.id !== currentFood.id)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3);
+                renderRelatedFoods(randomFoods);
+            } else {
+                renderRelatedFoods(relatedFoods);
+            }
+        }
+
+        function renderRelatedFoods(foods) {
+            const relatedHtml = foods.map(food => {
+                const ratingStars = generateRatingStars(food.rating);
+                return `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm related-food-card" data-food-id="${food.id}">
+                            <img src="${food.image}" class="card-img-top" alt="${food.name}" 
+                                 style="height: 200px; object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/300x200?text=Penang+Food'">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title">${food.name}</h6>
+                                <p class="card-text flex-grow-1 small">${food.description.substring(0, 80)}...</p>
+                                <div class="mt-auto">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="rating small">
+                                            ${ratingStars}
+                                            <small class="text-muted ms-1">(${food.rating})</small>
+                                        </div>
+                                        <span class="badge bg-warning text-dark">${food.category}</span>
+                                    </div>
+                                    <button class="btn btn-outline-success btn-sm w-100 view-related-btn" data-food-id="${food.id}">
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            $('#related-foods').html(relatedHtml);
+
+            // Add click handlers for related foods
+            $('.view-related-btn').click(function() {
+                const foodId = $(this).data('food-id');
+                const selectedFood = allFoods.find(f => f.id === foodId);
+                if (selectedFood) {
+                    localStorage.setItem('selectedFood', JSON.stringify(selectedFood));
+                    window.location.reload(); // Reload the page with new food
+                }
+            });
+        }
+
+        // Food Tips API Integration - Using jQuery RESTful calls
+        function loadFoodTip() {
+            // Using jQuery.ajax() for RESTful GET request
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                method: 'GET',
+                dataType: 'json',
+                timeout: 10000,
+                success: function(data) {
+                    // Get random post and convert to food tip
+                    const randomPost = data[Math.floor(Math.random() * data.length)];
+                    const foodTip = convertToFoodTip(randomPost.title);
+                    displayFoodTip(foodTip);
+                },
+                error: function(xhr, status, error) {
+                    console.log('Food Tips API Error:', status, error);
+                    displayFallbackTip();
+                },
+                beforeSend: function() {
+                    $('#food-tip-content').text('Loading new tip...');
+                },
+                complete: function() {
+                    $('#food-tips').fadeIn();
+                }
+            });
+        }
+
+        // Alternative RESTful methods for food tips
+        function loadFoodTipAlternative() {
+            // Using jQuery.get() shorthand
+            $.get('https://jsonplaceholder.typicode.com/posts/1')
+                .done(function(data) {
+                    const tip = convertToFoodTip(data.title);
+                    displayFoodTip(tip);
+                })
+                .fail(function() {
+                    displayFallbackTip();
+                });
+        }
+
+        // Using jQuery.getJSON() for RESTful API call
+        function loadFoodTipWithGetJSON() {
+            $.getJSON('https://jsonplaceholder.typicode.com/posts?_limit=10')
+                .done(function(posts) {
+                    const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                    const tip = convertToFoodTip(randomPost.title);
+                    displayFoodTip(tip);
+                })
+                .fail(function() {
+                    displayFallbackTip();
+                });
+        }
+
+        function convertToFoodTip(title) {
+            const foodTips = [
+                "Always taste your food before adding salt - let the natural flavors shine!",
+                "Fresh ingredients make all the difference in authentic street food.",
+                "The best time to enjoy street food is when it's freshly cooked and hot.",
+                "Don't be afraid to try new flavors - that's how you discover favorites!",
+                "Street food is best enjoyed with friends and family.",
+                "Look for busy stalls - high turnover means fresher ingredients.",
+                "Each region has its own twist on classic dishes - embrace the variety!",
+                "The secret ingredient in great food is always love and passion."
+            ];
+            return foodTips[Math.floor(Math.random() * foodTips.length)];
+        }
+
+        function displayFoodTip(tip) {
+            $('#food-tip-content').text(tip);
+            $('#food-tips').fadeIn();
+        }
+
+        function displayFallbackTip() {
+            const fallbackTips = [
+                "Street food tells the story of a place and its people.",
+                "The best meals come from the heart, not just the kitchen.",
+                "Food is a universal language that brings people together.",
+                "Every dish has a history worth discovering."
+            ];
+            const randomTip = fallbackTips[Math.floor(Math.random() * fallbackTips.length)];
+            displayFoodTip(randomTip);
+        }
+
+        // Example of other RESTful operations using jQuery
+        function demonstrateRestfulOperations() {
+            // POST request example - Create new data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    title: 'New Food Review',
+                    body: 'This food was amazing!',
+                    userId: 1
+                }),
+                success: function(response) {
+                    console.log('POST Success:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.log('POST Error:', error);
+                }
+            });
+
+            // PUT request example - Update existing data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    id: 1,
+                    title: 'Updated Food Review',
+                    body: 'Updated review content',
+                    userId: 1
+                }),
+                success: function(response) {
+                    console.log('PUT Success:', response);
+                }
+            });
+
+            // PATCH request example - Partial update
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'PATCH',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    title: 'Partially Updated Title'
+                }),
+                success: function(response) {
+                    console.log('PATCH Success:', response);
+                }
+            });
+
+            // DELETE request example - Remove data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'DELETE',
+                success: function(response) {
+                    console.log('DELETE Success:', response);
+                }
+            });
+        }
+
+        // Food Tips API Integration - Using jQuery RESTful calls
+        function loadFoodTip() {
+            // Using jQuery.ajax() for RESTful GET request
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                method: 'GET',
+                dataType: 'json',
+                timeout: 10000,
+                success: function(data) {
+                    // Get random post and convert to food tip
+                    const randomPost = data[Math.floor(Math.random() * data.length)];
+                    const foodTip = convertToFoodTip(randomPost.title);
+                    displayFoodTip(foodTip);
+                },
+                error: function(xhr, status, error) {
+                    console.log('Food Tips API Error:', status, error);
+                    displayFallbackTip();
+                },
+                beforeSend: function() {
+                    $('#food-tip-content').text('Loading new tip...');
+                },
+                complete: function() {
+                    $('#food-tips').fadeIn();
+                }
+            });
+        }
+
+        // Alternative RESTful methods for food tips
+        function loadFoodTipAlternative() {
+            // Using jQuery.get() shorthand
+            $.get('https://jsonplaceholder.typicode.com/posts/1')
+                .done(function(data) {
+                    const tip = convertToFoodTip(data.title);
+                    displayFoodTip(tip);
+                })
+                .fail(function() {
+                    displayFallbackTip();
+                });
+        }
+
+        // Using jQuery.getJSON() for RESTful API call
+        function loadFoodTipWithGetJSON() {
+            $.getJSON('https://jsonplaceholder.typicode.com/posts?_limit=10')
+                .done(function(posts) {
+                    const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                    const tip = convertToFoodTip(randomPost.title);
+                    displayFoodTip(tip);
+                })
+                .fail(function() {
+                    displayFallbackTip();
+                });
+        }
+
+        function convertToFoodTip(title) {
+            const foodTips = [
+                "Always taste your food before adding salt - let the natural flavors shine!",
+                "Fresh ingredients make all the difference in authentic street food.",
+                "The best time to enjoy street food is when it's freshly cooked and hot.",
+                "Don't be afraid to try new flavors - that's how you discover favorites!",
+                "Street food is best enjoyed with friends and family.",
+                "Look for busy stalls - high turnover means fresher ingredients.",
+                "Each region has its own twist on classic dishes - embrace the variety!",
+                "The secret ingredient in great food is always love and passion."
+            ];
+            return foodTips[Math.floor(Math.random() * foodTips.length)];
+        }
+
+        function displayFoodTip(tip) {
+            $('#food-tip-content').text(tip);
+            $('#food-tips').fadeIn();
+        }
+
+        function displayFallbackTip() {
+            const fallbackTips = [
+                "Street food tells the story of a place and its people.",
+                "The best meals come from the heart, not just the kitchen.",
+                "Food is a universal language that brings people together.",
+                "Every dish has a history worth discovering."
+            ];
+            const randomTip = fallbackTips[Math.floor(Math.random() * fallbackTips.length)];
+            displayFoodTip(randomTip);
+        }
+
+        // Example of other RESTful operations using jQuery
+        function demonstrateRestfulOperations() {
+            // POST request example - Create new data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    title: 'New Food Review',
+                    body: 'This food was amazing!',
+                    userId: 1
+                }),
+                success: function(response) {
+                    console.log('POST Success:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.log('POST Error:', error);
+                }
+            });
+
+            // PUT request example - Update existing data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    id: 1,
+                    title: 'Updated Food Review',
+                    body: 'Updated review content',
+                    userId: 1
+                }),
+                success: function(response) {
+                    console.log('PUT Success:', response);
+                }
+            });
+
+            // PATCH request example - Partial update
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'PATCH',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    title: 'Partially Updated Title'
+                }),
+                success: function(response) {
+                    console.log('PATCH Success:', response);
+                }
+            });
+
+            // DELETE request example - Remove data
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'DELETE',
+                success: function(response) {
+                    console.log('DELETE Success:', response);
+                }
+            });
+        }
+
+        function showError() {
+            $('#food-details-content').hide();
+            $('#error-message').show();
+        }
+
+        // Utility functions
+        function generateRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            
+            return '★'.repeat(fullStars) + 
+                   (hasHalfStar ? '☆' : '') + 
+                   '☆'.repeat(emptyStars);
+        }
+
+        // Share functions
+        function shareOnWhatsApp() {
+            if (currentFood) {
+                const text = encodeURIComponent(`Check out this delicious ${currentFood.name} from Penang! 🍜 ${window.location.href}`);
+                window.open(`https://wa.me/?text=${text}`, '_blank');
+            }
+        }
+
+        function shareOnTwitter() {
+            if (currentFood) {
+                const text = encodeURIComponent(`Check out this delicious ${currentFood.name} from Penang! 🍜 ${window.location.href}`);
+                window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+            }
+        }
+
+        function addToFavorites() {
+            if (currentFood) {
+                let favorites = JSON.parse(localStorage.getItem('penangFavorites') || '[]');
+                
+                if (!favorites.find(fav => fav.id === currentFood.id)) {
+                    favorites.push(currentFood);
+                    localStorage.setItem('penangFavorites', JSON.stringify(favorites));
+                    
+                    $('#add-to-favorites').html('<i class="bi bi-heart-fill"></i> Added to Favorites')
+                        .removeClass('btn-success').addClass('btn-danger');
+                    
+                    showToast('Added to Favorites!', `${currentFood.name} has been saved to your favorites.`, 'success');
+                } else {
+                    showToast('Already in Favorites', `${currentFood.name} is already in your favorites.`, 'info');
+                }
+            }
+        }
+
+        function copyLink() {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(window.location.href).then(function() {
+                    showToast('Link Copied!', 'The food link has been copied to your clipboard.', 'success');
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = window.location.href;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Link Copied!', 'The food link has been copied to your clipboard.', 'success');
+                } catch (err) {
+                    showToast('Copy Failed', 'Could not copy the link.', 'danger');
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showToast(title, message, type) {
+            const toastHtml = `
+                <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <strong>${title}</strong><br>${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+            
+            if (!$('#toast-container').length) {
+                $('body').append('<div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>');
+            }
+            
+            $('#toast-container').append(toastHtml);
+            const toastElement = $('#toast-container .toast:last')[0];
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            $(toastElement).on('hidden.bs.toast', function() {
+                $(this).remove();
+            });
+        }
+
+        // Custom CSS for enhanced styling
+        $('<style>')
+            .prop('type', 'text/css')
+            .html(`
+                .rating {
+                    color: #ffc107;
+                }
+                .rating-large {
+                    font-size: 2rem;
+                    color: #ffc107;
+                }
+                .info-item {
+                    padding: 8px 0;
+                    border-bottom: 1px solid #eee;
+                }
+                .info-item:last-child {
+                    border-bottom: none;
+                }
+                .ingredients-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    gap: 15px;
+                    padding: 20px;
+                    background-color: #f8f9fa;
+                    border-radius: 12px;
+                    border: 1px solid #dee2e6;
+                }
+                .ingredient-card {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px;
+                    background: white;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    transition: transform 0.2s ease;
+                }
+                .ingredient-card:hover {
+                    transform: translateY(-2px);
+                }
+                .ingredient-number {
+                    background: #39765f;
+                    color: white;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    margin-right: 12px;
+                    font-size: 0.9rem;
+                }
+                .ingredient-name {
+                    font-weight: 500;
+                    color: #333;
+                }
+                .locations-list {
+                    max-height: 200px;
+                    overflow-y: auto;
+                }
+                .related-food-card {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    cursor: pointer;
+                }
+                .related-food-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+                }
+                .food-image-container {
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 12px;
+                }
+                .share-buttons .btn {
+                    margin: 5px;
+                }
+                @media (max-width: 768px) {
+                    .ingredients-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .rating-large {
+                        font-size: 1.5rem;
+                    }
+                }
+            `)
+            .appendTo('head');
+    </script>
+</body>
+</html>
