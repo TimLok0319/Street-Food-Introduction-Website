@@ -1,0 +1,23 @@
+[
+  {
+    "question": "What noodles are used in Char Kway Teow?",
+    "answers": ["Yellow Mee", "Flat Rice Noodles", "Bee Hoon", "Instant Noodles"],
+    "correct": 1,
+    "image": "images/char_kway_teow.png",
+    "explanation": "Char Kway Teow uses flat rice noodles stir-fried with prawns, cockles, egg, bean sprouts, and Chinese sausage."
+  },
+  {
+    "question": "Penang Assam Laksa is famous for its taste of…",
+    "answers": ["Coconut milk", "Tamarind (sour)", "Sweet soy sauce", "Curry powder"],
+    "correct": 1,
+    "image": "images/Penang-asam-laksa-in-a-bowl.jpg",
+    "explanation": "Penang Assam Laksa is known for its sour and spicy tamarind-based broth with mackerel fish and fresh herbs."
+  },
+  {
+    "question": "Which ingredient makes Cendol green?",
+    "answers": ["Pandan", "Matcha", "Mint", "Spinach"],
+    "correct": 0,
+    "image": "images/Penang-Cendol.jpg",
+    "explanation": "The green jelly in Cendol is made from rice flour flavored with pandan juice, giving it its color and aroma."
+  }
+]
