@@ -1,0 +1,411 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penang One Better - Street Food</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Luckiest+Guy&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        /* Shared container styles */
+        .page-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background-color: #e9ecef;
+        }
+
+        /* Make profile page wider */
+        #profilePage.page-container {
+            max-width: 800px;
+        }
+
+        /* Account page specific styles */
+        .nav-tabs .nav-link {
+            color: #495057;
+        }
+
+            .nav-tabs .nav-link.active {
+                color: #000;
+                font-weight: bold;
+            }
+
+        /* Profile page specific styles */
+        .profile-container {
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        #avatarUpload {
+            display: none;
+        }
+
+        /* Utility to hide elements */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="images/brand-logo.png" height="50" width="180"></a>
+            <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">FOOD GALLERY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">FIND A RESTAURANT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">MY FAVOURITE</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">QUIZ</a></li>
+                </ul>
+                <!-- Dynamic Nav Items will be injected here -->
+                <ul class="navbar-nav" id="nav-auth-section"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== PAGE CONTENT AREA ========== -->
+    <main class="container">
+
+        <!-- ===== ACCOUNT PAGE (Login/Signup) ===== -->
+        <div id="accountPage" class="page-container">
+            <ul class="nav nav-tabs nav-fill mb-4" id="accountTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="signin-tab" data-bs-toggle="tab" data-bs-target="#signin-pane" type="button">Sign In</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup-pane" type="button">Sign Up</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="accountTabContent">
+                <!-- Sign In Form -->
+                <div class="tab-pane fade show active" id="signin-pane" role="tabpanel">
+                    <h3 class="text-center mb-4">Welcome Back!</h3>
+                    <form id="signInForm">
+                        <div class="form-floating mb-3"><input type="text" class="form-control" id="signInUsername" placeholder="Username" required><label for="signInUsername">Username</label></div>
+                        <div class="form-floating mb-3"><input type="password" class="form-control" id="signInPassword" placeholder="Password" required><label for="signInPassword">Password</label></div>
+                        <div class="d-grid"><button type="submit" class="btn btn-primary btn-lg">Sign In</button></div>
+                    </form>
+                </div>
+                <!-- Sign Up Form -->
+                <div class="tab-pane fade" id="signup-pane" role="tabpanel">
+                    <h3 class="text-center mb-4">Create an Account</h3>
+                    <form id="signUpForm">
+                        <div class="form-floating mb-3"><input type="text" class="form-control" id="signUpUsername" placeholder="Username" required><label for="signUpUsername">Username</label></div>
+                        <div class="form-floating mb-3"><input type="password" class="form-control" id="signUpPassword" placeholder="Password" required><label for="signUpPassword">Password</label></div>
+                        <div class="form-floating mb-3"><input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required><label for="confirmPassword">Confirm Password</label></div>
+                        <div class="d-grid"><button type="submit" class="btn btn-success btn-lg">Sign Up</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PROFILE PAGE ===== -->
+        <div id="profilePage" class="page-container profile-container hidden">
+            <h2 class="mb-3">My Profile</h2>
+            <img src="images/user-logo.png" alt="User photo" id="profileAvatar" class="profile-avatar">
+            <h3 id="profileUsername" class="mt-2">Username</h3>
+            <h4 id="profileName" class="text-muted fw-normal mb-5">Name</h4>
+
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
+                <label for="avatarUpload" class="btn btn-primary btn-lg px-4">Change Photo</label>
+                <input type="file" id="avatarUpload" accept="image/*">
+                <button type="button" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#nameModal">Change Name</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</button>
+            </div>
+
+            <div class="d-grid">
+                <button id="logoutButton" class="btn btn-danger btn-lg mt-3">Logout</button>
+            </div>
+        </div>
+
+    </main>
+    <!-- End Here -->
+    <!-- ===== MODALS ===== -->
+    <!-- Name Modal -->
+    <div class="modal fade" id="nameModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nameUpdateForm">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="newName" placeholder="New Name" required>
+                            <label for="newName">New Name</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="nameUpdateForm">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="modal fade" id="passwordModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="form-floating mb-3"><input type="password" class="form-control" id="currentPassword" placeholder="Current Password" required><label for="currentPassword">Current Password</label></div>
+                        <div class="form-floating mb-3"><input type="password" class="form-control" id="newPassword" placeholder="New Password" required><label for="newPassword">New Password</label></div>
+                        <div class="form-floating"><input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirm New Password" required><label for="confirmNewPassword">Confirm New Password</label></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="changePasswordForm">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer text-center text-white py-4 mt-5">
+        <div class="container">
+            <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ========== MAIN JAVASCRIPT LOGIC ========== -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DOM Elements ---
+            const accountPage = document.getElementById('accountPage');
+            const profilePage = document.getElementById('profilePage');
+            const navAuthSection = document.getElementById('nav-auth-section');
+
+            // --- DATA MANAGEMENT (localStorage) ---
+            const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
+            const saveUsers = (users) => localStorage.setItem('users', JSON.stringify(users));
+            const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+
+            // --- CORE APP LOGIC ---
+            const showPage = (pageName) => {
+                accountPage.classList.add('hidden');
+                profilePage.classList.add('hidden');
+
+                if (pageName === 'account') {
+                    accountPage.classList.remove('hidden');
+                } else if (pageName === 'profile') {
+                    profilePage.classList.remove('hidden');
+                    populateProfileData();
+                }
+                updateNavbar();
+            };
+
+            const updateNavbar = () => {
+                const loggedInUsername = getLoggedInUser();
+                navAuthSection.innerHTML = ''; // Clear current nav items
+
+                if (loggedInUsername) {
+                    const users = getUsers();
+                    const user = users.find(u => u.username === loggedInUsername);
+
+                    // MODIFIED: Use nickname for display, fallback to username if nickname doesn't exist
+                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                    // Display both the user's name (nickname) and avatar
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="#" title="View Profile">
+                                    ${displayName.toUpperCase()}
+                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                                </a>
+                            </li>
+                        `;
+                } else {
+                    // Original sign-in button for logged-out users
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
+                        `;
+                }
+            };
+
+
+            const populateProfileData = () => {
+                const username = getLoggedInUser();
+                if (!username) return;
+
+                const user = getUsers().find(u => u.username === username);
+                if (user) {
+                    document.getElementById('profileAvatar').src = user.avatar;
+                    document.getElementById('profileUsername').textContent = user.username;
+                    document.getElementById('profileName').textContent = user.nickname || user.username;
+                    document.getElementById('nameUpdateForm').reset();
+                    document.getElementById('changePasswordForm').reset();
+                }
+            };
+
+            // --- EVENT HANDLERS ---
+            const handleSignUp = (e) => {
+                e.preventDefault();
+                const username = document.getElementById('signUpUsername').value;
+                const password = document.getElementById('signUpPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (password !== confirmPassword) return alert('Passwords do not match.');
+
+                const users = getUsers();
+                if (users.find(u => u.username === username)) return alert('Username already exists.');
+
+                users.push({
+                    username,
+                    password,
+                    avatar: 'images/user-logo.png', // Use user-logo.png as default
+                    nickname: username // Initially, nickname is the same as username
+                });
+                saveUsers(users);
+                alert('Registration successful! Please sign in.');
+                document.getElementById('signUpForm').reset();
+                new bootstrap.Tab(document.getElementById('signin-tab')).show();
+            };
+
+            const handleSignIn = (e) => {
+                e.preventDefault();
+                const username = document.getElementById('signInUsername').value;
+                const password = document.getElementById('signInPassword').value;
+                const user = getUsers().find(u => u.username === username && u.password === password);
+
+                if (user) {
+                    localStorage.setItem('loggedInUser', username);
+                    showPage('profile');
+                } else {
+                    alert('Invalid username or password.');
+                }
+            };
+
+            const handleLogout = () => {
+                localStorage.removeItem('loggedInUser');
+                showPage('account');
+            };
+
+            const handleChangePassword = (e) => {
+                e.preventDefault();
+                const currentUsername = getLoggedInUser();
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+                if (newPassword !== confirmNewPassword) return alert('New passwords do not match.');
+                if (!newPassword) return alert('New password cannot be empty.');
+
+                let users = getUsers();
+                const userIndex = users.findIndex(u => u.username === currentUsername);
+
+                if (userIndex === -1) return alert('Error: User not found.');
+                if (users[userIndex].password !== currentPassword) return alert('Incorrect current password.');
+
+                users[userIndex].password = newPassword;
+                saveUsers(users);
+                alert('Password changed successfully!');
+                bootstrap.Modal.getInstance(document.getElementById('passwordModal')).hide();
+            };
+
+            const handleNameUpdate = (e) => {
+                e.preventDefault();
+                const newName = document.getElementById('newName').value.trim();
+                const currentUsername = getLoggedInUser();
+                if (!newName) return alert('Name cannot be empty.');
+
+                let users = getUsers();
+                const userIndex = users.findIndex(u => u.username === currentUsername);
+                if (userIndex !== -1) {
+                    users[userIndex].nickname = newName;
+                    saveUsers(users);
+                    populateProfileData(); // Updates the profile page content
+                    updateNavbar();      // MODIFIED: Refreshes the navbar display name
+                    alert('Name updated successfully!');
+                    bootstrap.Modal.getInstance(document.getElementById('nameModal')).hide();
+                }
+            };
+
+            const handleAvatarChange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const avatarDataUrl = event.target.result;
+                    const username = getLoggedInUser();
+                    let users = getUsers();
+                    const userIndex = users.findIndex(u => u.username === username);
+                    if (userIndex !== -1) {
+                        users[userIndex].avatar = avatarDataUrl;
+                        saveUsers(users);
+                        populateProfileData();
+                        updateNavbar(); // Refresh the navbar avatar as well
+                        alert('Photo updated successfully!');
+                    }
+                };
+                reader.readAsDataURL(file);
+            };
+
+            // --- EVENT LISTENERS ---
+            document.getElementById('signUpForm').addEventListener('submit', handleSignUp);
+            document.getElementById('signInForm').addEventListener('submit', handleSignIn);
+            document.getElementById('changePasswordForm').addEventListener('submit', handleChangePassword);
+            document.getElementById('nameUpdateForm').addEventListener('submit', handleNameUpdate);
+            document.getElementById('avatarUpload').addEventListener('change', handleAvatarChange);
+            document.getElementById('logoutButton').addEventListener('click', handleLogout);
+
+            // Listener for dynamic navbar links
+            navAuthSection.addEventListener('click', (e) => {
+                const profileLink = e.target.closest('#nav-profile-link');
+                const signinLink = e.target.closest('#nav-signin-link');
+
+                if (profileLink) {
+                    e.preventDefault();
+                    showPage('profile');
+                }
+                if (signinLink) {
+                    e.preventDefault();
+                    showPage('account');
+                }
+            });
+
+            // --- INITIALIZATION ---
+            if (getLoggedInUser()) {
+                showPage('profile');
+            } else {
+                showPage('account');
+            }
+        });</script>
+</body>
+</html>
