@@ -187,7 +187,26 @@ nav{
     .food-recommendation .container .card-container{
         flex-direction: column;
     }
+
+    .restaurant-reco .container-fluid{
+        flex-direction: column !important;
+    }
+
+    #card-container{
+        grid-template-columns: 1fr !important;
+        justify-items: center;
+    }
+
+    #card-container .card{
+        width: 90%;
+    }
+
+    #card-container .col-md-4 img{
+        width:100%;
+        justify-self: center;
+    };
 }
+
 
 .food-recommendation .container .card{
     width: rem;
@@ -199,9 +218,22 @@ nav{
     flex-direction: row;
 }
 
-.restaurant-reco #card-container{
-    display: flex;
+#large-img-container{
+    flex: 1;
+    align-content: center;
+}
+
+.restaurant-reco #large-img-container img{
+    outline: 7px solid #ffffff;
+    border-radius : 15px;
+}
+
+#card-container{
+    display: grid;
     flex-direction: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+    flex: 2;
 }
 
 .section3{
