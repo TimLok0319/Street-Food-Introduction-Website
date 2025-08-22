@@ -194,6 +194,27 @@ nav{
     margin: 20px;
 }
 
+.restaurant-reco .container-fluid{
+    display: flex;
+    flex-direction: row;
+}
+
+.restaurant-reco #card-container{
+    display: flex;
+    flex-direction: grid;
+}
+
+.section3{
+    position: relative;
+    background-size: cover; 
+    background-position: center;
+    background-image:url(images/hawker-centre.JPG);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+
 main .temp
 {
     min-height: 70vh;
