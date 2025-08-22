@@ -4,7 +4,6 @@ let score = 0;
 let answers = [];
 let stage = "welcome";
 let lastSelected = null;
-let savedResultId = null;
 
 // Sections
 const welcomeSection = $("#welcomeSection");
@@ -22,7 +21,6 @@ const explainText = $("#explainText");
 const yourAnswer = $("#yourAnswer");
 const correctAnswer = $("#correctAnswer");
 const finalScore = $("#finalScore");
-const rankingList = $("#rankingList");
 const progressText = $("#progressText");
 
 // --- Helpers ---
@@ -39,8 +37,7 @@ function saveState() {
         score,
         answers,
         stage,
-        lastSelected,
-        savedResultId
+        lastSelected
     }));
 }
 
@@ -48,45 +45,52 @@ function clearState() {
     localStorage.removeItem("quizState");
 }
 
-// --- Load quiz JSON ---
+// --- Show Current Section ---
+function showCurrentSection() {
+    hideAll();
+    switch (stage) {
+        case "welcome":
+            welcomeSection.show();
+            break;
+        case "quiz":
+            showQuestion();
+            quizSection.show();
+            break;
+        case "explain":
+            showExplanation();
+            break;
+        case "result":
+            showResults();
+            break;
+        default:
+            stage = "welcome";
+            welcomeSection.show();
+    }
+}
+
+// --- Load Quiz Data ---
 async function loadQuizData() {
     try {
         const response = await fetch("quiz.json");
         quizData = await response.json();
-        console.log("Quiz loaded:", quizData);
-
-        // Restore state
-        const saved = JSON.parse(localStorage.getItem("quizState"));
-        if (saved) {
-            currentQuestion = saved.currentQuestion ?? 0;
-            score = saved.score ?? 0;
-            answers = saved.answers ?? [];
-            stage = saved.stage ?? "welcome";
-            lastSelected = saved.lastSelected ?? null;
-            savedResultId = saved.savedResultId ?? null;
-        } else {
-            stage = "welcome";
-        }
-
-        showCurrentSection();
     } catch (err) {
         console.error("Failed to load quiz.json", err);
+        quizData = [];
     }
-}
 
-// --- Show Current Section ---
-function showCurrentSection() {
-    hideAll();
-    if (stage === "welcome") {
-        welcomeSection.show();
-    } else if (stage === "quiz") {
-        showQuestion();
-        quizSection.show();
-    } else if (stage === "explain") {
-        showExplanation();
-    } else if (stage === "result") {
-        showResults();
+    // Restore saved state
+    const saved = JSON.parse(localStorage.getItem("quizState"));
+    if (saved) {
+        currentQuestion = saved.currentQuestion ?? 0;
+        score = saved.score ?? 0;
+        answers = saved.answers ?? [];
+        stage = saved.stage ?? "welcome";
+        lastSelected = saved.lastSelected ?? null;
+    } else {
+        stage = "welcome"; // ensure welcome page shows
     }
+
+    showCurrentSection();
 }
 
 // --- Start Quiz ---
@@ -96,26 +100,21 @@ function startQuiz() {
     answers = [];
     stage = "quiz";
     lastSelected = null;
-    savedResultId = null;
 
-    showCurrentSection();
     saveState();
+    showCurrentSection();
 }
 
 // --- Show Question ---
 function showQuestion() {
     if (!quizData.length) return;
-
     const q = quizData[currentQuestion];
     questionText.text(`${currentQuestion + 1}. ${q.question}`);
     foodImage.attr("src", q.image);
     progressText.text(`Question ${currentQuestion + 1} of ${quizData.length}`);
     answerButtons.empty();
-
     q.answers.forEach((ans, i) => {
-        answerButtons.append(`
-            <button class="btn btn-outline-primary w-100 mb-2" onclick="submitAnswer(${i})">${ans}</button>
-        `);
+        answerButtons.append(`<button class="btn btn-outline-primary w-100 mb-2" onclick="submitAnswer(${i})">${ans}</button>`);
     });
 }
 
@@ -167,21 +166,37 @@ $("#nextBtn").click(() => {
         stage = "result";
     }
 
-    showCurrentSection();
     saveState();
+    showCurrentSection();
 });
 
+
 // --- Show Results ---
-async function showResults() {
+function showResults() {
     hideAll();
     const total = quizData.length;
     const correct = score;
     const incorrect = total - correct;
-    const accuracy = Math.round((correct / total) * 100);
-    finalScore.html(`${correct} correct / ${incorrect} incorrect<br>Accuracy: ${accuracy}%`);
+
+    // Show score text
+    finalScore.html(`${correct} correct / ${incorrect} incorrect`);
+
+    // Calculate percentages
+    const correctPercent = (correct / total) * 100;
+    const wrongPercent = (incorrect / total) * 100;
+
+    // Update bar widths
+    $(".accuracy-bar-fill-correct").css("width", `${correctPercent}%`);
+    $(".accuracy-bar-fill-wrong").css("width", `${wrongPercent}%`);
+
+    // Optional: label
+    $("#accuracyLabel").text(`Accuracy: ${Math.round(correctPercent)}%`);
 
     resultSection.show();
 }
+
+
+
 
 // --- Restart Quiz ---
 function restartQuiz() {
@@ -190,11 +205,9 @@ function restartQuiz() {
     answers = [];
     stage = "welcome";
     lastSelected = null;
-    savedResultId = null;
-
     clearState();
     showCurrentSection();
 }
 
 // --- Init ---
-document.addEventListener("DOMContentLoaded", loadQuizData);
+$(document).ready(loadQuizData);
