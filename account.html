@@ -203,7 +203,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- ========== MAIN JAVASCRIPT LOGIC ========== -->
-    <script>document.addEventListener('DOMContentLoaded', () => {
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
             // --- DOM Elements ---
             const accountPage = document.getElementById('accountPage');
@@ -230,20 +231,34 @@
             };
 
             const updateNavbar = () => {
-                const loggedInUser = getLoggedInUser();
+                const loggedInUsername = getLoggedInUser();
                 navAuthSection.innerHTML = ''; // Clear current nav items
 
-                if (loggedInUser) {
+                if (loggedInUsername) {
+                    const users = getUsers();
+                    const user = users.find(u => u.username === loggedInUsername);
+
+                    // MODIFIED: Use nickname for display, fallback to username if nickname doesn't exist
+                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                    // Display both the user's name (nickname) and avatar
                     navAuthSection.innerHTML = `
-                        <li class="nav-item"><a id="nav-profile-link" class="nav-link" href="#">PROFILE</a></li>
-                        <li class="nav-item"><a id="nav-logout-link" class="nav-link" href="#">LOGOUT</a></li>
-                    `;
+                            <li class="nav-item">
+                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="#" title="View Profile">
+                                    ${displayName.toUpperCase()}
+                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                                </a>
+                            </li>
+                        `;
                 } else {
+                    // Original sign-in button for logged-out users
                     navAuthSection.innerHTML = `
-                        <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
-                    `;
+                            <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
+                        `;
                 }
             };
+
 
             const populateProfileData = () => {
                 const username = getLoggedInUser();
@@ -275,7 +290,7 @@
                     username,
                     password,
                     avatar: 'images/user-logo.png', // Use user-logo.png as default
-                    nickname: username
+                    nickname: username // Initially, nickname is the same as username
                 });
                 saveUsers(users);
                 alert('Registration successful! Please sign in.');
@@ -335,7 +350,8 @@
                 if (userIndex !== -1) {
                     users[userIndex].nickname = newName;
                     saveUsers(users);
-                    populateProfileData();
+                    populateProfileData(); // Updates the profile page content
+                    updateNavbar();      // MODIFIED: Refreshes the navbar display name
                     alert('Name updated successfully!');
                     bootstrap.Modal.getInstance(document.getElementById('nameModal')).hide();
                 }
@@ -354,6 +370,7 @@
                         users[userIndex].avatar = avatarDataUrl;
                         saveUsers(users);
                         populateProfileData();
+                        updateNavbar(); // Refresh the navbar avatar as well
                         alert('Photo updated successfully!');
                     }
                 };
@@ -370,10 +387,17 @@
 
             // Listener for dynamic navbar links
             navAuthSection.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (e.target.id === 'nav-logout-link') handleLogout();
-                if (e.target.id === 'nav-profile-link') showPage('profile');
-                if (e.target.id === 'nav-signin-link') showPage('account');
+                const profileLink = e.target.closest('#nav-profile-link');
+                const signinLink = e.target.closest('#nav-signin-link');
+
+                if (profileLink) {
+                    e.preventDefault();
+                    showPage('profile');
+                }
+                if (signinLink) {
+                    e.preventDefault();
+                    showPage('account');
+                }
             });
 
             // --- INITIALIZATION ---
