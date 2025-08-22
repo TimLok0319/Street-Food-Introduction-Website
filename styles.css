@@ -1,260 +1,289 @@
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-    font-family: 'Oswald', sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
 
 /*----------------------------------------------------------------Navbar----------------------------------------------------------------*/
 
 nav {
-    background-color: #39765f;
-    padding-bottom: 12px !important;
-    padding-top: 12px !important;
+  background-color: #39765f;
+  padding-bottom: 12px !important;
+  padding-top: 12px !important;
 }
 
 .navbar-brand {
-    padding-right: 0px;
-    justify-content: center;
+  padding-right: 0px;
+  justify-content: center;
 }
 
 .navbar .nav-link {
-    color: white;
-    font-size: 23px;
-    font-weight: 450;
-    padding-left: 15px;
+  color: white;
+  font-size: 23px;
+  font-weight: 450;
+  padding-left: 15px;
 }
 
 .nav-item {
-    padding-left: 15px;
+  padding-left: 15px;
 }
 
 .navbar .nav-link:hover {
-    color: #0c1602
+  color: #0c1602;
 }
 
 .navbar .nav-link.active {
-    color: white;
-    background-color: #152700;
-    border-radius: 15px;
+  color: white;
+  background-color: #152700;
+  border-radius: 15px;
 }
 
 .navbar-toggler.navbar-toggler:collapsed {
-    background-color: white;
+  background-color: white;
 }
 
 .navbar-toggler-icon {
-    background-image: url("images/hamburger-icon.png");
+  background-image: url("images/hamburger-icon.png");
 }
 
 .nav-item-user-icon {
-    align-content: center;
-
+  align-content: center;
 }
 
-
 .account {
-    text-decoration: none;
-    color: white;
-    font-size: 23px;
-    font-weight: 450;
+  text-decoration: none;
+  color: white;
+  font-size: 23px;
+  font-weight: 450;
 }
 
 .account:hover {
-    color: #0c1602;
+  color: #0c1602;
 }
 
 /*----------------------------------------------------------------Homepage----------------------------------------------------------------*/
+
 .hero-section {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-image: url(images/street.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  position: relative;
+  background-image: url(images/street.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero-section h1 {
-    font-size: clamp(4.5rem, 10vw, 10rem);
-    font-weight: 1000;
-    color: white;
-    padding-top: 30px;
+  font-size: clamp(4.5rem, 10vw, 10rem);
+  font-weight: 1000;
+  color: white;
+  padding-top: 30px;
 }
 
 .hero-section h4 {
-    font-size: clamp(1.5rem, 1.5vw, 3rem);
-    font-weight: 350;
+  font-size: clamp(1.5rem, 1.5vw, 3rem);
+  font-weight: 350;
 }
 
 .hero-section button {
-    width: 90%;
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.157);
-    backdrop-filter: blur(15px);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    border-left: 1px solid rgba(255, 255, 255, 0.4);
-    border-bottom: none;
-    border-right: none;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.089);
-    font-size: 35px;
-    font-weight: bold;
-    display: flexbox;
-    margin: 10px auto;
+  width: 90%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.157);
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: none;
+  border-right: none;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.089);
+  font-size: 35px;
+  font-weight: bold;
+  display: flexbox;
+  margin: 10px auto;
 }
 
 .hero-section button:hover {
-    background-color: #197152;
-    border: none;
+  background-color: #197152;
+  border: none;
 }
 
 .hero-section button:active {
-    background-color: #197152 !important;
-    transform: translateY(1px);
+  background-color: #197152 !important;
+  transform: translateY(1px);
 }
 
 #stats {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: top;
-    padding-top: 6rem;
-    padding-bottom: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
 }
 
 .hero-section h2 {
-    font-size: clamp(3.3rem, 10vw, 5rem);
-    font-weight: 900;
+  font-size: clamp(3.3rem, 10vw, 5rem);
+  font-weight: 900;
 }
 
 .hero-section h3 {
-    font-size: clamp(1rem, 5vw, 2rem);
+  font-size: clamp(1rem, 5vw, 2rem);
 }
 
 .food-recommendation {
-    background-color: #f0fff4;
+  background-color: #f0fff4;
 }
 
 .food-recommendation .container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding-top: 4rem;
-    padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
 }
 
 .food-recommendation .container h1 {
-    color: #000000;
-    font-size: clamp(3.5rem, 10vw, 10rem);
-    font-weight: 800;
+  color: #000000;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 800;
 }
 
 .food-recommendation .container .card-title {
-    font-size: 30px;
-    font-weight: 600;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .food-recommendation .container .card-text {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .food-recommendation .container .card-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .food-recommendation .container .card-container .list-group {
-    font-size: 20px;
-    font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
 }
-
-@media (max-width: 991px) {
-    .food-recommendation .container .card-container {
-        flex-direction: column;
-    }
-
-    .restaurant-reco .container-fluid {
-        flex-direction: column !important;
-    }
-
-    #card-container {
-        grid-template-columns: 1fr !important;
-        justify-items: center;
-    }
-
-    #card-container .card {
-        width: 90%;
-    }
-
-    #card-container .col-md-4 img {
-        width: 100%;
-        justify-self: center;
-    }
-
-    ;
-}
-
 
 .food-recommendation .container .card {
-    width: rem;
-    margin: 20px;
+  margin: 20px;
 }
 
 .restaurant-reco .container-fluid {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  padding-top: 30px;
 }
 
 #large-img-container {
-    flex: 1;
-    align-content: center;
+  flex: 1;
+  align-content: center;
+  position: relative;
 }
 
 .restaurant-reco #large-img-container img {
-    outline: 7px solid #ffffff;
-    border-radius: 15px;
+  outline: 7px solid #ffffff;
+  border-radius: 15px;
+}
+
+.overlay-text {
+  position: absolute;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 90%;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay-text h1 {
+  font-size: clamp(2.8rem, 13vw, 8rem);
+  font-weight: 700;
 }
 
 #card-container {
-    display: grid;
-    flex-direction: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  flex: 2;
+  padding-left: 30px;
+}
+
+#card-container .card {
+  width: 100%;
+}
+
+#card-container .card h5 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+#card-container .card-text {
+  font-size: 20px;
 }
 
 .section3 {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-image: url(images/hawker-centre.JPG);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 90vh;
+  position: relative;
+  background-image: url(images/hawker-centre.JPG);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 90vh;
+}
+
+@media (max-width: 991px) {
+  .food-recommendation .container .card-container {
+    flex-direction: column;
+  }
+
+  .restaurant-reco .container-fluid {
+    flex-direction: column !important;
+  }
+
+  #card-container {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+    padding-left: 0px;
+    padding-top: 30px;
+  }
+
+  #card-container .card {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  #card-container .col-4 {
+    display: flex;
+    align-items: center;
+  }
+
+  #card-container .col-4 img {
+    height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
 }
 
 main .temp {
-    min-height: 70vh;
+  min-height: 70vh;
 }
-
-/*----------------------------------------------------------------Start Here----------------------------------------------------------------*/
-
 
 /*----------------------------------------------------------------Quiz----------------------------------------------------------------*/
 
@@ -264,10 +293,12 @@ main .temp {
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
+
 .quiz-card h2 {
   font-family: 'Lilita One', cursive;
   color: #c0392b;
 }
+
 .quiz-carousel-img {
   width: 45%;
   max-height: 250px;
@@ -275,6 +306,7 @@ main .temp {
   border-radius: 15px;
   transition: transform 0.5s ease;
 }
+
 .quiz-carousel-img:hover {
   transform: scale(1.05);
 }
@@ -288,17 +320,20 @@ main .temp {
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
+
 .result-header h2 {
   font-family: 'Lilita One', sans-serif;
   font-size: 2rem;
   color: #2d3436; /* dark neutral */
   margin-bottom: 10px;
 }
+
 .result-header h4 {
   font-size: 1.3rem;
   font-weight: bold;
   color: #444;
 }
+
 #finalScore {
   font-size: 1.2rem;
   font-weight: bold;
@@ -313,6 +348,7 @@ main .temp {
   border-radius: 15px;
   box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
 }
+
 .ranking-card h5 {
   font-family: 'Lilita One', sans-serif;
   font-size: 1.2rem;
@@ -321,23 +357,28 @@ main .temp {
   padding-bottom: 8px;
   margin-bottom: 15px;
 }
+
 .ranking-list {
   padding-left: 20px;
   margin: 0;
 }
+
 .ranking-list li {
   font-size: 1.1rem;
   padding: 8px 0;
   border-bottom: 1px solid #eee;
 }
+
 .ranking-list li:first-child {
   font-weight: bold;
   color: #e67e22; /* gold */
 }
+
 .ranking-list li:nth-child(2) {
   font-weight: bold;
   color: #3498db; /* silver */
 }
+
 .ranking-list li:nth-child(3) {
   font-weight: bold;
   color: #2ecc71; /* bronze */
@@ -350,24 +391,29 @@ main .temp {
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
 .share-modal .modal-header {
   background: linear-gradient(135deg, #ffeaa7, #fab1a0);
   border-bottom: none;
   border-radius: 12px 12px 0 0;
 }
+
 .share-modal .modal-title {
   font-family: 'Lilita One', cursive;
   color: #2d3436;
 }
+
 .share-modal .modal-body {
   font-size: 1rem;
   color: #444;
   padding: 20px;
   line-height: 1.6;
 }
+
 .share-modal .modal-body p {
   margin-bottom: 10px;
 }
+
 .share-modal .modal-footer {
   border-top: none;
   justify-content: space-between;
@@ -381,6 +427,7 @@ main .temp {
   border-radius: 8px;
   font-weight: bold;
 }
+
 .fb-share-btn:hover {
   background-color: #145dbf;
   color: white;
@@ -394,25 +441,26 @@ main .temp {
   border-radius: 8px;
   font-weight: bold;
 }
+
 .share-btn:hover {
   background-color: #b88546;
   color: white;
 }
+
 .btn-outline-dark {
   font-weight: bold;
   border-radius: 8px;
 }
 
-
 /*----------------------------------------------------------------Footer----------------------------------------------------------------*/
 
 .footer {
-    background-color: #39765f;
-    text-align: center;
-    padding-bottom: 10px;
-    align-items: center;
+  background-color: #39765f;
+  text-align: center;
+  padding-bottom: 10px;
+  align-items: center;
 }
 
-body>* {
-    width: 100%;
+body > * {
+  width: 100%;
 }
