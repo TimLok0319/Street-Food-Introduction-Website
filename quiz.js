@@ -114,8 +114,9 @@ function showQuestion() {
     progressText.text(`Question ${currentQuestion + 1} of ${quizData.length}`);
     answerButtons.empty();
     q.answers.forEach((ans, i) => {
-        answerButtons.append(`<button class="btn btn-outline-primary w-100 mb-2" onclick="submitAnswer(${i})">${ans}</button>`);
+        answerButtons.append(`<button class="btn w-100 mb-2 custom-answer-btn" onclick="submitAnswer(${i})">${ans}</button>`);
     });
+
 }
 
 // --- Submit Answer ---
