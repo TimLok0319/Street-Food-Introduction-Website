@@ -166,6 +166,7 @@ nav {
 
 .food-recommendation .container .card-text {
   font-size: 20px;
+  color: #333;
 }
 
 .food-recommendation .container .card-container {
@@ -174,12 +175,12 @@ nav {
   justify-content: center;
 }
 
-.food-recommendation .container .card-container .list-group {
+.food-recommendation .container .card-container a .list-group {
   font-size: 20px;
   font-weight: 500;
 }
 
-.food-recommendation .container .card {
+.food-recommendation .container a .card {
   margin: 20px;
 }
 
@@ -254,12 +255,26 @@ nav {
 }
 
 #card-container .card h5 {
-  font-size: 30px;
+  font-size: clamp(0.5rem,3vh,2rem);
   font-weight: 600;
 }
 
 #card-container .card-text {
-  font-size: 20px;
+  font-size: clamp(0.5rem,1.9vh,2rem);
+  color: #333;
+}
+
+#card-container .card {
+  height: 250px;
+}
+
+#card-container .card .row {
+  height: 100%;
+}
+
+#card-container .col-md-4 img {
+  height: 100% !important;
+  object-fit: cover;
 }
 
 .michelin-sec {
@@ -438,9 +453,10 @@ nav {
     padding-top: 30px;
   }
 
-  #card-container .card {
+    #card-container .card {
     width: 90%;
     flex-direction: column;
+    height: auto; /* This will allow the card to adjust its height based on content */
   }
 
   .michelin-sec {
@@ -690,4 +706,20 @@ nav {
 
 body>* {
   width: 100%;
+}
+
+a.btn[style*="background-color: #39765f"] {
+  transition: background-color 0.3s ease;
+}
+
+a.btn[style*="background-color: #39765f"]:hover {
+  background-color: #2a5a4a !important; /* A darker shade of the original green */
+}
+
+.btn-custom-green {
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom-green:hover {
+  background-color: #2a5a4a !important; /* A darker shade of the original green */
 }
