@@ -1,15 +1,15 @@
-main {
-  flex: 1;
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Oswald", sans-serif;
   display: flex;
   flex-direction: column;
+  min-height: 100dvh; /* better for Safari/iPad */
 }
 
-body {
-  font-family: "Oswald", sans-serif;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Main content grows, pushes footer down */
+main {
+  flex: 1 0 auto;
 }
 
 /*----------------------------------------------------------------Navbar----------------------------------------------------------------*/
@@ -77,7 +77,7 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  min-height: 100dvh;
   color: white;
   text-align: center;
   display: flex;
@@ -716,12 +716,13 @@ nav {
 }
 
 /*----------------------------------------------------------------Footer----------------------------------------------------------------*/
-
 .footer {
+  flex-shrink: 0;
+  margin-top: auto;
   background-color: #39765f;
   text-align: center;
-  padding-bottom: 10px;
-  align-items: center;
+  padding: 15px 0;
+  color: white;
 }
 
 body>* {
