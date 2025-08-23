@@ -154,7 +154,7 @@ nav {
 }
 
 .food-recommendation .container h1 {
-  color: #000000;
+  color: #333;
   font-size: clamp(3.5rem, 10vw, 10rem);
   font-weight: 800;
 }
@@ -191,7 +191,6 @@ nav {
 
 #large-img-container {
   flex: 1;
-  align-content: center;
   position: relative;
 }
 
@@ -324,22 +323,81 @@ nav {
   right: 15px;
 }
 
-main .temp {
-  min-height: 70vh;
-  background-image: url(images/hawker-centre.JPG);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 90vh;
+.review-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #f9f9e6; /* Matches your site's theme */
 }
 
-@media (max-width: 991px) {
+.review-section .section-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.scroller {
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.review-list {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+}
+
+.review-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin: 0 1rem;
+  width: 350px; /* Fixed width for each card */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-card p {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #555;
+  flex-grow: 1;
+}
+
+.review-card .reviewer-name {
+  display: block;
+  text-align: right;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  color: #39765f; /* Matches your site's theme */
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem)); /* The 0.5rem is half the margin */
+  }
+}
+
+/* Pause animation on hover */
+.scroller:hover .review-list {
+  animation-play-state: paused;
+}
+
+@media (max-width: 1300px) {
   .food-recommendation .container .card-container {
     flex-direction: column;
   }
 
   .restaurant-reco .container-fluid {
     flex-direction: column !important;
+    align-items: center;
   }
 
   #card-container {
@@ -366,7 +424,7 @@ main .temp {
   }
 
   .michelin-sec {
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: center;
     align-items: center; 
     text-align: center; 
@@ -375,7 +433,8 @@ main .temp {
   }
 
   .carousel-container img {
-    height: 50%; 
+    height: clamp(10rem,35vh,100rem);
+    width: 100%; 
   }
 
   #michelin-text {
@@ -385,8 +444,8 @@ main .temp {
   }
 
   #michelin-text img{
-    width: 60%;
-    height: 60%;
+    width: 30%;
+    height: 30%;
   }
   
 }
@@ -564,3 +623,6 @@ main .temp {
 body > * {
   width: 100%;
 }
+
+
+
