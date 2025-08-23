@@ -171,7 +171,6 @@ $("#nextBtn").click(() => {
     showCurrentSection();
 });
 
-
 // --- Show Results ---
 function showResults() {
     hideAll();
@@ -179,24 +178,59 @@ function showResults() {
     const correct = score;
     const incorrect = total - correct;
 
-    // Show score text
+    // Show score
     finalScore.html(`${correct} correct / ${incorrect} incorrect`);
 
-    // Calculate percentages
+    // Fill into share snapshot
+    $("#playerScore").text(`${correct} / ${total}`);
+    $("#playerName").text("Foodie"); // later can link with login name
+
+    // Accuracy %
     const correctPercent = (correct / total) * 100;
-    const wrongPercent = (incorrect / total) * 100;
-
-    // Update bar widths
     $(".accuracy-bar-fill-correct").css("width", `${correctPercent}%`);
-    $(".accuracy-bar-fill-wrong").css("width", `${wrongPercent}%`);
-
-    // Optional: label
+    $(".accuracy-bar-fill-wrong").css("width", `${100 - correctPercent}%`);
     $("#accuracyLabel").text(`Accuracy: ${Math.round(correctPercent)}%`);
+
+    // 👇 New performance-based tagline
+    let tagline = "";
+    if (correctPercent >= 80) {
+        tagline = "🍜 Penang Food Master! You know your Char Koay Teow from your Laksa!";
+    } 
+    else if (correctPercent >= 50) {
+        tagline = "🌶️ Not bad! But you still need more street food adventures!";
+    } 
+    else {
+        tagline = "😋 Time to makan more! Discover Penang’s famous dishes with us!";
+    }
+    $("#resultTagline").text(tagline);
 
     resultSection.show();
 }
 
+function shareResult() {
+  // Copy resultSnapshot content into shareContent
+  $("#shareContent").html($("#resultSnapshot").html());
 
+  const shareModal = new bootstrap.Modal(document.getElementById("shareModal"));
+  shareModal.show();
+
+  // Save button (capture ONLY branded shareSnapshot)
+  $("#saveResultBtn").off("click").on("click", () => {
+    const element = document.getElementById("shareSnapshot");
+
+    html2canvas(element, {
+      backgroundColor: "#fff",
+      scale: 2,
+      useCORS: true
+    }).then(canvas => {
+      const imgData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "quiz-result.png";
+      link.click();
+    });
+  });
+}
 
 
 // --- Restart Quiz ---
