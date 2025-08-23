@@ -5,7 +5,7 @@ main {
 }
 
 body {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   margin: 0;
   min-height: 100vh;
   display: flex;
@@ -183,6 +183,15 @@ nav {
   margin: 20px;
 }
 
+.food-recommendation .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-recommendation .card:hover {
+  transform: translateY(-5px); /* Lifts the card up by 5px */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Adds a more prominent shadow */
+}
+
 .restaurant-reco .container-fluid {
   display: flex;
   flex-direction: row;
@@ -225,23 +234,24 @@ nav {
   padding-left: 30px;
 }
 
-  #card-container .card {
-    width: 90%;
-    flex-direction: column;
-  }
+#card-container .card {
+  width: 90%;
+  flex-direction: column;
+}
 
-      #card-container .col-md-4 img {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16/9 !important;
-    object-fit: cover !important;
-    border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0 !important;
-  }
+#card-container .col-md-4 img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16/9 !important;
+  object-fit: cover !important;
+  border-radius: var(--bs-card-inner-border-radius)
+    var(--bs-card-inner-border-radius) 0 0 !important;
+}
 
-  #card-container .card:nth-child(1) .col-md-4 img,
-  #card-container .card:nth-child(2) .col-md-4 img {
-    object-position: top;
-  }
+#card-container .card:nth-child(1) .col-md-4 img,
+#card-container .card:nth-child(2) .col-md-4 img {
+  object-position: top;
+}
 
 #card-container .card h5 {
   font-size: 30px;
@@ -252,33 +262,32 @@ nav {
   font-size: 20px;
 }
 
-.michelin-sec{
+.michelin-sec {
   height: 70vh;
   background-image: url(images/hawker-centre..png);
-  display:flex;
+  display: flex;
   flex-direction: row;
 }
 
-#michelin-text{
+#michelin-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-
-#michelin-text h1{
+#michelin-text h1 {
   color: white;
   font-size: clamp(3.3rem, 10vw, 6rem);
   font-weight: 600;
-  text-align: center  ;
+  text-align: center;
 }
 
-#michelin-text h2{
+#michelin-text h2 {
   color: white;
   font-size: clamp(3.3rem, 10vw, 5rem);
   font-weight: 300;
-  text-align: center  ;
+  text-align: center;
 }
 
 .carousel {
@@ -297,7 +306,7 @@ nav {
 
 #carousel-container-parent {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 }
 
@@ -307,25 +316,25 @@ nav {
   overflow: hidden;
   position: relative;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border: 5px solid white;
 }
 
 .carousel-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-  position: absolute ;
+  position: absolute;
   top: 50%;
-  bottom : auto !important;
-  transform: translateY(-50%)!important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
   width: 40px;
   height: 40px;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
 }
 
@@ -354,7 +363,13 @@ nav {
   max-width: 1200px;
   margin: auto;
   overflow: hidden;
-  -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
   mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
 }
 
@@ -368,7 +383,7 @@ nav {
 .review-card {
   background: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin: 0 1rem;
   width: 350px; /* Fixed width for each card */
@@ -395,7 +410,9 @@ nav {
 
 @keyframes scroll {
   to {
-    transform: translate(calc(-50% - 0.5rem)); /* The 0.5rem is half the margin */
+    transform: translate(
+      calc(-50% - 0.5rem)
+    ); /* The 0.5rem is half the margin */
   }
 }
 
@@ -426,20 +443,18 @@ nav {
     flex-direction: column;
   }
 
-  
-
   .michelin-sec {
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
-    text-align: center; 
-    padding: 20px 0; 
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
     height: auto;
   }
 
   .carousel-container img {
-    height: clamp(10rem,35vh,100rem);
-    width: 100%; 
+    height: clamp(10rem, 35vh, 100rem);
+    width: 100%;
   }
 
   #michelin-text {
@@ -448,11 +463,10 @@ nav {
     margin-top: 20px;
   }
 
-  #michelin-text img{
+  #michelin-text img {
     width: 30%;
     height: 30%;
   }
-  
 }
 
 /*----------------------------------------------------------------Quiz----------------------------------------------------------------*/
@@ -465,7 +479,7 @@ nav {
 }
 
 .quiz-card h2 {
-  font-family: 'Lilita One', cursive;
+  font-family: "Lilita One", cursive;
   color: #c0392b;
 }
 
@@ -509,7 +523,7 @@ nav {
 }
 
 .result-header h2 {
-  font-family: 'Lilita One', sans-serif;
+  font-family: "Lilita One", sans-serif;
   font-size: 2rem;
   color: #2d3436;
   /* dark neutral */
@@ -529,7 +543,6 @@ nav {
   margin-top: 8px;
 }
 
-
 /* Share Result Modal Styling */
 .share-modal {
   background: #fffdf7;
@@ -545,7 +558,7 @@ nav {
 }
 
 .share-modal .modal-title {
-  font-family: 'Lilita One', cursive;
+  font-family: "Lilita One", cursive;
   color: #2d3436;
 }
 
@@ -582,7 +595,7 @@ nav {
 
 /* Custom Share + Replay Buttons */
 .share-btn {
-  background-color: #DDA15E;
+  background-color: #dda15e;
   color: black;
   border: none;
   border-radius: 8px;
@@ -636,7 +649,6 @@ nav {
   color: #2c3e50;
 }
 
-
 /*----------------------------------------------------------------Footer----------------------------------------------------------------*/
 
 .footer {
@@ -649,6 +661,3 @@ nav {
 body>* {
   width: 100%;
 }
-
-
-
