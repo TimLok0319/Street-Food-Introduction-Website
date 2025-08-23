@@ -199,6 +199,26 @@ nav {
   padding-top: 30px;
 }
 
+/* --- Hover effect for restaurant recommendation cards --- */
+
+.restaurant-reco .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.restaurant-reco .card:hover {
+  transform: translateY(-5px); /* Lifts the card up by 5px */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* Adds a more prominent shadow */
+}
+
+.restaurant-reco a .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.restaurant-reco a:hover .card {
+  transform: translateY(-5px); /* Lifts the card up by 5px */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* Adds a more prominent shadow */
+}
+
 #large-img-container {
   flex: 1;
   position: relative;
