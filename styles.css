@@ -300,21 +300,26 @@ main .temp {
 }
 
 /* Carousel, question, and explanation images same size */
-.quiz-carousel-img,
-#foodImage,
-#explainImage {
+.quiz-carousel-img {
   width: 60%;
-  /* full width of container */
   height: 300px;
-  /* fixed height */
   object-fit: cover;
-  /* crop & fill without distortion */
-  border-radius: 15px;
+  border-radius: 15px;   /* rounded corners */
   transition: transform 0.5s ease;
 }
 
-.quizCarousel-img:hover {
+.quiz-carousel-img:hover {
   transform: scale(1.05);
+}
+
+#foodImage,
+#explainImage {
+  width: 80%;        /* slightly smaller than container */
+  max-height: 300px; /* consistent height */
+  object-fit: cover;
+  border-radius: 0;  /* rectangle shape */
+  display: block;
+  margin: 15px auto; /* center + spacing */
 }
 
 .custom-answer-btn {
@@ -368,17 +373,26 @@ main .temp {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.share-modal .modal-header {
-  background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-  border-bottom: none;
-  border-radius: 12px 12px 0 0;
+.snapshot-header img {
+  height: 70px;       /* scale logo */
+  max-width: 100%;
+  display: inline-block;
 }
 
+.snapshot-header h1 {
+  font-family: 'Lilita One', cursive;
+  font-size: 1.8rem;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Share Modal Title */
 .share-modal .modal-title {
   font-family: 'Lilita One', cursive;
   color: #2d3436;
 }
 
+/* Modal Body */
 .share-modal .modal-body {
   font-size: 1rem;
   color: #444;
@@ -390,23 +404,39 @@ main .temp {
   margin-bottom: 10px;
 }
 
-.share-modal .modal-footer {
-  border-top: none;
-  justify-content: space-between;
+/* Minimal Header (for snapshot & modal) */
+.snapshot-header {
+  background-color: #39765F !important;
+  justify-content: center;
+  border-bottom: none;
+  position: relative;
+  padding: 20px 0;   /* give it vertical height */
+  text-align: center;
 }
 
-/* Facebook button */
-.fb-share-btn {
-  background-color: #1877f2;
-  /* FB blue */
+/* Minimal Footer (for snapshot & modal) */
+.snapshot-footer {
+  background-color: #39765F !important;
+  justify-content: center;
+  border-top: none;
+  padding: 15px 0;   /* give footer height */
+  text-align: center;
   color: white;
+  font-size: 0.9rem;
+}
+
+.save-btn {
+  background-color: #DDA15E;
+  color: black;
+  font-weight: bold;
   border: none;
   border-radius: 8px;
-  font-weight: bold;
+  padding: 8px 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-.fb-share-btn:hover {
-  background-color: #145dbf;
+.save-btn:hover {
+  background-color: #b88546;
   color: white;
 }
 
