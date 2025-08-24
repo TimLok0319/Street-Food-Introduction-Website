@@ -5,6 +5,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100dvh; /* better for Safari/iPad */
+
 }
 
 /* Main content grows, pushes footer down */
@@ -805,6 +806,62 @@ nav {
   font-weight: bold;
   color: #2c3e50;
 }
+
+/*----------------------------------------------------------------Account----------------------------------------------------------------*/
+
+/* Shared container styles */
+.page-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body {
+    background-color: #e9ecef;
+}
+
+/* Make profile page wider */
+#profilePage.page-container {
+    max-width: 800px;
+}
+
+/* Account page specific styles */
+.nav-tabs .nav-link {
+    color: #495057;
+}
+
+    .nav-tabs .nav-link.active {
+        color: #000;
+        font-weight: bold;
+    }
+
+/* Profile page specific styles */
+.profile-container {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+#avatarUpload {
+    display: none;
+}
+
+/* Utility to hide elements */
+.hidden {
+    display: none;
+}
+
 
 /*----------------------------------------------------------------Footer----------------------------------------------------------------*/
 .footer {
