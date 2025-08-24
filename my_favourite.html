@@ -39,11 +39,7 @@
                         <a class="nav-link" href="#">QUIZ</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
-                    </li>
-                </ul>
+                <ul class="navbar-nav" id="nav-auth-section"></ul>
             </div>
         </div>
     </nav>
@@ -55,7 +51,7 @@
                 <div class="text-center mb-5">
                     <h1 class="display-4 fw-bold text-dark">MY FAVOURITE FOODS</h1>
                     <p class="lead">Your personal collection of delicious Penang street foods</p>
-                    
+
                     <!-- Daily Quote Widget -->
                     <div class="quote-widget mb-4" id="quote-widget" style="display: none;">
                         <div class="card mx-auto" style="max-width: 600px;">
@@ -73,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mt-3">
                         <span class="badge bg-danger fs-6 me-2">❤️ Your Favourites</span>
                         <span class="badge bg-success fs-6 me-2">🇲🇾 Penang Specials</span>
@@ -213,25 +209,25 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         // Global variables
         let favouriteFoods = [];
         let displayedFavourites = [];
         let currentFood = null;
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadFavourites();
             updateStatistics();
             loadDailyQuote();
 
             // Event handlers
             $('#search-btn').click(performSearch);
-            $('#search-favourites').keypress(function(e) {
+            $('#search-favourites').keypress(function (e) {
                 if (e.which === 13) performSearch();
             });
 
-            $('#filter-category').change(function() {
+            $('#filter-category').change(function () {
                 filterByCategory($(this).val());
             });
 
@@ -242,7 +238,7 @@
             $('#share-whatsapp').click(shareOnWhatsApp);
             $('#share-twitter').click(shareOnTwitter);
             $('#copy-link').click(copyLink);
-            
+
             // Quote widget handler
             $('#new-quote-btn').click(loadDailyQuote);
         });
@@ -273,71 +269,71 @@
 
             foods.forEach(food => {
                 const ratingStars = generateRatingStars(food.rating);
-                
+
                 const foodCard = `
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 shadow-sm favourite-card" data-food-id="${food.id}">
-                            <div class="position-relative">
-                                <img src="${food.image}" class="card-img-top" alt="${food.name}" 
-                                     style="height: 200px; object-fit: cover;" 
-                                     onerror="this.src='https://via.placeholder.com/300x200?text=Penang+Food'">
-                                <div class="position-absolute top-0 start-0 m-2">
-                                    <span class="badge bg-danger">❤️ Favourite</span>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 shadow-sm favourite-card" data-food-id="${food.id}">
+                                <div class="position-relative">
+                                    <img src="${food.image}" class="card-img-top" alt="${food.name}"
+                                         style="height: 200px; object-fit: cover;"
+                                         onerror="this.src='https://via.placeholder.com/300x200?text=Penang+Food'">
+                                    <div class="position-absolute top-0 start-0 m-2">
+                                        <span class="badge bg-danger">❤️ Favourite</span>
+                                    </div>
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <button class="btn btn-sm btn-outline-light remove-favourite-btn" data-food-id="${food.id}" title="Remove from favourites">
+                                            <i class="bi bi-heart-fill text-danger"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="position-absolute top-0 end-0 m-2">
-                                    <button class="btn btn-sm btn-outline-light remove-favourite-btn" data-food-id="${food.id}" title="Remove from favourites">
-                                        <i class="bi bi-heart-fill text-danger"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${food.name}</h5>
-                                <p class="card-text flex-grow-1">${food.description.substring(0, 120)}...</p>
-                                <div class="mt-auto">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="rating">
-                                            ${ratingStars}
-                                            <small class="text-muted ms-1">(${food.rating})</small>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${food.name}</h5>
+                                    <p class="card-text flex-grow-1">${food.description.substring(0, 120)}...</p>
+                                    <div class="mt-auto">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating">
+                                                ${ratingStars}
+                                                <small class="text-muted ms-1">(${food.rating})</small>
+                                            </div>
+                                            <small class="text-muted">${food.calories} cal</small>
                                         </div>
-                                        <small class="text-muted">${food.calories} cal</small>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <span class="badge bg-warning text-dark">${food.category}</span>
-                                        <small class="text-muted">${food.calories} cal</small>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-success fw-bold">${food.price_range}</small>
-                                        <small class="text-muted">📍 Penang</small>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="badge bg-warning text-dark">${food.category}</span>
+                                            <small class="text-muted">${food.calories} cal</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-success fw-bold">${food.price_range}</small>
+                                            <small class="text-muted">📍 Penang</small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row g-2">
-                                    <div class="col-8">
-                                        <button class="btn btn-success btn-sm w-100 view-details-btn" data-food-id="${food.id}">
-                                            <i class="bi bi-eye me-1"></i>View Details
-                                        </button>
-                                    </div>
-                                    <div class="col-4">
-                                        <button class="btn btn-outline-danger btn-sm w-100 remove-favourite-btn" data-food-id="${food.id}" title="Remove">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
+                                <div class="card-footer">
+                                    <div class="row g-2">
+                                        <div class="col-8">
+                                            <button class="btn btn-success btn-sm w-100 view-details-btn" data-food-id="${food.id}">
+                                                <i class="bi bi-eye me-1"></i>View Details
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-outline-danger btn-sm w-100 remove-favourite-btn" data-food-id="${food.id}" title="Remove">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
                 container.append(foodCard);
             });
 
             // Add click handlers
-            $('.view-details-btn').click(function() {
+            $('.view-details-btn').click(function () {
                 const foodId = $(this).data('food-id');
                 showFoodDetails(foodId);
             });
 
-            $('.remove-favourite-btn').click(function(e) {
+            $('.remove-favourite-btn').click(function (e) {
                 e.stopPropagation();
                 const foodId = $(this).data('food-id');
                 removeFavourite(foodId);
@@ -354,82 +350,82 @@
 
         function renderFoodModal(food) {
             const ratingStars = generateRatingStars(food.rating);
-            
-            const modalContent = `
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="${food.image}" class="img-fluid rounded shadow" alt="${food.name}"
-                             onerror="this.src='https://via.placeholder.com/400x300?text=Penang+Food'">
-                        <div class="mt-3 text-center">
-                            <div class="rating-large">
-                                ${ratingStars}
-                                <span class="fs-5 fw-bold ms-2">${food.rating}/5</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>${food.name}</h3>
-                        <div class="mb-3">
-                            <span class="badge bg-danger me-2">❤️ Your Favourite</span>
-                            <span class="badge bg-warning text-dark me-2">${food.category}</span>
-                            <span class="badge bg-success">Authentic Local</span>
-                        </div>
-                        <p class="lead">${food.description}</p>
-                        
-                        <div class="row mb-3">
-                            <div class="col-12 mb-3">
-                                <strong><i class="bi bi-clock-history text-primary me-1"></i>History:</strong><br>
-                                <small>${food.history || 'No history available'}</small>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <strong><i class="bi bi-lightbulb text-warning me-1"></i>Facts:</strong><br>
-                                <small>${food.facts || 'No facts available'}</small>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <strong><i class="bi bi-people text-success me-1"></i>Culture:</strong><br>
-                                <small>${food.culture || 'No culture information available'}</small>
-                            </div>
-                            <div class="col-6">
-                                <strong><i class="bi bi-fire me-1"></i>Calories:</strong> ${food.calories} per serving
-                            </div>
-                            <div class="col-6">
-                                <strong><i class="bi bi-currency-dollar me-1"></i>Price:</strong> ${food.price_range}
-                            </div>
-                        </div>
 
-                        ${food.best_locations ? `
-                            <div class="mb-3">
-                                <strong><i class="bi bi-geo-alt me-1"></i>Best Locations:</strong><br>
-                                ${food.best_locations.map(location => `<span class="badge bg-light text-dark me-1">${location}</span>`).join('')}
-                            </div>
-                        ` : ''}
-                        
-                        <hr>
-                        <h6><i class="bi bi-list-check me-2"></i>Ingredients:</h6>
-                        <div class="ingredients-list" style="max-height: 200px; overflow-y: auto;">
-                            ${food.ingredients.map((ing, index) => `
-                                <div class="ingredient-item mb-1">
-                                    <span class="badge bg-light text-dark me-2">${index + 1}</span>
-                                    ${ing}
+            const modalContent = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="${food.image}" class="img-fluid rounded shadow" alt="${food.name}"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Penang+Food'">
+                            <div class="mt-3 text-center">
+                                <div class="rating-large">
+                                    ${ratingStars}
+                                    <span class="fs-5 fw-bold ms-2">${food.rating}/5</span>
                                 </div>
-                            `).join('')}
+                            </div>
                         </div>
-                        
-                        <div class="mt-3">
-                            <button class="btn btn-primary btn-sm me-2" onclick="goToFoodDetails('${food.id}')">
-                                <i class="bi bi-arrow-right me-1"></i>Full Details Page
-                            </button>
-                            <button class="btn btn-outline-danger btn-sm" onclick="removeFavourite('${food.id}')">
-                                <i class="bi bi-heart-fill me-1"></i>Remove from Favourites
-                            </button>
+                        <div class="col-md-6">
+                            <h3>${food.name}</h3>
+                            <div class="mb-3">
+                                <span class="badge bg-danger me-2">❤️ Your Favourite</span>
+                                <span class="badge bg-warning text-dark me-2">${food.category}</span>
+                                <span class="badge bg-success">Authentic Local</span>
+                            </div>
+                            <p class="lead">${food.description}</p>
+
+                            <div class="row mb-3">
+                                <div class="col-12 mb-3">
+                                    <strong><i class="bi bi-clock-history text-primary me-1"></i>History:</strong><br>
+                                    <small>${food.history || 'No history available'}</small>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <strong><i class="bi bi-lightbulb text-warning me-1"></i>Facts:</strong><br>
+                                    <small>${food.facts || 'No facts available'}</small>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <strong><i class="bi bi-people text-success me-1"></i>Culture:</strong><br>
+                                    <small>${food.culture || 'No culture information available'}</small>
+                                </div>
+                                <div class="col-6">
+                                    <strong><i class="bi bi-fire me-1"></i>Calories:</strong> ${food.calories} per serving
+                                </div>
+                                <div class="col-6">
+                                    <strong><i class="bi bi-currency-dollar me-1"></i>Price:</strong> ${food.price_range}
+                                </div>
+                            </div>
+
+                            ${food.best_locations ? `
+                                <div class="mb-3">
+                                    <strong><i class="bi bi-geo-alt me-1"></i>Best Locations:</strong><br>
+                                    ${food.best_locations.map(location => `<span class="badge bg-light text-dark me-1">${location}</span>`).join('')}
+                                </div>
+                            ` : ''}
+
+                            <hr>
+                            <h6><i class="bi bi-list-check me-2"></i>Ingredients:</h6>
+                            <div class="ingredients-list" style="max-height: 200px; overflow-y: auto;">
+                                ${food.ingredients.map((ing, index) => `
+                                    <div class="ingredient-item mb-1">
+                                        <span class="badge bg-light text-dark me-2">${index + 1}</span>
+                                        ${ing}
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div class="mt-3">
+                                <button class="btn btn-primary btn-sm me-2" onclick="goToFoodDetails('${food.id}')">
+                                    <i class="bi bi-arrow-right me-1"></i>Full Details Page
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="removeFavourite('${food.id}')">
+                                    <i class="bi bi-heart-fill me-1"></i>Remove from Favourites
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
 
             $('#modal-content').html(modalContent);
             $('#foodModalLabel').text(food.name);
-            
+
             const modal = new bootstrap.Modal(document.getElementById('foodModal'));
             modal.show();
         }
@@ -446,10 +442,10 @@
         function removeFavourite(foodId) {
             favouriteFoods = favouriteFoods.filter(food => food.id !== foodId);
             localStorage.setItem('penangFavorites', JSON.stringify(favouriteFoods));
-            
+
             loadFavourites();
             updateStatistics();
-            
+
             showToast('Removed from Favourites', 'Food has been removed from your favourites.', 'success');
         }
 
@@ -493,7 +489,7 @@
 
             // Apply search filter
             if (searchTerm) {
-                filtered = filtered.filter(food => 
+                filtered = filtered.filter(food =>
                     food.name.toLowerCase().includes(searchTerm) ||
                     food.description.toLowerCase().includes(searchTerm) ||
                     food.ingredients.some(ing => ing.toLowerCase().includes(searchTerm))
@@ -506,7 +502,7 @@
 
         function filterByCategory(category) {
             const searchTerm = $('#search-favourites').val().trim().toLowerCase();
-            
+
             let filtered = [...favouriteFoods];
 
             // Apply category filter
@@ -516,7 +512,7 @@
 
             // Apply search filter if exists
             if (searchTerm) {
-                filtered = filtered.filter(food => 
+                filtered = filtered.filter(food =>
                     food.name.toLowerCase().includes(searchTerm) ||
                     food.description.toLowerCase().includes(searchTerm) ||
                     food.ingredients.some(ing => ing.toLowerCase().includes(searchTerm))
@@ -550,10 +546,10 @@
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            
-            return '★'.repeat(fullStars) + 
-                   (hasHalfStar ? '☆' : '') + 
-                   '☆'.repeat(emptyStars);
+
+            return '★'.repeat(fullStars) +
+                (hasHalfStar ? '☆' : '') +
+                '☆'.repeat(emptyStars);
         }
 
         // Share functions
@@ -573,7 +569,7 @@
 
         function copyLink() {
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(window.location.href).then(function() {
+                navigator.clipboard.writeText(window.location.href).then(function () {
                     showToast('Link Copied!', 'The page link has been copied to your clipboard.', 'success');
                 });
             } else {
@@ -581,28 +577,28 @@
             }
         }
 
-        function             showToast(title, message, type) {
+        function showToast(title, message, type) {
             const toastHtml = `
-                <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            <strong>${title}</strong><br>${message}
+                    <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <strong>${title}</strong><br>${message}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
                     </div>
-                </div>
-            `;
-            
+                `;
+
             if (!$('#toast-container').length) {
                 $('body').append('<div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>');
             }
-            
+
             $('#toast-container').append(toastHtml);
             const toastElement = $('#toast-container .toast:last')[0];
             const toast = new bootstrap.Toast(toastElement);
             toast.show();
-            
-            $(toastElement).on('hidden.bs.toast', function() {
+
+            $(toastElement).on('hidden.bs.toast', function () {
                 $(this).remove();
             });
         }
@@ -618,20 +614,20 @@
                 },
                 dataType: 'json',
                 timeout: 8000, // 8 second timeout
-                success: function(data) {
+                success: function (data) {
                     console.log('Quote API Success:', data);
                     displayQuote(data.content, data.author);
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.log('Quote API Error:', status, error);
                     displayFallbackQuote();
                 },
-                beforeSend: function() {
+                beforeSend: function () {
                     // Show loading state
                     $('#daily-quote').text('Loading inspirational quote...');
                     $('#quote-author').text('Please wait...');
                 },
-                complete: function() {
+                complete: function () {
                     console.log('Quote API request completed');
                 }
             });
@@ -644,21 +640,21 @@
                 tags: 'food',
                 minLength: 50
             })
-            .done(function(data) {
-                displayQuote(data.content, data.author);
-            })
-            .fail(function() {
-                displayFallbackQuote();
-            });
+                .done(function (data) {
+                    displayQuote(data.content, data.author);
+                })
+                .fail(function () {
+                    displayFallbackQuote();
+                });
         }
 
         // RESTful API call using jQuery.getJSON()
         function loadQuoteWithGetJSON() {
             $.getJSON('https://api.quotable.io/random?tags=food')
-                .done(function(data) {
+                .done(function (data) {
                     displayQuote(data.content, data.author);
                 })
-                .fail(function() {
+                .fail(function () {
                     displayFallbackQuote();
                 });
         }
@@ -726,7 +722,7 @@
                 { quote: "Street food is the heart of a city's culture.", author: "Food Explorer" },
                 { quote: "Good food is the foundation of genuine happiness.", author: "Auguste Escoffier" }
             ];
-            
+
             const randomQuote = foodQuotes[Math.floor(Math.random() * foodQuotes.length)];
             displayQuote(randomQuote.quote, randomQuote.author);
         }
@@ -735,51 +731,96 @@
         $('<style>')
             .prop('type', 'text/css')
             .html(`
-                .favourite-card {
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    cursor: pointer;
-                }
-                .favourite-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-                }
-                .rating {
-                    color: #ffc107;
-                }
-                .rating-large {
-                    font-size: 1.5rem;
-                    color: #ffc107;
-                }
-                .ingredient-item {
-                    padding: 5px 0;
-                    border-bottom: 1px solid #eee;
-                }
-                .ingredient-item:last-child {
-                    border-bottom: none;
-                }
-                .ingredients-list {
-                    background-color: #f8f9fa;
-                    padding: 15px;
-                    border-radius: 8px;
-                    border: 1px solid #dee2e6;
-                }
-                .remove-favourite-btn {
-                    transition: all 0.3s ease;
-                }
-                .remove-favourite-btn:hover {
-                    transform: scale(1.1);
-                }
-                @media (max-width: 768px) {
-                    .btn-group {
-                        flex-direction: column;
-                        width: 100%;
+                    .favourite-card {
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        cursor: pointer;
                     }
-                    .btn-group .btn {
-                        margin-bottom: 5px;
+                    .favourite-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
                     }
-                }
-            `)
+                    .rating {
+                        color: #ffc107;
+                    }
+                    .rating-large {
+                        font-size: 1.5rem;
+                        color: #ffc107;
+                    }
+                    .ingredient-item {
+                        padding: 5px 0;
+                        border-bottom: 1px solid #eee;
+                    }
+                    .ingredient-item:last-child {
+                        border-bottom: none;
+                    }
+                    .ingredients-list {
+                        background-color: #f8f9fa;
+                        padding: 15px;
+                        border-radius: 8px;
+                        border: 1px solid #dee2e6;
+                    }
+                    .remove-favourite-btn {
+                        transition: all 0.3s ease;
+                    }
+                    .remove-favourite-btn:hover {
+                        transform: scale(1.1);
+                    }
+                    @media (max-width: 768px) {
+                        .btn-group {
+                            flex-direction: column;
+                            width: 100%;
+                        }
+                        .btn-group .btn {
+                            margin-bottom: 5px;
+                        }
+                    }
+                `)
             .appendTo('head');
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navAuthSection = document.getElementById('nav-auth-section');
+
+            const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
+            const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+
+            const updateNavbar = () => {
+                const loggedInUsername = getLoggedInUser();
+                navAuthSection.innerHTML = '';
+
+                if (loggedInUsername) {
+
+                    const users = getUsers();
+                    const user = users.find(u => u.username === loggedInUsername);
+                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                                    ${displayName.toUpperCase()}
+                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                                </a>
+                            </li>
+                        `;
+                } else {
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-signin-link" class="account nav-link" href="account.html">
+                                    SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35">
+                                </a>
+                            </li>
+                        `;
+                }
+            };
+
+            // update navbat
+            updateNavbar();
+        });
+    </script>
+
 </body>
 </html>
