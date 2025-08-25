@@ -20,30 +20,26 @@
     <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse"  id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">HOME</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">FOOD GALLERY</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">FIND A RESTAURANT</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">MY FAVOURITE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">QUIZ</a>
-        </li>
-      </ul>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">FOOD GALLERY</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">FIND A RESTAURANT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">MY FAVOURITE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">QUIZ</a>
+            </li>
+        </ul>
 
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
-        </li>
-      </ul>
+        <ul class="navbar-nav" id="nav-auth-section"></ul>
 
     </div>
   </div>
@@ -66,4 +62,49 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const navAuthSection = document.getElementById('nav-auth-section');
+
+        const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
+        const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+
+        const updateNavbar = () => {
+            const loggedInUsername = getLoggedInUser();
+            navAuthSection.innerHTML = '';
+
+            if (loggedInUsername) {
+
+                const users = getUsers();
+                const user = users.find(u => u.username === loggedInUsername);
+                const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                navAuthSection.innerHTML = `
+                        <li class="nav-item">
+                            <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                                ${displayName.toUpperCase()}
+                                <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                            </a>
+                        </li>
+                    `;
+            } else {
+
+                navAuthSection.innerHTML = `
+                        <li class="nav-item">
+                            <a id="nav-signin-link" class="account nav-link" href="account.html">
+                                SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35">
+                            </a>
+                        </li>
+                    `;
+            }
+        };
+
+        // update navbat
+        updateNavbar();
+    });
+</script>
+
 </html>
