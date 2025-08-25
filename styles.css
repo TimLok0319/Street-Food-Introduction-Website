@@ -162,6 +162,14 @@ nav {
   font-weight: 800;
 }
 
+.section-title-h1 {
+  color: #333;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 800;
+}
+
+
+
 .food-recommendation .container .card-title {
   font-size: 30px;
   font-weight: 600;
@@ -198,105 +206,108 @@ nav {
 
 /*----------------------------------------------------------------Restaurant----------------------------------------------------------------*/
 
-.restaurant-reco .container-fluid {
-  display: flex;
-  flex-direction: row;
-  padding-top: 30px;
-}
-
-.restaurant-reco .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.restaurant-reco .card:hover {
-  transform: translateY(-5px); /* Lifts the card up by 5px */
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* Adds a more prominent shadow */
-}
-
-.restaurant-reco a .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.restaurant-reco a:hover .card {
-  transform: translateY(-5px); /* Lifts the card up by 5px */
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* Adds a more prominent shadow */
-}
-
-#large-img-container {
-  flex: 1;
+.restaurant-reco .restaurant-image-card {
   position: relative;
-  display: flex;           
-  justify-content: center; 
-  align-items: center;  
-}
-
-.restaurant-reco #large-img-container img {
-  outline: 7px solid #ffffff;
-  border-radius: 15px;
-}
-
-.overlay-text {
-  position: absolute;
-  color: white;
-  padding: 20px;
-  border-radius: 15px;
+  display: block;
+  overflow: hidden;
+  border-radius: 0.375rem; /* Bootstrap's default card border-radius */
+  height: 450px; /* Increased height for consistency */
   width: 100%;
-  max-width: 90%;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  text-decoration: none;
+  color: white; /* Default text color for overlay */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.overlay-text h1 {
-  font-size: clamp(1.5rem, 10vw, 3.5rem);
-  font-weight: 700;
+.restaurant-reco .restaurant-image-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 }
 
-#card-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  flex: 2;
-  padding-left: 30px;
+.restaurant-reco .restaurant-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-#card-container .card {
-  width: 90%;
-  flex-direction: column;
+.restaurant-reco .restaurant-image-card:hover img {
+  transform: scale(1.05); /* Slight zoom on hover */
 }
 
-#card-container .col-md-4 img {
-  width: 100% !important;
-  height: auto !important;
-  aspect-ratio: 16/9 !important;
-  object-fit: cover !important;
-  border-radius: var(--bs-card-inner-border-radius)
-    var(--bs-card-inner-border-radius) 0 0 !important;
+.restaurant-reco .restaurant-name-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better contrast */
 }
 
-#card-container .card:nth-child(1) .col-md-4 img,
-#card-container .card:nth-child(2) .col-md-4 img {
-  object-position: top;
+.restaurant-reco .restaurant-name-overlay h5 {
+  margin-bottom: 0;
+  color: white; /* Ensure text is white */
 }
 
-#card-container .card h5 {
-  font-size: clamp(0.5rem,3vh,2rem);
-  font-weight: 600;
-}
-
-#card-container .card-text {
-  font-size: clamp(0.5rem,1.9vh,2rem);
-  color: #333;
-}
-
-#card-container .card .row {
+.restaurant-reco .image-container {
+  position: relative;
+  width: 100%;
   height: 100%;
 }
 
-#card-container .col-md-4 img {
-  height: 100% !important;
-  object-fit: cover;
+.restaurant-reco .hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.restaurant-reco .restaurant-image-card:hover .hover-img {
+  opacity: 1;
+}
+
+.restaurant-reco .signature-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 10%, transparent 40%, rgba(0,0,0,0.6) 95%);
+  color: white;
+}
+
+.restaurant-reco .restaurant-image-card:hover .signature-text-overlay {
+  opacity: 1;
+}
+
+.restaurant-reco .signature-text-overlay .top-left {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.restaurant-reco .signature-text-overlay .bottom-left {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px black;
+}
+
+.restaurant-reco .restaurant-image-card:hover .restaurant-name-overlay {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /*----------------------------------------------------------------Michelin----------------------------------------------------------------*/
@@ -594,6 +605,37 @@ nav {
 
   #card-container .card-text {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .restaurant-reco .restaurant-row-header h2 {
+    font-size: 2.5rem !important; /* Drastically reduce font size for the title */
+  }
+
+  .restaurant-reco .restaurant-image-card {
+    height: 250px; /* Reduce card height for smaller screens */
+  }
+
+  .restaurant-reco .restaurant-name-overlay {
+    font-size: 1rem; /* Adjust overlay font size */
+    padding: 4px 8px;
+  }
+
+  .restaurant-reco .btn-custom-green {
+    font-size: 1.2rem !important; /* Adjust button font size */
+    padding: 0.7rem 1.2rem !important;
+  }
+
+  .restaurant-reco .container-fluid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .restaurant-reco .restaurant-row-header {
+    order: -1; /* This will move the header to the top */
+    margin-top: 0 !important; /* Remove top margin */
+    margin-bottom: 2rem !important; /* Add some space below the header */
   }
 }
 
