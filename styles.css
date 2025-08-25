@@ -134,7 +134,7 @@ nav {
 }
 
 .hero-section h2 {
-  font-size: clamp(3.3rem, 10vw, 5rem);
+  font-size: clamp(3.2rem, 10vw, 5rem);
   font-weight: 900;
 }
 
@@ -154,12 +154,6 @@ nav {
   text-align: center;
   padding-top: 4rem;
   padding-bottom: 5rem;
-}
-
-.food-recommendation .container h1 {
-  color: #333;
-  font-size: clamp(3.5rem, 10vw, 10rem);
-  font-weight: 800;
 }
 
 .section-title-h1 {
@@ -313,66 +307,54 @@ nav {
 /*----------------------------------------------------------------Michelin----------------------------------------------------------------*/
 
 .michelin-sec {
-  height: 70vh;
+  padding: 8rem 0;
   background-image: url(images/hawker-centre..png);
-  display: flex;
-  flex-direction: row;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 
-#michelin-text {
+#michelin-text-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-#michelin-text h1 {
-  color: white;
-  font-size: clamp(3.3rem, 8vw, 5rem);
+.michelin-h1 {
+  font-size: clamp(4rem, 8vw, 6rem);
   font-weight: 600;
-  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-#michelin-text h2 {
-  color: white;
-  font-size: clamp(1.8rem, 5vw, 3rem);
+.michelin-h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 300;
-  text-align: center;
-}
-
-.carousel {
-  height: 100%;
-}
-.carousel-item {
-  height: 100%;
-}
-
-.carousel,
-.carousel-inner,
-.carousel-item {
-  height: 100%;
-  width: 100%;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 #carousel-container-parent {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .carousel-container {
-  width: 90%;
-  height: 90%;
-  overflow: hidden;
   position: relative;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border: 5px solid white;
+  width: 100%;
+  max-width: 900px;
+
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border: 3px solid white;
 }
 
 .carousel-container img {
   width: 100%;
-  height: 100%;
+  height: 90%;
   object-fit: cover;
 }
 
@@ -380,12 +362,12 @@ nav {
 .carousel-control-next {
   position: absolute;
   top: 50%;
-  bottom: auto !important;
   transform: translateY(-50%) !important;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
+  width: 40px; 
+  height: 40px; 
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%; 
+   z-index: 2; 
 }
 
 .carousel-control-prev {
@@ -393,7 +375,7 @@ nav {
 }
 
 .carousel-control-next {
-  right: 15px;
+  right: 15px; 
 }
 
 /*----------------------------------------------------------------Review----------------------------------------------------------------*/
@@ -438,7 +420,7 @@ nav {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin: 0 1rem;
-  width: 350px; /* Fixed width for each card */
+  width: 350px; 
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -457,31 +439,23 @@ nav {
   text-align: right;
   font-weight: bold;
   margin-top: 1.5rem;
-  color: #39765f; /* Matches your site's theme */
+  color: #39765f; 
 }
 
 @keyframes scroll {
   to {
     transform: translate(
       calc(-50% - 0.5rem)
-    ); /* The 0.5rem is half the margin */
+    ); 
   }
 }
 
-/* Pause animation on hover */
+
 .scroller:hover .review-list {
   animation-play-state: paused;
 }
 
 @media (max-width: 1366px) {
-  #card-container {
-  grid-template-columns: 1fr;
-  }
-
-   #large-img-container {
-    max-width: 700px;
-  }
-
   .food-recommendation .card{
     max-width: 700px;
     justify-self: center;
@@ -541,28 +515,23 @@ nav {
   }
 
   .michelin-sec {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     padding: 20px 0;
     height: auto;
+  }
+
+  .michelin-sec .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .michelin-sec .col-6 {
+    width: 100%;
+    text-align: center;
   }
 
   .carousel-container img {
     height: clamp(10rem, 35vh, 100rem);
     width: 100%;
-  }
-
-  #michelin-text {
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  #michelin-text img {
-    width: 30%;
-    height: 30%;
   }
 
   .restaurant-reco #card-container .card-title {
@@ -574,56 +543,44 @@ nav {
   }
 }
 
-@media (max-height: 500px) {
+@media (max-width: 500px) {
   
-  .food-recommendation .container .card-container{
-    flex-direction: row;
+
+  .food-recommendation .container .card {
+    width: 250px;
   }
 
-  .food-recommendation .container .card{
-    width:250px ;
-  }
-
-  .food-recommendation .card-container .card-title{
+  .food-recommendation .card-container .card-title {
     font-size: 25px;
   }
 
-  .food-recommendation .card-container .list-group-item{
+  .food-recommendation .card-container .list-group-item {
     font-size: 15px;
   }
 
-  .food-recommendation .card-container .card-text{
+  .food-recommendation .card-container .card-text {
     font-size: 15px;
   }
 
-  .food-recommendation .text-center{
-    text-align: center!important;
-  }
-  #card-container .card h5 {
-    font-size: 1.2rem; /* force a readable size */
+  .food-recommendation .text-center {
+    text-align: center !important;
   }
 
-  #card-container .card-text {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 500px) {
   .restaurant-reco .restaurant-row-header h2 {
-    font-size: 2.5rem !important; /* Drastically reduce font size for the title */
+    font-size: 2.5rem !important;
   }
 
   .restaurant-reco .restaurant-image-card {
-    height: 250px; /* Reduce card height for smaller screens */
+    height: 250px;
   }
 
   .restaurant-reco .restaurant-name-overlay {
-    font-size: 1rem; /* Adjust overlay font size */
+    font-size: 1rem;
     padding: 4px 8px;
   }
 
   .restaurant-reco .btn-custom-green {
-    font-size: 1.2rem !important; /* Adjust button font size */
+    font-size: 1.2rem !important;
     padding: 0.7rem 1.2rem !important;
   }
 
@@ -633,10 +590,65 @@ nav {
   }
 
   .restaurant-reco .restaurant-row-header {
-    order: -1; /* This will move the header to the top */
-    margin-top: 0 !important; /* Remove top margin */
-    margin-bottom: 2rem !important; /* Add some space below the header */
+    order: -1;
+    margin-top: 0 !important;
+    margin-bottom: 2rem !important;
   }
+
+  .michelin-sec .row > div {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #michelin-text-container {
+    order: 1;
+  }
+
+  #carousel-container-parent {
+    order: 2;
+  }
+
+  .michelin-sec {
+    padding: 3rem 0;
+  }
+
+  #michelin-text-container img {
+    max-width: 200px !important;
+  }
+
+  .michelin-h1 {
+    font-size: clamp(2rem, 6vw, 3rem) !important;
+  }
+
+  .michelin-h2 {
+    font-size: clamp(1.8rem, 3vw, 1.5rem) !important;
+  }
+
+  .carousel-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 2rem;
+  }
+
+  .carousel-control-prev {
+    left: 10px !important;
+  }
+
+  .carousel-control-next {
+    right: 10px !important;
+  }
+
+  #stats {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .hero-section h2
+  {
+    font-size: 45px;
+  }
+
 }
 
 /*----------------------------------------------------------------Quiz----------------------------------------------------------------*/
