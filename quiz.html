@@ -17,181 +17,258 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-xl">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="images/brand-logo.png" height="50" width="180"></a>
-      <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">HOME</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">FOOD GALLERY</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">FIND A RESTAURANT</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">MY FAVOURITE</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">QUIZ</a>
-          </li>
-        </ul>
-
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35"
-                width="35"></a>
-          </li>
-        </ul>
-
-      </div>
-    </div>
-  </nav>
-
-
-  <!-- Start Here -->
-  <main class="flex-grow-1">
-    <div class="container my-5">
-      <div id="quizCard" class="card quiz-card shadow-lg p-4 mx-auto text-center" style="max-width: 700px;">
-
-        <!-- Welcome Section -->
-        <div id="welcomeSection">
-          <div id="quizCarousel" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="2000"
-            data-bs-wrap="true">
-            <div class="carousel-inner rounded">
-              <div class="carousel-item active">
-                <img src="images/quiz_char_kway_teow.png" class="d-block mx-auto quiz-carousel-img">
-              </div>
-              <div class="carousel-item">
-                <img src="images/quiz_laksa.png" class="d-block mx-auto quiz-carousel-img">
-              </div>
-              <div class="carousel-item">
-                <img src="images/quiz_cendol.png" class="d-block mx-auto quiz-carousel-img">
-              </div>
-              <div class="carousel-item">
-                <img src="images/quiz_hokkien_mee.png" class="d-block mx-auto quiz-carousel-img">
-              </div>
-            </div>
-          </div>
-          <h2 class="mb-4">🍜 Penang Street Food Quiz</h2>
-          <p class="lead">Are you ready to test your knowledge of Penang’s famous street food?</p>
-          <button class="btn btn-primary w-100 mt-3" onclick="startQuiz()">Start Quiz</button>
-        </div>
-
-        <!-- Quiz Section -->
-        <div id="quizSection" style="display:none;">
-          <h4 id="questionText"></h4>
-          <img id="foodImage" class="img-fluid rounded mb-3" style="max-height:300px; object-fit:cover;">
-          <div id="answerButtons" class="mt-3"></div>
-          <p class="mt-2 text-muted" id="progressText"></p>
-        </div>
-
-        <!-- Explanation Section -->
-        <div id="explainSection" style="display:none;">
-          <h4 id="explainTitle"></h4>
-          <img id="explainImage" class="img-fluid rounded mb-3" style="max-height:300px; object-fit:cover;">
-          <p id="explainText"></p>
-          <p id="yourAnswer" class="fw-bold"></p>
-          <p id="correctAnswer" class="fw-bold text-success"></p>
-          <button id="nextBtn" class="btn btn-success w-100 mt-3">Next Question</button>
-        </div>
-
-        <!-- Result Section -->
-        <div id="resultSection" style="display:none;">
-          <div class="result-header mb-4">
-            <h2 class="fw-bold">🏆 Congratulations!</h2>
-            <h4 id="finalScore" class="mt-2"></h4>
-          </div>
-
-          <!-- Accuracy Bar -->
-          <div class="accuracy-bar-container">
-            <div class="accuracy-bar-fill-correct"></div>
-            <div class="accuracy-bar-fill-wrong"></div>
-          </div>
-          <div class="accuracy-bar-label" id="accuracyLabel"></div>
-
-          <div class="d-flex justify-content-between mt-4">
-            <button class="btn share-btn w-50 me-2" onclick="shareResult()">
-              <i class="bi bi-share-fill"></i> Share
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="images/brand-logo.png" height="50" width="180"></a>
+            <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <button class="btn btn-outline-dark w-50 ms-2" onclick="restartQuiz()">
-              <i class="bi bi-arrow-repeat"></i> Play Again
-            </button>
-          </div>
-        </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FOOD GALLERY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FIND A RESTAURANT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">MY FAVOURITE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">QUIZ</a>
+                    </li>
+                </ul>
 
+                <ul class="navbar-nav" id="nav-auth-section"></ul>
 
-
-        <!-- Share Result Modal -->
-        <div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content share-modal">
-              <div class="modal-header">
-                <h5 class="modal-title"><i class="bi bi-share-fill"></i> Share Your Result</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body" id="shareContent">
-                <!-- Filled dynamically by JS -->
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn fb-share-btn">
-                  <i class="bi bi-facebook"></i> Share to Facebook
-                </button>
-              </div>
             </div>
-          </div>
         </div>
+    </nav>
 
 
-      </div>
-    </div>
-  </main>
 
-  <footer class="footer text-center text-white py-4">
-    <div class="container">
-      <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
-      <div class="mt-2">
-        <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i
-            class="bi bi-instagram"></i></a>
-        <a href="https://github.com/TimLok0319/Street-Food-Introduction-Website" target="_blank"
-          rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-github"></i></a>
-      </div>
-    </div>
-  </footer>
+    <main class="flex-grow-1">
+        <div class="container my-5">
+            <div id="quizCard" class="card quiz-card shadow-lg p-4 mx-auto text-center" style="max-width: 700px;">
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+                <!-- Welcome Section -->
+                <div id="welcomeSection">
+                    <div id="quizCarousel" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="2000"
+                         data-bs-wrap="true">
+                        <div class="carousel-inner rounded">
+                            <div class="carousel-item">
+                                <img src="images/quiz_hokkien_mee.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item active">
+                                <img src="images/quiz_char_kway_teow.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_cendol.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_laksa.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_curry.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_rojak.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_abc.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_nasi_kandar.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/quiz_dsb.png" class="d-block mx-auto quiz-carousel-img">
+                            </div>
+                        </div>
+                    </div>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDnMrzQzarwHWzLT_KxFR0xP-4_g9EqoSc",
-      authDomain: "streetfoodquiz.firebaseapp.com",
-      projectId: "streetfoodquiz",
-      storageBucket: "streetfoodquiz.appspot.com",
-      messagingSenderId: "634779127454",
-      appId: "1:634779127454:web:6edae2bc4e538a6de2358f"
-    };
-    firebase.initializeApp(firebaseConfig);
+                    <h2 class="mb-4">🍜 Penang Street Food Quiz</h2>
+                    <p class="lead">Are you ready to test your knowledge of Penang’s famous street food?</p>
+                    <button class="btn btn-success w-100 mt-3" onclick="startQuiz()">Start Quiz</button>
+                </div>
 
-    // Make db global
-    window.db = firebase.firestore();
-  </script>
+                <!-- Quiz Section -->
+                <div id="quizSection" style="display:none;">
+                    <h4 id="questionText"></h4>
+                    <img id="foodImage" class="img-fluid rounded mb-3">
+                    <div id="answerButtons" class="mt-3"></div>
+                    <p class="mt-2 text-muted" id="progressText"></p>
+                </div>
 
-  <!-- Your main JS -->
-  <script src="quiz.js"></script>
+                <!-- Explanation Section -->
+                <div id="explainSection" style="display:none;">
+                    <h4 id="explainTitle"></h4>
+                    <img id="explainImage" class="img-fluid rounded mb-3">
+                    <p id="explainText"></p>
+                    <p id="yourAnswer" class="fw-bold"></p>
+                    <p id="correctAnswer" class="fw-bold text-success"></p>
+                    <button id="nextBtn" class="btn btn-success w-100 mt-3">Next Question</button>
+                </div>
+
+                <!-- ✅ Result Section (page only, no header/footer here) -->
+                <div id="resultSection" style="display:none;">
+                    <div id="resultSnapshot" class="p-4 text-center bg-white shadow rounded">
+                        <!-- Results -->
+                        <div class="result-header mb-3">
+                            <h2 class="fw-bold">🏆 Congratulations!</h2>
+                            <h4 id="finalScore" class="mt-2"></h4>
+                        </div>
+
+                        <!-- Accuracy Bar -->
+                        <div class="accuracy-bar-container">
+                            <div class="accuracy-bar-fill-correct"></div>
+                            <div class="accuracy-bar-fill-wrong"></div>
+                        </div>
+                        <div class="accuracy-bar-label" id="accuracyLabel"></div>
+
+                        <!-- Tagline -->
+                        <p id="resultTagline" class="lead fw-bold mt-3"></p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn share-btn w-50 me-2" onclick="shareResult()">
+                            <i class="bi bi-share-fill"></i> Share
+                        </button>
+                        <button class="btn btn-outline-dark w-50 ms-2" onclick="restartQuiz()">
+                            <i class="bi bi-arrow-repeat"></i> Play Again
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Share Result Modal -->
+                <div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content share-modal">
+
+                            <!-- Close Button -->
+                            <button type="button" class="btn-close ms-auto m-2" data-bs-dismiss="modal"></button>
+
+                            <!-- Snapshot Wrapper (this is what will be saved) -->
+                            <div id="shareSnapshot" class="p-4 text-center bg-white shadow rounded">
+
+                                <!-- Minimal Header -->
+                                <div class="snapshot-header mb-3">
+                                    <img src="images/brand-logo.png" alt="Site Logo" class="mx-auto d-block" style="height:60px;">
+                                </div>
+
+                                <!-- Injected Quiz Result -->
+                                <div id="shareContent"></div>
+
+                                <!-- Minimal Footer -->
+                                <div class="snapshot-footer mt-4">
+                                    <small>© 2025 Penang One Better</small>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="text-center my-3">
+                                <button id="saveResultBtn" class="btn save-btn">
+                                    💾 Save Result
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer inside wrapper -->
+    <footer class="footer text-center text-white py-4">
+        <div class="container">
+            <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://github.com/TimLok0319/Street-Food-Introduction-Website" target="_blank"
+                   rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDnMrzQzarwHWzLT_KxFR0xP-4_g9EqoSc",
+            authDomain: "streetfoodquiz.firebaseapp.com",
+            projectId: "streetfoodquiz",
+            storageBucket: "streetfoodquiz.appspot.com",
+            messagingSenderId: "634779127454",
+            appId: "1:634779127454:web:6edae2bc4e538a6de2358f"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Make db global
+        window.db = firebase.firestore();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="quiz.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navAuthSection = document.getElementById('nav-auth-section');
+
+            const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
+            const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+
+            const updateNavbar = () => {
+                const loggedInUsername = getLoggedInUser();
+                navAuthSection.innerHTML = '';
+
+                if (loggedInUsername) {
+
+                    const users = getUsers();
+                    const user = users.find(u => u.username === loggedInUsername);
+                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                                    ${displayName.toUpperCase()}
+                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                                </a>
+                            </li>
+                        `;
+                } else {
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-signin-link" class="account nav-link" href="account.html">
+                                    SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35">
+                                </a>
+                            </li>
+                        `;
+                }
+            };
+
+            // update navbat
+            updateNavbar();
+        });
+    </script>
+
 </body>
 
 </html>

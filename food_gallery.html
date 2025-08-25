@@ -39,11 +39,7 @@
                         <a class="nav-link" href="#">QUIZ</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
-                    </li>
-                </ul>
+                <ul class="navbar-nav" id="nav-auth-section"></ul>
             </div>
         </div>
     </nav>
@@ -55,7 +51,7 @@
                 <div class="text-center mb-5">
                     <h1 class="display-4 fw-bold text-dark">PENANG STREET FOOD</h1>
                     <p class="lead">Discover authentic Penang street food and Malaysian cuisine</p>
-                    
+
                     <!-- Weather Widget -->
                     <div class="weather-widget mb-4" id="weather-widget" style="display: none;">
                         <div class="card mx-auto" style="max-width: 400px;">
@@ -70,7 +66,7 @@
                                 </div>
                                 <div class="mt-2">
                                     <small class="text-muted">
-                                        Feels like <span id="weather-feels">--</span>°C | 
+                                        Feels like <span id="weather-feels">--</span>°C |
                                         Humidity: <span id="weather-humidity">--%</span>
                                     </small>
                                 </div>
@@ -80,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mt-3">
                         <span class="badge bg-success fs-6 me-2">🇲🇾 Authentic Malaysian</span>
                         <span class="badge bg-info fs-6 me-2">🍜 Street Food</span>
@@ -158,7 +154,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         // Global variables
         let allFoods = [];
@@ -195,7 +191,7 @@
                     culture: "Often eaten as breakfast or lunch, this dish represents the multicultural harmony of Penang, where different communities contributed ingredients and cooking techniques."
                 },
                 {
-                    id: "penang002", 
+                    id: "penang002",
                     name: "Char Kway Teow",
                     image: "images/Char-kway-teow-for-FP-2.jpg",
                     description: "Penang's signature stir-fried flat rice noodles with prawns, Chinese sausage, bean sprouts, and eggs. Cooked over high heat for that perfect 'wok hei' flavor.",
@@ -211,11 +207,11 @@
                 },
                 {
                     id: "penang003",
-                    name: "Penang Hokkien Mee", 
+                    name: "Penang Hokkien Mee",
                     image: "images/hokkien-mee.png",
                     description: "Rich prawn and pork rib broth served with yellow noodles and rice vermicelli. Topped with prawns, pork slices, hard-boiled eggs, and kangkung.",
                     ingredients: ["Yellow noodles", "Rice vermicelli", "Large prawns", "Pork ribs", "Hard-boiled eggs", "Bean sprouts", "Water spinach", "Fried shallots", "Lime wedges", "Red chilies", "White pepper"],
-                    category: "noodles", 
+                    category: "noodles",
                     rating: 4.6,
                     calories: 380,
                     price_range: "RM 6 - 11",
@@ -242,7 +238,7 @@
                 {
                     id: "penang005",
                     name: "Penang Rojak",
-                    image: "images/Penang-Rojak.jpg", 
+                    image: "images/Penang-Rojak.jpg",
                     description: "Unique fruit and vegetable salad with tangy, spicy dressing. Mixed tableside by the rojak man using wooden paddles for the perfect blend.",
                     ingredients: ["Green mango", "Cucumber", "Bean sprouts", "Firm tofu", "Turnip", "Jicama", "Tamarind paste", "Palm sugar", "Chili paste", "Prawn paste", "Crushed peanuts", "Sesame seeds"],
                     category: "snacks",
@@ -462,18 +458,18 @@
             }
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             initializePage();
             loadWeatherData();
 
             // Event handlers
             $('#search-btn').click(performSearch);
-            $('#search-input').keypress(function(e) {
+            $('#search-input').keypress(function (e) {
                 if (e.which === 13) performSearch();
             });
 
             // Clear search button
-            $('#clear-search-btn').click(function() {
+            $('#clear-search-btn').click(function () {
                 $('#search-input').val('');
                 $('#sort-select').val('default');
                 $('.category-btn').removeClass('active');
@@ -483,26 +479,26 @@
                 displayFoods(displayedFoods);
             });
 
-            $('.category-btn').click(function() {
+            $('.category-btn').click(function () {
                 $('.category-btn').removeClass('active');
                 $(this).addClass('active');
                 currentCategory = $(this).data('category');
                 filterByCategory(currentCategory);
             });
 
-            $('#sort-select').change(function() {
+            $('#sort-select').change(function () {
                 sortFoods($(this).val());
             });
         });
 
         async function initializePage() {
             showLoading(true);
-            
+
             // Load Penang foods
             allFoods = await loadPenangFoods();
             displayedFoods = [...allFoods];
             displayFoods(displayedFoods);
-            
+
             showLoading(false);
         }
 
@@ -515,7 +511,7 @@
             }
 
             // Search in local foods
-            const searchResults = allFoods.filter(food => 
+            const searchResults = allFoods.filter(food =>
                 food.name.toLowerCase().includes(searchTerm) ||
                 food.description.toLowerCase().includes(searchTerm) ||
                 food.ingredients.some(ing => ing.toLowerCase().includes(searchTerm)) ||
@@ -574,55 +570,55 @@
 
             foods.forEach(food => {
                 const ratingStars = generateRatingStars(food.rating);
-                
+
                 const foodCard = `
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 shadow-sm food-card" data-food-id="${food.id}">
-                            <div class="position-relative">
-                                <img src="${food.image}" class="card-img-top" alt="${food.name}" 
-                                     style="height: 200px; object-fit: cover;" 
-                                     onerror="this.src='https://via.placeholder.com/300x200?text=Penang+Food'">
-                                <div class="position-absolute top-0 start-0 m-2">
-                                    <span class="badge bg-success">Penang Authentic</span>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 shadow-sm food-card" data-food-id="${food.id}">
+                                <div class="position-relative">
+                                    <img src="${food.image}" class="card-img-top" alt="${food.name}"
+                                         style="height: 200px; object-fit: cover;"
+                                         onerror="this.src='https://via.placeholder.com/300x200?text=Penang+Food'">
+                                    <div class="position-absolute top-0 start-0 m-2">
+                                        <span class="badge bg-success">Penang Authentic</span>
+                                    </div>
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <span class="badge bg-dark">⭐ ${food.rating}</span>
+                                    </div>
                                 </div>
-                                <div class="position-absolute top-0 end-0 m-2">
-                                    <span class="badge bg-dark">⭐ ${food.rating}</span>
-                                </div>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${food.name}</h5>
-                                <p class="card-text flex-grow-1">${food.description.substring(0, 120)}...</p>
-                                <div class="mt-auto">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="rating">
-                                            ${ratingStars}
-                                            <small class="text-muted ms-1">(${food.rating})</small>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${food.name}</h5>
+                                    <p class="card-text flex-grow-1">${food.description.substring(0, 120)}...</p>
+                                    <div class="mt-auto">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="rating">
+                                                ${ratingStars}
+                                                <small class="text-muted ms-1">(${food.rating})</small>
+                                            </div>
+
                                         </div>
-                                        
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <span class="badge bg-warning text-dark">${food.category}</span>
-                                        <small class="text-muted">${food.calories} cal</small>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-success fw-bold">${food.price_range}</small>
-                                        <small class="text-muted">📍 Penang</small>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="badge bg-warning text-dark">${food.category}</span>
+                                            <small class="text-muted">${food.calories} cal</small>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-success fw-bold">${food.price_range}</small>
+                                            <small class="text-muted">📍 Penang</small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-success w-100 view-details-btn" data-food-id="${food.id}">
-                                    <i class="bi bi-eye me-2"></i>View Details
-                                </button>
+                                <div class="card-footer">
+                                    <button class="btn btn-success w-100 view-details-btn" data-food-id="${food.id}">
+                                        <i class="bi bi-eye me-2"></i>View Details
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
                 container.append(foodCard);
             });
 
             // Add click handlers
-            $('.view-details-btn').click(function() {
+            $('.view-details-btn').click(function () {
                 const foodId = $(this).data('food-id');
                 saveFoodData(foodId);
             });
@@ -633,10 +629,10 @@
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            
-            return '★'.repeat(fullStars) + 
-                   (hasHalfStar ? '☆' : '') + 
-                   '☆'.repeat(emptyStars);
+
+            return '★'.repeat(fullStars) +
+                (hasHalfStar ? '☆' : '') +
+                '☆'.repeat(emptyStars);
         }
 
         function showLoading(show) {
@@ -664,19 +660,19 @@
                 },
                 dataType: 'json',
                 timeout: 10000, // 10 second timeout
-                success: function(data) {
+                success: function (data) {
                     console.log('Weather API Success:', data);
                     displayWeatherData(data);
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.log('Weather API Error:', status, error);
                     displayFallbackWeather();
                 },
-                beforeSend: function() {
+                beforeSend: function () {
                     // Show loading state
                     $('#weather-widget .card-body').append('<div class="spinner-border spinner-border-sm me-2" id="weather-spinner"></div>');
                 },
-                complete: function() {
+                complete: function () {
                     // Remove loading spinner
                     $('#weather-spinner').remove();
                 }
@@ -697,20 +693,20 @@
                 },
                 dataType: 'json'
             })
-            .done(function(data) {
-                console.log('Weather data loaded successfully');
-                displayWeatherData(data);
-            })
-            .fail(function(xhr, status, error) {
-                console.log('Failed to load weather data:', error);
-                displayFallbackWeather();
-            })
-            .always(function() {
-                console.log('Weather API request completed');
-            });
+                .done(function (data) {
+                    console.log('Weather data loaded successfully');
+                    displayWeatherData(data);
+                })
+                .fail(function (xhr, status, error) {
+                    console.log('Failed to load weather data:', error);
+                    displayFallbackWeather();
+                })
+                .always(function () {
+                    console.log('Weather API request completed');
+                });
         }
 
-        // RESTful API call using jQuery.getJSON() 
+        // RESTful API call using jQuery.getJSON()
         function loadWeatherWithGetJSON() {
             const apiUrl = 'https://api.open-meteo.com/v1/forecast?' + $.param({
                 latitude: 5.4164,
@@ -721,10 +717,10 @@
             });
 
             $.getJSON(apiUrl)
-                .done(function(data) {
+                .done(function (data) {
                     displayWeatherData(data);
                 })
-                .fail(function() {
+                .fail(function () {
                     displayFallbackWeather();
                 });
         }
@@ -732,19 +728,19 @@
         function displayWeatherData(data) {
             const temp = Math.round(data.current_weather.temperature);
             const weatherCode = data.current_weather.weathercode;
-            
+
             // Map weather codes to descriptions and icons
             const weatherInfo = getWeatherInfo(weatherCode);
-            
+
             $('#weather-temp').text(`${temp}°C`);
             $('#weather-desc').text(weatherInfo.description);
             $('#weather-icon').attr('src', weatherInfo.icon);
             $('#weather-feels').text(temp); // Simplified for demo
             $('#weather-humidity').text(data.hourly.relative_humidity_2m[0] || 70);
-            
+
             // Show food recommendation based on weather
             showFoodRecommendation(temp, weatherCode);
-            
+
             $('#weather-widget').fadeIn();
         }
 
@@ -755,7 +751,7 @@
             $('#weather-icon').attr('src', 'https://openweathermap.org/img/w/02d.png');
             $('#weather-feels').text('36');
             $('#weather-humidity').text('75');
-            
+
             showFoodRecommendation(32, 2); // Partly cloudy
             $('#weather-widget').fadeIn();
         }
@@ -775,13 +771,13 @@
                 80: { description: 'Rain Showers', icon: 'https://openweathermap.org/img/w/09d.png' },
                 95: { description: 'Thunderstorm', icon: 'https://openweathermap.org/img/w/11d.png' }
             };
-            
+
             return weatherMap[weatherCode] || { description: 'Unknown', icon: 'https://openweathermap.org/img/w/02d.png' };
         }
 
         function showFoodRecommendation(temp, weatherCode) {
             let suggestion = '';
-            
+
             if (temp > 30) {
                 // Hot weather - recommend cooling foods
                 const coolingFoods = ['Penang Cendol', 'Ice Kacang', 'Nutmeg Juice', 'Durian Cendol'];
@@ -799,7 +795,7 @@
                 const popularFoods = ['Penang Asam Laksa', 'Char Kway Teow', 'Penang Rojak'];
                 suggestion = `Perfect weather to try ${popularFoods[Math.floor(Math.random() * popularFoods.length)]}! 🌟`;
             }
-            
+
             $('#food-suggestion').text(suggestion);
             $('#weather-recommendation').show();
         }
@@ -808,37 +804,82 @@
         $('<style>')
             .prop('type', 'text/css')
             .html(`
-                .food-card {
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    cursor: pointer;
-                }
-                .food-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-                }
-                .rating {
-                    color: #ffc107;
-                }
-                .category-btn {
-                    margin: 2px;
-                    transition: all 0.3s ease;
-                }
-                .category-btn.active {
-                    background-color: #39765f;
-                    border-color: #39765f;
-                    color: white;
-                }
-                @media (max-width: 768px) {
-                    .btn-group {
-                        flex-direction: column;
-                        width: 100%;
+                    .food-card {
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        cursor: pointer;
                     }
-                    .btn-group .btn {
-                        margin-bottom: 5px;
+                    .food-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
                     }
-                }
-            `)
+                    .rating {
+                        color: #ffc107;
+                    }
+                    .category-btn {
+                        margin: 2px;
+                        transition: all 0.3s ease;
+                    }
+                    .category-btn.active {
+                        background-color: #39765f;
+                        border-color: #39765f;
+                        color: white;
+                    }
+                    @media (max-width: 768px) {
+                        .btn-group {
+                            flex-direction: column;
+                            width: 100%;
+                        }
+                        .btn-group .btn {
+                            margin-bottom: 5px;
+                        }
+                    }
+                `)
             .appendTo('head');
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navAuthSection = document.getElementById('nav-auth-section');
+
+            const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
+            const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+
+            const updateNavbar = () => {
+                const loggedInUsername = getLoggedInUser();
+                navAuthSection.innerHTML = '';
+
+                if (loggedInUsername) {
+
+                    const users = getUsers();
+                    const user = users.find(u => u.username === loggedInUsername);
+                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                                    ${displayName.toUpperCase()}
+                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                                </a>
+                            </li>
+                        `;
+                } else {
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-signin-link" class="account nav-link" href="account.html">
+                                    SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35">
+                                </a>
+                            </li>
+                        `;
+                }
+            };
+
+            // update navbat
+            updateNavbar();
+        });
+    </script>
+
 </body>
 </html>
