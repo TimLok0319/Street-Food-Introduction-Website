@@ -27,19 +27,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">HOME</a>
+            <a class="nav-link" href="index.html">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">FOOD GALLERY</a>
+            <a class="nav-link" href="food_gallery.html">FOOD GALLERY</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">FIND A RESTAURANT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">MY FAVOURITE</a>
+            <a class="nav-link" href="my_favourite.html">MY FAVOURITE</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">QUIZ</a>
+            <a class="nav-link active" aria-current="page" href="quiz.html">QUIZ</a>
           </li>
         </ul>
 
@@ -207,25 +207,6 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDnMrzQzarwHWzLT_KxFR0xP-4_g9EqoSc",
-      authDomain: "streetfoodquiz.firebaseapp.com",
-      projectId: "streetfoodquiz",
-      storageBucket: "streetfoodquiz.appspot.com",
-      messagingSenderId: "634779127454",
-      appId: "1:634779127454:web:6edae2bc4e538a6de2358f"
-    };
-    firebase.initializeApp(firebaseConfig);
-
-    // Make db global
-    window.db = firebase.firestore();
-  </script>
-
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="quiz.js"></script>
 </body>
