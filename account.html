@@ -155,17 +155,45 @@
 
     <!-- javascipt -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
 
-            //DOM element
+            // DOM element
             const accountPage = document.getElementById('accountPage');
             const profilePage = document.getElementById('profilePage');
             const navAuthSection = document.getElementById('nav-auth-section');
 
-            //local storage 
+            // local storage
             const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
             const saveUsers = (users) => localStorage.setItem('users', JSON.stringify(users));
-            const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+
+            const setCookie = (name, value, days) => {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            };
+
+            //get cookie
+            const getCookie = (name) => {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            };
+
+            //delete cookie
+            const deleteCookie = (name) => {
+                document.cookie = name + '=; Max-Age=-99999999; path=/;';
+            };
+
+            const getLoggedInUser = () => getCookie('loggedInUser'); 
 
             //account
             const showPage = (pageName) => {
@@ -184,30 +212,27 @@
             //update navbar
             const updateNavbar = () => {
                 const loggedInUsername = getLoggedInUser();
-                navAuthSection.innerHTML = ''; 
+                navAuthSection.innerHTML = '';
 
                 if (loggedInUsername) {
                     const users = getUsers();
                     const user = users.find(u => u.username === loggedInUsername);
 
-                    //get name and photo
                     const displayName = user ? (user.nickname || user.username) : loggedInUsername;
                     const avatarSrc = user ? user.avatar : 'images/user-logo.png';
 
-                    //show name and photo
                     navAuthSection.innerHTML = `
-                            <li class="nav-item">
-                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="#" title="View Profile">
-                                    ${displayName.toUpperCase()}
-                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
-                                </a>
-                            </li>
-                        `;
+                        <li class="nav-item">
+                            <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="#" title="View Profile">
+                                ${displayName.toUpperCase()}
+                                <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                            </a>
+                        </li>
+                    `;
                 } else {
-                    //logout update
                     navAuthSection.innerHTML = `
-                            <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
-                        `;
+                        <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
+                    `;
                 }
             };
 
@@ -226,7 +251,7 @@
                 }
             };
 
-            //signup
+            //sign up
             const handleSignUp = (e) => {
                 e.preventDefault();
                 const username = document.getElementById('signUpUsername').value;
@@ -242,7 +267,7 @@
                     username,
                     password,
                     avatar: 'images/user-logo.png',
-                    nickname: username 
+                    nickname: username
                 });
                 saveUsers(users);
                 alert('Registration successful! Please sign in.');
@@ -250,7 +275,8 @@
                 new bootstrap.Tab(document.getElementById('signin-tab')).show();
             };
 
-            //signin
+
+            //sign in
             const handleSignIn = (e) => {
                 e.preventDefault();
                 const username = document.getElementById('signInUsername').value;
@@ -258,20 +284,22 @@
                 const user = getUsers().find(u => u.username === username && u.password === password);
 
                 if (user) {
-                    localStorage.setItem('loggedInUser', username);
+                    // localStorage.setItem('loggedInUser', username); 
+                    setCookie('loggedInUser', username, 7); 
                     showPage('profile');
                 } else {
                     alert('Invalid username or password.');
                 }
             };
 
-            //logout
+            //log out
             const handleLogout = () => {
-                localStorage.removeItem('loggedInUser');
+                // localStorage.removeItem('loggedInUser');
+                deleteCookie('loggedInUser'); 
                 showPage('account');
-        };
+            };
 
-            //password change
+            // password change
             const handleChangePassword = (e) => {
                 e.preventDefault();
                 const currentUsername = getLoggedInUser();
@@ -294,7 +322,7 @@
                 bootstrap.Modal.getInstance(document.getElementById('passwordModal')).hide();
             };
 
-            //name update
+            // name update
             const handleNameUpdate = (e) => {
                 e.preventDefault();
                 const newName = document.getElementById('newName').value.trim();
@@ -306,14 +334,14 @@
                 if (userIndex !== -1) {
                     users[userIndex].nickname = newName;
                     saveUsers(users);
-                    populateProfileData(); 
-                    updateNavbar();     
+                    populateProfileData();
+                    updateNavbar();
                     alert('Name updated successfully!');
                     bootstrap.Modal.getInstance(document.getElementById('nameModal')).hide();
                 }
             };
 
-            //photo change
+            // photo change
             const handleAvatarChange = (e) => {
                 const file = e.target.files[0];
                 if (!file) return;
@@ -327,14 +355,14 @@
                         users[userIndex].avatar = avatarDataUrl;
                         saveUsers(users);
                         populateProfileData();
-                        updateNavbar(); 
+                        updateNavbar();
                         alert('Photo updated successfully!');
                     }
                 };
                 reader.readAsDataURL(file);
             };
 
-            //event listeners
+            // event listeners
             document.getElementById('signUpForm').addEventListener('submit', handleSignUp);
             document.getElementById('signInForm').addEventListener('submit', handleSignIn);
             document.getElementById('changePasswordForm').addEventListener('submit', handleChangePassword);
@@ -342,7 +370,7 @@
             document.getElementById('avatarUpload').addEventListener('change', handleAvatarChange);
             document.getElementById('logoutButton').addEventListener('click', handleLogout);
 
-             //for navigation links
+            // for navigation links
             navAuthSection.addEventListener('click', (e) => {
                 const profileLink = e.target.closest('#nav-profile-link');
                 const signinLink = e.target.closest('#nav-signin-link');
@@ -357,12 +385,13 @@
                 }
             });
 
-            //initial
+            // initial
             if (getLoggedInUser()) {
                 showPage('profile');
             } else {
                 showPage('account');
             }
-        });</script>
+        });
+    </script>
 </body>
 </html>
