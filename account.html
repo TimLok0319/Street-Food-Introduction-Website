@@ -32,10 +32,10 @@
         </div>
     </nav>
 
-    <!-- ========== PAGE CONTENT AREA ========== -->
+    <!-- page content -->
     <main class="container">
 
-        <!-- ===== ACCOUNT PAGE (Login/Signup) ===== -->
+        <!-- account(sign in/sign up) -->
         <div id="accountPage" class="page-container">
             <ul class="nav nav-tabs nav-fill mb-4" id="accountTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -46,7 +46,7 @@
                 </li>
             </ul>
             <div class="tab-content" id="accountTabContent">
-                <!-- Sign In Form -->
+                <!-- sign in -->
                 <div class="tab-pane fade show active" id="signin-pane" role="tabpanel">
                     <h3 class="text-center mb-4">Welcome Back!</h3>
                     <form id="signInForm">
@@ -55,7 +55,7 @@
                         <div class="d-grid"><button type="submit" class="btn btn-primary btn-lg">Sign In</button></div>
                     </form>
                 </div>
-                <!-- Sign Up Form -->
+                <!-- sign up -->
                 <div class="tab-pane fade" id="signup-pane" role="tabpanel">
                     <h3 class="text-center mb-4">Create an Account</h3>
                     <form id="signUpForm">
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <!-- ===== PROFILE PAGE ===== -->
+        <!-- account profile -->
         <div id="profilePage" class="page-container profile-container hidden">
             <h2 class="mb-3">My Profile</h2>
             <img src="images/user-logo.png" alt="User photo" id="profileAvatar" class="profile-avatar">
@@ -88,9 +88,8 @@
         </div>
 
     </main>
-    <!-- End Here -->
-    <!-- ===== MODALS ===== -->
-    <!-- Name Modal -->
+    
+    <!-- change name -->
     <div class="modal fade" id="nameModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -114,7 +113,7 @@
         </div>
     </div>
 
-    <!-- Password Modal -->
+    <!-- change password -->
     <div class="modal fade" id="passwordModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -138,7 +137,7 @@
     </div>
 
 
-    <!-- ========== FOOTER ========== -->
+  
 <footer class="footer text-center text-white py-4">
 <div class="container">
   <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
@@ -151,24 +150,52 @@
 </div>
 </footer>
 
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- ========== MAIN JAVASCRIPT LOGIC ========== -->
+    <!-- javascipt -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
 
-            // --- DOM Elements ---
+            // DOM element
             const accountPage = document.getElementById('accountPage');
             const profilePage = document.getElementById('profilePage');
             const navAuthSection = document.getElementById('nav-auth-section');
 
-            // --- DATA MANAGEMENT (localStorage) ---
+            // local storage
             const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
             const saveUsers = (users) => localStorage.setItem('users', JSON.stringify(users));
-            const getLoggedInUser = () => localStorage.getItem('loggedInUser');
 
-            // --- CORE APP LOGIC ---
+            const setCookie = (name, value, days) => {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            };
+
+            //get cookie
+            const getCookie = (name) => {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            };
+
+            //delete cookie
+            const deleteCookie = (name) => {
+                document.cookie = name + '=; Max-Age=-99999999; path=/;';
+            };
+
+            const getLoggedInUser = () => getCookie('loggedInUser'); 
+
+            //account
             const showPage = (pageName) => {
                 accountPage.classList.add('hidden');
                 profilePage.classList.add('hidden');
@@ -182,36 +209,34 @@
                 updateNavbar();
             };
 
+            //update navbar
             const updateNavbar = () => {
                 const loggedInUsername = getLoggedInUser();
-                navAuthSection.innerHTML = ''; // Clear current nav items
+                navAuthSection.innerHTML = '';
 
                 if (loggedInUsername) {
                     const users = getUsers();
                     const user = users.find(u => u.username === loggedInUsername);
 
-                    // MODIFIED: Use nickname for display, fallback to username if nickname doesn't exist
                     const displayName = user ? (user.nickname || user.username) : loggedInUsername;
                     const avatarSrc = user ? user.avatar : 'images/user-logo.png';
 
-                    // Display both the user's name (nickname) and avatar
                     navAuthSection.innerHTML = `
-                            <li class="nav-item">
-                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="#" title="View Profile">
-                                    ${displayName.toUpperCase()}
-                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
-                                </a>
-                            </li>
-                        `;
+                        <li class="nav-item">
+                            <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="#" title="View Profile">
+                                ${displayName.toUpperCase()}
+                                <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                            </a>
+                        </li>
+                    `;
                 } else {
-                    // Original sign-in button for logged-out users
                     navAuthSection.innerHTML = `
-                            <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
-                        `;
+                        <li class="nav-item"><a id="nav-signin-link" class="account nav-link" href="#">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a></li>
+                    `;
                 }
             };
 
-
+            //get profile data
             const populateProfileData = () => {
                 const username = getLoggedInUser();
                 if (!username) return;
@@ -226,7 +251,7 @@
                 }
             };
 
-            // --- EVENT HANDLERS ---
+            //sign up
             const handleSignUp = (e) => {
                 e.preventDefault();
                 const username = document.getElementById('signUpUsername').value;
@@ -241,8 +266,8 @@
                 users.push({
                     username,
                     password,
-                    avatar: 'images/user-logo.png', // Use user-logo.png as default
-                    nickname: username // Initially, nickname is the same as username
+                    avatar: 'images/user-logo.png',
+                    nickname: username
                 });
                 saveUsers(users);
                 alert('Registration successful! Please sign in.');
@@ -250,6 +275,8 @@
                 new bootstrap.Tab(document.getElementById('signin-tab')).show();
             };
 
+
+            //sign in
             const handleSignIn = (e) => {
                 e.preventDefault();
                 const username = document.getElementById('signInUsername').value;
@@ -257,18 +284,22 @@
                 const user = getUsers().find(u => u.username === username && u.password === password);
 
                 if (user) {
-                    localStorage.setItem('loggedInUser', username);
+                    // localStorage.setItem('loggedInUser', username); 
+                    setCookie('loggedInUser', username, 7); 
                     showPage('profile');
                 } else {
                     alert('Invalid username or password.');
                 }
             };
 
+            //log out
             const handleLogout = () => {
-                localStorage.removeItem('loggedInUser');
+                // localStorage.removeItem('loggedInUser');
+                deleteCookie('loggedInUser'); 
                 showPage('account');
             };
 
+            // password change
             const handleChangePassword = (e) => {
                 e.preventDefault();
                 const currentUsername = getLoggedInUser();
@@ -291,6 +322,7 @@
                 bootstrap.Modal.getInstance(document.getElementById('passwordModal')).hide();
             };
 
+            // name update
             const handleNameUpdate = (e) => {
                 e.preventDefault();
                 const newName = document.getElementById('newName').value.trim();
@@ -302,13 +334,14 @@
                 if (userIndex !== -1) {
                     users[userIndex].nickname = newName;
                     saveUsers(users);
-                    populateProfileData(); // Updates the profile page content
-                    updateNavbar();      // MODIFIED: Refreshes the navbar display name
+                    populateProfileData();
+                    updateNavbar();
                     alert('Name updated successfully!');
                     bootstrap.Modal.getInstance(document.getElementById('nameModal')).hide();
                 }
             };
 
+            // photo change
             const handleAvatarChange = (e) => {
                 const file = e.target.files[0];
                 if (!file) return;
@@ -322,14 +355,14 @@
                         users[userIndex].avatar = avatarDataUrl;
                         saveUsers(users);
                         populateProfileData();
-                        updateNavbar(); // Refresh the navbar avatar as well
+                        updateNavbar();
                         alert('Photo updated successfully!');
                     }
                 };
                 reader.readAsDataURL(file);
             };
 
-            // --- EVENT LISTENERS ---
+            // event listeners
             document.getElementById('signUpForm').addEventListener('submit', handleSignUp);
             document.getElementById('signInForm').addEventListener('submit', handleSignIn);
             document.getElementById('changePasswordForm').addEventListener('submit', handleChangePassword);
@@ -337,7 +370,7 @@
             document.getElementById('avatarUpload').addEventListener('change', handleAvatarChange);
             document.getElementById('logoutButton').addEventListener('click', handleLogout);
 
-            // Listener for dynamic navbar links
+            // for navigation links
             navAuthSection.addEventListener('click', (e) => {
                 const profileLink = e.target.closest('#nav-profile-link');
                 const signinLink = e.target.closest('#nav-signin-link');
@@ -352,12 +385,13 @@
                 }
             });
 
-            // --- INITIALIZATION ---
+            // initial
             if (getLoggedInUser()) {
                 showPage('profile');
             } else {
                 showPage('account');
             }
-        });</script>
+        });
+    </script>
 </body>
 </html>
