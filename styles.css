@@ -324,13 +324,13 @@ nav {
 }
 
 .michelin-h1 {
-  font-size: clamp(4rem, 8vw, 6rem);
+  font-size: clamp(1rem, 6vw, 6rem);
   font-weight: 600;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .michelin-h2 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
@@ -350,6 +350,7 @@ nav {
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   border: 3px solid white;
+  overflow: hidden;
 }
 
 .carousel-container img {
@@ -531,7 +532,6 @@ nav {
 
   .carousel-container img {
     height: clamp(10rem, 35vh, 100rem);
-    width: 100%;
   }
 
   .restaurant-reco #card-container .card-title {
@@ -617,11 +617,11 @@ nav {
   }
 
   .michelin-h1 {
-    font-size: clamp(2rem, 6vw, 3rem) !important;
+    font-size: clamp(2rem, 6vw, 3rem);
   }
 
   .michelin-h2 {
-    font-size: clamp(1.8rem, 3vw, 1.5rem) !important;
+    font-size: clamp(1.5rem, 3vw, 2rem);
   }
 
   .carousel-container {
@@ -874,7 +874,7 @@ nav {
 }
 
 body {
-    background-color: #e9ecef;
+    background-color: #FEFAE0;
 }
 
 /* Make profile page wider */
@@ -916,6 +916,167 @@ body {
     display: none;
 }
 
+/*----------------------------------------------------------------About Page----------------------------------------------------------------*/
+
+/* About Hero Section */
+.about-hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(images/penang-skyline.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 8rem 0;
+    color: white;
+}
+
+/* Counter Section */
+.counter-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.counter-section:hover {
+    transform: translateY(-5px);
+}
+
+.counter {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #39765f;
+}
+
+/* Flip Card Section */
+.flip-card {
+    background-color: transparent;
+    height: 200px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.flip-card-front {
+    background-color: #39765f;
+    color: white;
+}
+
+.flip-card-back {
+    background-color: #f9f9e6;
+    color: #39765f;
+    transform: rotateY(180deg);
+    padding: 20px;
+}
+
+/* Timeline Section */
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #39765f;
+    transform: translateX(-50%);
+}
+
+.timeline-item .card {
+    transition: transform 0.3s ease;
+}
+
+.timeline-item .card:hover {
+    transform: translateY(-5px);
+}
+
+/* Feature Card Section */
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+}
+
+/* Refactored from inline styles in about.html */
+.about-section {
+    background-color: #FEFAE0;
+    padding: 50px 0;
+}
+
+.about-section h2.display-5,
+.about-section h4 {
+    color: #39765f;
+}
+
+.flip-card-front i {
+    font-size: 3rem;
+}
+
+.timeline-item img {
+    max-width: 150px;
+}
+
+.feature-card img {
+    width: 80px;
+    height: 80px;
+}
+
+.feature-card .progress {
+    height: 5px;
+}
+
+.accordion-body img {
+    width: 150px;
+}
+
+.quiz-teaser-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.quiz-teaser-card i {
+    font-size: 2rem;
+}
+
+.skyline-image {
+    max-width: 100%;
+    width: 600px;
+    height: auto;
+}
+
+.accordion-body {
+    overflow: auto;
+}
 
 /*----------------------------------------------------------------Footer----------------------------------------------------------------*/
 .footer {
@@ -945,4 +1106,19 @@ a.btn[style*="background-color: #39765f"]:hover {
 
 .btn-custom-green:hover {
   background-color: #2a5a4a !important; /* A darker shade of the original green */
+}
+
+
+.footer-text {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.footer a {
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ccc;
 }
