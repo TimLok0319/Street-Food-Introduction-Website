@@ -1,0 +1,637 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Penang One Better</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity=
+     "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Luckiest+Guy&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        /* Interactive Animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 20px 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+        
+        .value-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: rotateY(10deg) scale(1.05);
+        }
+        
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #39765f;
+        }
+        
+        .hero-banner {
+            background: linear-gradient(135deg, #39765f 0%, #5a9b7f 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-banner::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: #39765f;
+            color: white;
+        }
+        
+        .progress-bar-animated {
+            animation: progressAnimation 2s ease-out;
+        }
+        
+        @keyframes progressAnimation {
+            from { width: 0; }
+        }
+        
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .flip-card-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .flip-card-back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img src="images/brand-logo.png" height="50" width="180"></a>
+            <button class="navbar-toggler order-last" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="food_gallery.html">FOOD GALLERY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="find_restaurant.html">FIND A RESTAURANT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my_favourite.html">MY FAVOURITE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="quiz.html">QUIZ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="about.html">ABOUT</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="nav-auth-section">
+                    <li class="nav-item">
+                        <a class="account nav-link" href="account.html">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container text-center position-relative">
+            <h1 class="display-2 fw-bold mb-4 fade-in">DISCOVER PENANG'S FOOD STORY</h1>
+            <p class="lead fs-3 mb-4 slide-up">Where Tradition Meets Innovation on Every Plate</p>
+            <div class="floating">
+                <img src="images/penang-map-illustration.png" alt="Penang Map" style="max-width: 200px; opacity: 0.8;">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <main>
+        <section class="about-section" style="background-color: #FEFAE0; padding: 50px 0;">
+            <div class="container">
+                
+                <!-- Interactive Stats Counter -->
+                <div class="row mb-5">
+                    <div class="col-md-3 col-6 mb-3 text-center">
+                        <div class="counter" data-target="200">0</div>
+                        <p class="fw-bold">Street Food Stalls</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3 text-center">
+                        <div class="counter" data-target="60">0</div>
+                        <p class="fw-bold">Michelin Stars</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3 text-center">
+                        <div class="counter" data-target="25">0</div>
+                        <p class="fw-bold">Signature Dishes</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3 text-center">
+                        <div class="counter" data-target="100">0</div>
+                        <p class="fw-bold">Years of Heritage</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Mission Cards -->
+                <div class="row mb-5">
+                    <div class="col-12 text-center mb-4">
+                        <h2 class="display-5 fw-bold" style="color: #39765f;">Our Journey</h2>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <i class="bi bi-compass" style="font-size: 3rem;"></i>
+                                    <h4 class="mt-3">Our Mission</h4>
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>To be the ultimate digital guide for Penang's street food, preserving culinary traditions while making them accessible to food lovers worldwide.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <i class="bi bi-eye" style="font-size: 3rem;"></i>
+                                    <h4 class="mt-3">Our Vision</h4>
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Creating a vibrant community where food stories are shared, traditions are celebrated, and every meal becomes an unforgettable journey.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Timeline -->
+                <div class="row mb-5">
+                    <div class="col-lg-10 mx-auto">
+                        <h2 class="text-center mb-4 display-5 fw-bold" style="color: #39765f;">
+                            The Penang Food Timeline
+                        </h2>
+                        <div class="position-relative">
+                            <div class="timeline-item">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-3 text-center">
+                                                <img src="images/heritage-building.jpg" alt="Heritage" class="img-fluid rounded" style="max-width: 150px;">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h4 style="color: #39765f;">1800s - The Beginning</h4>
+                                                <p>Chinese, Indian, and Malay traders converge in Penang, bringing their unique culinary traditions.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-3 text-center">
+                                                <img src="images/vintage-hawker.jpg" alt="Vintage Hawker" class="img-fluid rounded" style="max-width: 150px;">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h4 style="color: #39765f;">1920s - Street Food Era</h4>
+                                                <p>Hawker culture emerges as immigrants create affordable, delicious meals for workers.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-3 text-center">
+                                                <img src="images/unesco-heritage.jpg" alt="UNESCO" class="img-fluid rounded" style="max-width: 150px;">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h4 style="color: #39765f;">2008 - UNESCO Recognition</h4>
+                                                <p>George Town becomes a UNESCO World Heritage Site, bringing global attention to Penang's food.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-3 text-center">
+                                                <img src="images/modern-foodie.jpg" alt="Modern Era" class="img-fluid rounded" style="max-width: 150px;">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h4 style="color: #39765f;">Today - Digital Era</h4>
+                                                <p>Penang One Better brings traditional street food to the digital world, preserving recipes for future generations.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Features Grid -->
+                <div class="row mb-5">
+                    <div class="col-12 text-center mb-4">
+                        <h2 class="display-5 fw-bold" style="color: #39765f;">Explore Our Features</h2>
+                        <p class="lead">Click on each card to discover what makes us special</p>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card feature-card h-100 border-0 shadow">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <img src="images/food-gallery-icon.png" alt="Food Gallery" style="width: 80px; height: 80px;">
+                                </div>
+                                <h5 class="card-title">Food Gallery</h5>
+                                <p class="card-text small">authentic dishes</p>
+                                <div class="progress mt-3" style="height: 5px;">
+                                    <div class="progress-bar bg-success progress-bar-animated" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card feature-card h-100 border-0 shadow">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <img src="images/restaurant-finder-icon.png" alt="Restaurant Finder" style="width: 80px; height: 80px;">
+                                </div>
+                                <h5 class="card-title">Restaurant Finder</h5>
+                                <p class="card-text small">locations mapped</p>
+                                <div class="progress mt-3" style="height: 5px;">
+                                    <div class="progress-bar bg-primary progress-bar-animated" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card feature-card h-100 border-0 shadow">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <img src="images/quiz-icon.png" alt="Quiz" style="width: 80px; height: 80px;">
+                                </div>
+                                <h5 class="card-title">Interactive Quiz</h5>
+                                <p class="card-text small">Test your knowledge</p>
+                                <div class="progress mt-3" style="height: 5px;">
+                                    <div class="progress-bar bg-warning progress-bar-animated" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card feature-card h-100 border-0 shadow">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <img src="images/favorites-icon.png" alt="Favorites" style="width: 80px; height: 80px;">
+                                </div>
+                                <h5 class="card-title">Save Favorites</h5>
+                                <p class="card-text small">Personal collection</p>
+                                <div class="progress mt-3" style="height: 5px;">
+                                    <div class="progress-bar bg-danger progress-bar-animated" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fun Facts Accordion -->
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="text-center mb-4 display-5 fw-bold" style="color: #39765f;">
+                            Did You Know?
+                        </h2>
+                        <div class="accordion" id="funFactsAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#fact1">
+                                        <i class="bi bi-lightbulb me-2"></i> The Secret of Wok Hei
+                                    </button>
+                                </h2>
+                                <div id="fact1" class="accordion-collapse collapse show" data-bs-parent="#funFactsAccordion">
+                                    <div class="accordion-body">
+                                        <img src="images/wok-hei-flame.jpg" alt="Wok Hei" class="float-end ms-3 mb-2 rounded" style="width: 150px;">
+                                        "Wok hei" or "breath of the wok" is achieved at temperatures over 200°C. Master chefs can create this smoky flavor in just 30 seconds of intense stir-frying!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fact2">
+                                        <i class="bi bi-award me-2"></i> CNN's Recognition
+                                    </button>
+                                </h2>
+                                <div id="fact2" class="accordion-collapse collapse" data-bs-parent="#funFactsAccordion">
+                                    <div class="accordion-body">
+                                        <img src="images/asam-laksa-bowl.jpg" alt="Asam Laksa" class="float-end ms-3 mb-2 rounded" style="width: 150px;">
+                                        Penang Asam Laksa was ranked 7th in CNN's World's 50 Most Delicious Foods. It's the only Malaysian dish in the top 10!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fact3">
+                                        <i class="bi bi-clock-history me-2"></i> 24-Hour Food Paradise
+                                    </button>
+                                </h2>
+                                <div id="fact3" class="accordion-collapse collapse" data-bs-parent="#funFactsAccordion">
+                                    <div class="accordion-body">
+                                        <img src="images/night-hawker.jpg" alt="Night Hawker" class="float-end ms-3 mb-2 rounded" style="width: 150px;">
+                                        You can find delicious food in Penang 24/7! From early morning Dim Sum to late-night Nasi Kandar, there's always something cooking.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fact4">
+                                        <i class="bi bi-globe me-2"></i> Cultural Melting Pot
+                                    </button>
+                                </h2>
+                                <div id="fact4" class="accordion-collapse collapse" data-bs-parent="#funFactsAccordion">
+                                    <div class="accordion-body">
+                                        <img src="images/cultural-food.jpg" alt="Cultural Mix" class="float-end ms-3 mb-2 rounded" style="width: 150px;">
+                                        Penang's food reflects its multicultural heritage - Malay, Chinese, Indian, and Peranakan influences create unique fusion dishes found nowhere else in the world.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Quiz Teaser -->
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="card-body text-center text-white p-5">
+                                <h3 class="mb-3">Think You Know Penang Food?</h3>
+                                <p class="lead mb-4">Test your knowledge with our interactive quiz and become a certified Penang food expert!</p>
+                                <div class="row mb-4">
+                                    <div class="col-4">
+                                        <i class="bi bi-patch-question" style="font-size: 2rem;"></i>
+                                        <p class="mb-0">12 Questions</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-trophy" style="font-size: 2rem;"></i>
+                                        <p class="mb-0">Score Tracking</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-share" style="font-size: 2rem;"></i>
+                                        <p class="mb-0">Share Results</p>
+                                    </div>
+                                </div>
+                                <a href="quiz.html" class="btn btn-light btn-lg px-4">
+                                    <i class="bi bi-play-circle me-2"></i>Start Quiz Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Closing Statement -->
+                <div class="row">
+                    <div class="col-lg-10 mx-auto text-center">
+                        <div class="p-5">
+                            <img src="images/penang-skyline.jpg" alt="Penang Skyline" class="img-fluid rounded shadow mb-4" style="max-width: 600px;">
+                            <h2 class="display-5 fw-bold mb-3" style="color: #39765f;">Join Our Food Journey</h2>
+                            <p class="lead">
+                                Every dish tells a story, every recipe carries history, and every meal creates memories. 
+                                Welcome to Penang One Better - where we celebrate the flavors that make Penang the food capital of Malaysia.
+                            </p>
+                            <div class="mt-4">
+                                <a href="food_gallery.html" class="btn btn-success btn-lg me-2">
+                                    <i class="bi bi-cup-hot me-2"></i>Explore Foods
+                                </a>
+                                <a href="find_restaurant.html" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-geo-alt me-2"></i>Find Restaurants
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer text-center text-white py-4">
+        <div class="container">
+            <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="https://github.com/TimLok0319/Street-Food-Introduction-Website" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Update navbar with user authentication state
+        function updateNavbar() {
+            const navAuthSection = document.getElementById('nav-auth-section');
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (loggedInUser) {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.username === loggedInUser);
+                const displayName = user ? (user.nickname || user.username) : loggedInUser;
+                const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                navAuthSection.innerHTML = `
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                            ${displayName.toUpperCase()}
+                            <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                        </a>
+                    </li>
+                `;
+            } else {
+                navAuthSection.innerHTML = `
+                    <li class="nav-item">
+                        <a class="account nav-link" href="account.html">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
+                    </li>
+                `;
+            }
+        }
+
+        // Animated Counter
+        function animateCounter() {
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const increment = target / 100;
+                
+                const updateCounter = () => {
+                    const current = +counter.innerText;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.innerText = target + '+';
+                    }
+                };
+                
+                // Start animation when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavbar();
+            animateCounter();
+            
+            // Add stagger effect to timeline items
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Add hover sound effect simulation (visual feedback)
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#f0f8ff';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
