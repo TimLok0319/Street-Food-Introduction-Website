@@ -68,17 +68,31 @@
 
         const navAuthSection = document.getElementById('nav-auth-section');
 
-        const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
-        const getLoggedInUser = () => localStorage.getItem('loggedInUser');
+        //get cookie
+        const getCookie = (name) => {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        };
 
+        //check log in
+        const getLoggedInUser = () => getCookie('loggedInUser');
+
+
+        //update vavigation bar
         const updateNavbar = () => {
             const loggedInUsername = getLoggedInUser();
             navAuthSection.innerHTML = '';
 
             if (loggedInUsername) {
-
                 const users = getUsers();
                 const user = users.find(u => u.username === loggedInUsername);
+
                 const displayName = user ? (user.nickname || user.username) : loggedInUsername;
                 const avatarSrc = user ? user.avatar : 'images/user-logo.png';
 
@@ -102,7 +116,7 @@
             }
         };
 
-        // update navbat
+        //update
         updateNavbar();
     });
 </script>
