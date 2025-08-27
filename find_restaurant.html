@@ -42,7 +42,11 @@
                         <a class="nav-link" href="about.html">ABOUT</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav" id="nav-auth-section"></ul>
+                <ul class="navbar-nav" id="nav-auth-section">
+                    <li class="nav-item">
+                        <a class="account nav-link" href="account.html">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -54,7 +58,7 @@
                 <div class="text-center mb-5">
                     <h1 class="display-4 fw-bold text-dark">FIND A RESTAURANT</h1>
                     <p class="lead">Discover the best Penang street food restaurants and stalls</p>
-
+                    
                     <div class="mt-3">
                         <span class="badge bg-success fs-6 me-2">🪙 Authentic Restaurants</span>
                         <span class="badge bg-info fs-6 me-2">⭐ Top Rated</span>
@@ -145,32 +149,7 @@
                     </div>
                 </div>
 
-                <!-- Map Preview -->
-                <div class="row mb-5">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0"><i class="bi bi-map me-2"></i>Restaurant Map View</h5>
-                                <button class="btn btn-outline-primary btn-sm" id="toggle-map">
-                                    <i class="bi bi-eye me-1"></i><span id="map-toggle-text">Show Map</span>
-                                </button>
-                            </div>
-                            <div class="card-body p-0">
-                                <div id="restaurant-map" class="bg-light text-center py-5" style="display: none; min-height: 350px;">
-                                    <div class="d-flex align-items-center justify-content-center h-100">
-                                        <div>
-                                            <div class="spinner-border text-success mb-3" role="status">
-                                                <span class="visually-hidden">Loading map...</span>
-                                            </div>
-                                            <h5>Loading Map View...</h5>
-                                            <p class="text-muted">Please wait while we load restaurant locations</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <!-- Loading Spinner -->
                 <div id="loading" class="text-center" style="display: none;">
@@ -276,7 +255,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    
     <script>
         // Global variables
         let allRestaurants = [];
@@ -288,7 +267,7 @@
         let currentPage = 1;
         const restaurantsPerPage = 12;
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             initializePage();
             updateNavbar();
             loadFavouriteRestaurants();
@@ -296,30 +275,30 @@
 
             // Event handlers
             $('#search-btn').click(performSearch);
-            $('#search-input').keypress(function (e) {
+            $('#search-input').keypress(function(e) {
                 if (e.which === 13) performSearch();
             });
 
-            $('#area-filter').change(function () {
+            $('#area-filter').change(function() {
                 currentArea = $(this).val();
                 filterRestaurants();
             });
 
-            $('#sort-select').change(function () {
+            $('#sort-select').change(function() {
                 currentSort = $(this).val();
                 sortRestaurants();
             });
 
-            $('.filter-btn').click(function () {
+            $('.filter-btn').click(function() {
                 $('.filter-btn').removeClass('active');
                 $(this).addClass('active');
                 currentFilter = $(this).data('filter');
                 filterRestaurants();
             });
 
-            $('#toggle-map').click(toggleMap);
+            
             $('#load-more-btn').click(loadMoreRestaurants);
-            $('#show-favourites-btn').click(function () {
+            $('#show-favourites-btn').click(function() {
                 currentFilter = 'favourites';
                 $('.filter-btn').removeClass('active');
                 $('.filter-btn[data-filter="favourites"]').addClass('active');
@@ -328,7 +307,7 @@
 
             // Modal event handlers (using event delegation)
             $(document).on('click', '#share-whatsapp', shareRestaurant);
-            $(document).on('click', '#get-directions', function () {
+            $(document).on('click', '#get-directions', function() {
                 console.log('Get directions button clicked in modal');
                 console.log('Current modal restaurant:', window.currentModalRestaurant);
                 getDirections();
@@ -338,20 +317,20 @@
 
         async function initializePage() {
             showLoading(true);
-
+            
             // Force clear any cached restaurant data
             allRestaurants = [];
             displayedRestaurants = [];
-
+            
             await loadRestaurants();
-
+            
             // Debug: Log all restaurant names
             console.log('=== RESTAURANT CHECK ===');
             allRestaurants.forEach(r => {
                 console.log(`ID: ${r.id}, Name: ${r.name}`);
             });
             console.log('=== END CHECK ===');
-
+            
             displayedRestaurants = [...allRestaurants];
             displayRestaurants();
             updateStats();
@@ -377,7 +356,7 @@
         async function loadRestaurants() {
             // Simulate loading from API
             allRestaurants = getLocalRestaurants();
-
+            
             // Optionally load from external API
             try {
                 // Example of loading restaurant data from an API
@@ -387,7 +366,7 @@
                     dataType: 'json',
                     timeout: 5000
                 });
-
+                
                 // Transform API data if needed
                 console.log('External API data loaded (for demo purposes)');
             } catch (error) {
@@ -545,7 +524,7 @@
                 return;
             }
 
-            const searchResults = allRestaurants.filter(restaurant =>
+            const searchResults = allRestaurants.filter(restaurant => 
                 restaurant.name.toLowerCase().includes(searchTerm) ||
                 restaurant.description.toLowerCase().includes(searchTerm) ||
                 restaurant.cuisine.some(c => c.toLowerCase().includes(searchTerm)) ||
@@ -624,70 +603,70 @@
             updateStats();
 
             const restaurantsToShow = displayedRestaurants.slice(0, currentPage * restaurantsPerPage);
-
+            
             restaurantsToShow.forEach(restaurant => {
                 const ratingStars = generateRatingStars(restaurant.rating);
                 const cuisineString = restaurant.cuisine.slice(0, 2).join(', ');
                 const isFavourite = favouriteRestaurants.some(fav => fav.id === restaurant.id);
                 const favouriteIcon = isFavourite ? 'bi-heart-fill text-danger' : 'bi-heart text-muted';
-
+                
                 const restaurantCard = `
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100 shadow-sm restaurant-card" data-restaurant-id="${restaurant.id}">
-                                <div class="position-relative">
-                                    <img src="${restaurant.image}" class="card-img-top" alt="${restaurant.name}"
-                                         style="height: 200px; object-fit: cover;"
-                                         onerror="this.src='https://via.placeholder.com/300x200?text=Restaurant'">
-                                    <div class="position-absolute top-0 start-0 m-2">
-                                        <span class="badge bg-success">${restaurant.type.replace('-', ' ').toUpperCase()}</span>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 shadow-sm restaurant-card" data-restaurant-id="${restaurant.id}">
+                            <div class="position-relative">
+                                <img src="${restaurant.image}" class="card-img-top" alt="${restaurant.name}" 
+                                     style="height: 200px; object-fit: cover;" 
+                                     onerror="this.src='https://via.placeholder.com/300x200?text=Restaurant'">
+                                <div class="position-absolute top-0 start-0 m-2">
+                                    <span class="badge bg-success">${restaurant.type.replace('-', ' ').toUpperCase()}</span>
+                                </div>
+                                <div class="position-absolute top-0 end-0 m-2">
+                                    <span class="badge bg-dark">⭐ ${restaurant.rating}</span>
+                                </div>
+                                <div class="position-absolute bottom-0 end-0 m-2">
+                                    <button class="btn btn-sm btn-light favourite-toggle-btn" data-restaurant-id="${restaurant.id}" title="${isFavourite ? 'Remove from favourites' : 'Add to favourites'}">
+                                        <i class="bi ${favouriteIcon}"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${restaurant.name}</h5>
+                                <p class="card-text flex-grow-1">${restaurant.description.substring(0, 100)}...</p>
+                                <div class="mt-auto">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="rating">
+                                            ${ratingStars}
+                                            <small class="text-muted ms-1">(${restaurant.rating})</small>
+                                        </div>
+                                        <small class="text-muted">${restaurant.price_range}</small>
                                     </div>
-                                    <div class="position-absolute top-0 end-0 m-2">
-                                        <span class="badge bg-dark">⭐ ${restaurant.rating}</span>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="badge bg-warning text-dark">${cuisineString}</span>
+                                        <small class="text-success fw-bold">${restaurant.hours.split('-')[0].trim()}</small>
                                     </div>
-                                    <div class="position-absolute bottom-0 end-0 m-2">
-                                        <button class="btn btn-sm btn-light favourite-toggle-btn" data-restaurant-id="${restaurant.id}" title="${isFavourite ? 'Remove from favourites' : 'Add to favourites'}">
-                                            <i class="bi ${favouriteIcon}"></i>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">📍 ${restaurant.area.replace('-', ' ')}</small>
+                                        <small class="text-primary">📞 ${restaurant.phone.substring(0, 12)}...</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row g-2">
+                                    <div class="col-8">
+                                        <button class="btn btn-success btn-sm w-100 view-details-btn" data-restaurant-id="${restaurant.id}">
+                                            <i class="bi bi-eye me-1"></i>View Details
                                         </button>
                                     </div>
-                                </div>
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">${restaurant.name}</h5>
-                                    <p class="card-text flex-grow-1">${restaurant.description.substring(0, 100)}...</p>
-                                    <div class="mt-auto">
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <div class="rating">
-                                                ${ratingStars}
-                                                <small class="text-muted ms-1">(${restaurant.rating})</small>
-                                            </div>
-                                            <small class="text-muted">${restaurant.price_range}</small>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <span class="badge bg-warning text-dark">${cuisineString}</span>
-                                            <small class="text-success fw-bold">${restaurant.hours.split('-')[0].trim()}</small>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-muted">📍 ${restaurant.area.replace('-', ' ')}</small>
-                                            <small class="text-primary">📞 ${restaurant.phone.substring(0, 12)}...</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row g-2">
-                                        <div class="col-8">
-                                            <button class="btn btn-success btn-sm w-100 view-details-btn" data-restaurant-id="${restaurant.id}">
-                                                <i class="bi bi-eye me-1"></i>View Details
-                                            </button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class="btn btn-outline-primary btn-sm w-100 directions-btn" data-restaurant-id="${restaurant.id}" title="Directions">
-                                                <i class="bi bi-compass"></i>
-                                            </button>
-                                        </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-outline-primary btn-sm w-100 directions-btn" data-restaurant-id="${restaurant.id}" title="Directions">
+                                            <i class="bi bi-compass"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    `;
+                    </div>
+                `;
                 container.append(restaurantCard);
             });
 
@@ -699,18 +678,18 @@
             }
 
             // Add click handlers
-            $('.view-details-btn').click(function () {
+            $('.view-details-btn').click(function() {
                 const restaurantId = $(this).data('restaurant-id');
                 showRestaurantDetails(restaurantId);
             });
 
-            $('.directions-btn').click(function () {
+            $('.directions-btn').click(function() {
                 const restaurantId = $(this).data('restaurant-id');
                 console.log('Directions button clicked for restaurant ID:', restaurantId);
                 getDirections(restaurantId);
             });
 
-            $('.favourite-toggle-btn').click(function (e) {
+            $('.favourite-toggle-btn').click(function(e) {
                 e.stopPropagation();
                 const restaurantId = $(this).data('restaurant-id');
                 toggleFavourite(restaurantId, $(this));
@@ -722,31 +701,31 @@
             if (!restaurant) return;
 
             const isFavourite = favouriteRestaurants.some(fav => fav.id === restaurantId);
-
+            
             if (isFavourite) {
                 // Remove from favourites
                 favouriteRestaurants = favouriteRestaurants.filter(fav => fav.id !== restaurantId);
                 localStorage.setItem('penangRestaurantFavorites', JSON.stringify(favouriteRestaurants));
-
+                
                 // Update button
                 buttonElement.find('i').removeClass('bi-heart-fill text-danger').addClass('bi-heart text-muted');
                 buttonElement.attr('title', 'Add to favourites');
-
+                
                 showToast('Removed from Favourites', `${restaurant.name} has been removed from your favourites.`, 'info');
             } else {
                 // Add to favourites
                 favouriteRestaurants.push(restaurant);
                 localStorage.setItem('penangRestaurantFavorites', JSON.stringify(favouriteRestaurants));
-
+                
                 // Update button
                 buttonElement.find('i').removeClass('bi-heart text-muted').addClass('bi-heart-fill text-danger');
                 buttonElement.attr('title', 'Remove from favourites');
-
+                
                 showToast('Added to Favourites!', `${restaurant.name} has been added to your favourites.`, 'success');
             }
 
             updateFavouriteCount();
-
+            
             // If currently showing favourites filter, refresh the display
             if (currentFilter === 'favourites') {
                 filterRestaurants();
@@ -757,7 +736,7 @@
             const restaurant = allRestaurants.find(r => r.id === restaurantId);
             console.log('Showing details for restaurant ID:', restaurantId);
             console.log('Found restaurant:', restaurant);
-
+            
             if (!restaurant) {
                 console.error('Restaurant not found with ID:', restaurantId);
                 return;
@@ -770,81 +749,81 @@
 
         function renderRestaurantModal(restaurant) {
             const ratingStars = generateRatingStars(restaurant.rating);
-
+            
             const modalContent = `
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="${restaurant.image}" class="img-fluid rounded shadow" alt="${restaurant.name}"
-                                 onerror="this.src='https://via.placeholder.com/400x300?text=Restaurant'">
-                            <div class="mt-3 text-center">
-                                <div class="rating-large">
-                                    ${ratingStars}
-                                    <span class="fs-5 fw-bold ms-2">${restaurant.rating}/5</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>${restaurant.name}</h3>
-                            <div class="mb-3">
-                                <span class="badge bg-success me-2">${restaurant.type.replace('-', ' ').toUpperCase()}</span>
-                                <span class="badge bg-warning text-dark me-2">${restaurant.cuisine.join(', ')}</span>
-                                <span class="badge bg-primary">${restaurant.price_range}</span>
-                            </div>
-                            <p class="lead">${restaurant.description}</p>
-
-                            <div class="row mb-3">
-                                <div class="col-12 mb-3">
-                                    <strong><i class="bi bi-geo-alt text-primary me-1"></i>Address:</strong><br>
-                                    <small>${restaurant.address}</small>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <strong><i class="bi bi-telephone text-success me-1"></i>Phone:</strong><br>
-                                    <small>${restaurant.phone}</small>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <strong><i class="bi bi-clock text-warning me-1"></i>Hours:</strong><br>
-                                    <small>${restaurant.hours}</small>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <strong><i class="bi bi-star-fill text-warning me-1"></i>Specialties:</strong><br>
-                                <div class="mt-2">
-                                    ${restaurant.specialties.map(specialty => `
-                                        <span class="badge bg-light text-dark me-1 mb-1">${specialty}</span>
-                                    `).join('')}
-                                </div>
-                            </div>
-
-                            <hr>
-                            <h6><i class="bi bi-info-circle me-2"></i>Quick Info:</h6>
-                            <div class="row">
-                                <div class="col-6">
-                                    <small><strong>Cuisine:</strong> ${restaurant.cuisine.join(', ')}</small>
-                                </div>
-                                <div class="col-6">
-                                    <small><strong>Area:</strong> ${restaurant.area.replace('-', ' ')}</small>
-                                </div>
-                            </div>
-
-                            <div class="mt-3">
-                                <button class="btn btn-primary btn-sm me-2" onclick="window.open('food_gallery.html', '_blank')">
-                                    <i class="bi bi-cup-hot me-1"></i>View Foods
-                                </button>
-                                <button class="btn btn-outline-success btn-sm" onclick="window.open('my_favourite.html', '_blank')">
-                                    <i class="bi bi-heart me-1"></i>My Favourites
-                                </button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="${restaurant.image}" class="img-fluid rounded shadow" alt="${restaurant.name}"
+                             onerror="this.src='https://via.placeholder.com/400x300?text=Restaurant'">
+                        <div class="mt-3 text-center">
+                            <div class="rating-large">
+                                ${ratingStars}
+                                <span class="fs-5 fw-bold ms-2">${restaurant.rating}/5</span>
                             </div>
                         </div>
                     </div>
-                `;
+                    <div class="col-md-6">
+                        <h3>${restaurant.name}</h3>
+                        <div class="mb-3">
+                            <span class="badge bg-success me-2">${restaurant.type.replace('-', ' ').toUpperCase()}</span>
+                            <span class="badge bg-warning text-dark me-2">${restaurant.cuisine.join(', ')}</span>
+                            <span class="badge bg-primary">${restaurant.price_range}</span>
+                        </div>
+                        <p class="lead">${restaurant.description}</p>
+                        
+                        <div class="row mb-3">
+                            <div class="col-12 mb-3">
+                                <strong><i class="bi bi-geo-alt text-primary me-1"></i>Address:</strong><br>
+                                <small>${restaurant.address}</small>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <strong><i class="bi bi-telephone text-success me-1"></i>Phone:</strong><br>
+                                <small>${restaurant.phone}</small>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <strong><i class="bi bi-clock text-warning me-1"></i>Hours:</strong><br>
+                                <small>${restaurant.hours}</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <strong><i class="bi bi-star-fill text-warning me-1"></i>Specialties:</strong><br>
+                            <div class="mt-2">
+                                ${restaurant.specialties.map(specialty => `
+                                    <span class="badge bg-light text-dark me-1 mb-1">${specialty}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        <h6><i class="bi bi-info-circle me-2"></i>Quick Info:</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <small><strong>Cuisine:</strong> ${restaurant.cuisine.join(', ')}</small>
+                            </div>
+                            <div class="col-6">
+                                <small><strong>Area:</strong> ${restaurant.area.replace('-', ' ')}</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="btn btn-primary btn-sm me-2" onclick="window.open('food_gallery.html', '_blank')">
+                                <i class="bi bi-cup-hot me-1"></i>View Foods
+                            </button>
+                            <button class="btn btn-outline-success btn-sm" onclick="window.open('my_favourite.html', '_blank')">
+                                <i class="bi bi-heart me-1"></i>My Favourites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
 
             $('#modal-content').html(modalContent);
             $('#restaurantModalLabel').text(restaurant.name);
-
+            
             // Ensure current restaurant is stored for modal actions
             window.currentModalRestaurant = restaurant;
-
+            
             const modal = new bootstrap.Modal(document.getElementById('restaurantModal'));
             modal.show();
         }
@@ -872,66 +851,7 @@
             displayRestaurants();
         }
 
-        function toggleMap() {
-            const mapDiv = $('#restaurant-map');
-            const toggleBtn = $('#toggle-map');
-            const toggleText = $('#map-toggle-text');
-
-            if (mapDiv.is(':visible')) {
-                mapDiv.slideUp();
-                toggleText.text('Show Map');
-                toggleBtn.removeClass('btn-outline-primary').addClass('btn-outline-primary');
-            } else {
-                mapDiv.slideDown();
-                toggleText.text('Hide Map');
-                toggleBtn.removeClass('btn-outline-primary').addClass('btn-primary');
-
-                // Simulate map loading
-                setTimeout(() => {
-                    const mapContent = `
-                            <div class="d-flex align-items-center justify-content-center h-100">
-                                <div class="text-center">
-                                    <i class="bi bi-geo-alt-fill text-success" style="font-size: 4rem;"></i>
-                                    <h4 class="mt-3">Interactive Map View</h4>
-                                    <p class="text-muted mb-3">Restaurant locations across Penang</p>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card border-success mb-2">
-                                                <div class="card-body py-2">
-                                                    <small><strong>Georgetown:</strong> Multiple locations</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card border-warning mb-2">
-                                                <div class="card-body py-2">
-                                                    <small><strong>Penang Road:</strong> Heritage area</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card border-info mb-2">
-                                                <div class="card-body py-2">
-                                                    <small><strong>Gurney Drive:</strong> Seaside dining</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card border-danger mb-2">
-                                                <div class="card-body py-2">
-                                                    <small><strong>Air Itam:</strong> Local favorites</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <small class="text-muted mt-3 d-block">Ready for Google Maps, OpenStreetMap, or similar integration</small>
-                                </div>
-                            </div>
-                        `;
-                    mapDiv.html(mapContent);
-                }, 500);
-            }
-        }
+        
 
         function clearFilters() {
             $('#search-input').val('');
@@ -939,12 +859,12 @@
             $('#sort-select').val('rating');
             $('.filter-btn').removeClass('active');
             $('.filter-btn[data-filter="all"]').addClass('active');
-
+            
             currentFilter = 'all';
             currentArea = 'all';
             currentSort = 'rating';
             currentPage = 1;
-
+            
             displayedRestaurants = [...allRestaurants];
             displayRestaurants();
         }
@@ -967,30 +887,30 @@
                 restaurant = window.currentModalRestaurant;
                 console.log('Using modal restaurant:', restaurant);
             }
-
+            
             if (restaurant && restaurant.address) {
                 try {
                     // Clean and encode the address
                     const cleanAddress = restaurant.address.replace(/,\s*/g, ', ').trim();
                     const encodedAddress = encodeURIComponent(cleanAddress);
                     const encodedName = encodeURIComponent(restaurant.name);
-
+                    
                     // Create Google Maps URL - try address first, fallback to name+location
                     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
-
+                    
                     console.log('Opening maps URL:', mapsUrl);
-
+                    
                     // Show toast notification
                     showToast('Opening Directions', `Getting directions to ${restaurant.name}...`, 'info');
-
+                    
                     // Open Google Maps in new tab
                     const mapWindow = window.open(mapsUrl, '_blank');
-
+                    
                     // Check if popup was blocked
                     if (!mapWindow) {
                         showToast('Popup Blocked', 'Please allow popups to open Google Maps directions.', 'warning');
                     }
-
+                    
                 } catch (error) {
                     console.error('Error creating maps URL:', error);
                     showToast('Error', 'Could not create directions link.', 'danger');
@@ -1004,19 +924,19 @@
         function addToFavorites() {
             if (window.currentModalRestaurant) {
                 const restaurant = window.currentModalRestaurant;
-
+                
                 if (!favouriteRestaurants.find(fav => fav.id === restaurant.id)) {
                     favouriteRestaurants.push(restaurant);
                     localStorage.setItem('penangRestaurantFavorites', JSON.stringify(favouriteRestaurants));
                     updateFavouriteCount();
-
+                    
                     // Update the heart icon in the card if visible
                     $(`.favourite-toggle-btn[data-restaurant-id="${restaurant.id}"] i`)
                         .removeClass('bi-heart text-muted')
                         .addClass('bi-heart-fill text-danger');
                     $(`.favourite-toggle-btn[data-restaurant-id="${restaurant.id}"]`)
                         .attr('title', 'Remove from favourites');
-
+                    
                     showToast('Added to Favorites!', `${restaurant.name} has been saved to your favorites.`, 'success');
                 } else {
                     showToast('Already in Favorites', `${restaurant.name} is already in your favorites.`, 'info');
@@ -1029,10 +949,10 @@
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
-            return '★'.repeat(fullStars) +
-                (hasHalfStar ? '☆' : '') +
-                '☆'.repeat(emptyStars);
+            
+            return '★'.repeat(fullStars) + 
+                   (hasHalfStar ? '☆' : '') + 
+                   '☆'.repeat(emptyStars);
         }
 
         function showLoading(show) {
@@ -1048,154 +968,122 @@
 
         function showToast(title, message, type) {
             const toastHtml = `
-                    <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="d-flex">
-                            <div class="toast-body">
-                                <strong>${title}</strong><br>${message}
-                            </div>
-                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <strong>${title}</strong><br>${message}
                         </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
                     </div>
-                `;
-
+                </div>
+            `;
+            
             if (!$('#toast-container').length) {
                 $('body').append('<div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>');
             }
-
+            
             $('#toast-container').append(toastHtml);
             const toastElement = $('#toast-container .toast:last')[0];
             const toast = new bootstrap.Toast(toastElement);
             toast.show();
-
-            $(toastElement).on('hidden.bs.toast', function () {
+            
+            $(toastElement).on('hidden.bs.toast', function() {
                 $(this).remove();
             });
         }
 
-       
+        // Update navbar with user authentication state
+        function updateNavbar() {
+            const navAuthSection = $('#nav-auth-section');
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (loggedInUser) {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.username === loggedInUser);
+                const displayName = user ? (user.nickname || user.username) : loggedInUser;
+                const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                navAuthSection.html(`
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                            ${displayName.toUpperCase()}
+                            <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                        </a>
+                    </li>
+                `);
+            } else {
+                navAuthSection.html(`
+                    <li class="nav-item">
+                        <a class="account nav-link" href="account.html">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
+                    </li>
+                `);
+            }
+        }
 
         // Custom CSS for enhanced styling
         $('<style>')
             .prop('type', 'text/css')
             .html(`
+                .restaurant-card {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    cursor: pointer;
+                }
+                .restaurant-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+                }
+                .rating {
+                    color: #ffc107;
+                }
+                .rating-large {
+                    font-size: 1.5rem;
+                    color: #ffc107;
+                }
+                .filter-btn {
+                    margin: 2px;
+                    transition: all 0.3s ease;
+                }
+                .filter-btn.active {
+                    background-color: #39765f;
+                    border-color: #39765f;
+                    color: white;
+                }
+                .share-buttons {
+                    display: flex;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                }
+                .share-buttons .btn {
+                    flex: 1;
+                    min-width: 120px;
+                }
+                .favourite-toggle-btn {
+                    transition: all 0.3s ease;
+                }
+                .favourite-toggle-btn:hover {
+                    transform: scale(1.1);
+                }
+                @media (max-width: 768px) {
+                    .btn-group {
+                        flex-direction: column;
+                        width: 100%;
+                    }
+                    .btn-group .btn {
+                        margin-bottom: 5px;
+                    }
                     .restaurant-card {
-                        transition: transform 0.3s ease, box-shadow 0.3s ease;
-                        cursor: pointer;
-                    }
-                    .restaurant-card:hover {
-                        transform: translateY(-5px);
-                        box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-                    }
-                    .rating {
-                        color: #ffc107;
-                    }
-                    .rating-large {
-                        font-size: 1.5rem;
-                        color: #ffc107;
-                    }
-                    .filter-btn {
-                        margin: 2px;
-                        transition: all 0.3s ease;
-                    }
-                    .filter-btn.active {
-                        background-color: #39765f;
-                        border-color: #39765f;
-                        color: white;
+                        margin-bottom: 1rem;
                     }
                     .share-buttons {
-                        display: flex;
-                        gap: 8px;
-                        flex-wrap: wrap;
+                        flex-direction: column;
                     }
                     .share-buttons .btn {
-                        flex: 1;
-                        min-width: 120px;
+                        width: 100%;
+                        margin-bottom: 8px;
                     }
-                    .favourite-toggle-btn {
-                        transition: all 0.3s ease;
-                    }
-                    .favourite-toggle-btn:hover {
-                        transform: scale(1.1);
-                    }
-                    @media (max-width: 768px) {
-                        .btn-group {
-                            flex-direction: column;
-                            width: 100%;
-                        }
-                        .btn-group .btn {
-                            margin-bottom: 5px;
-                        }
-                        .restaurant-card {
-                            margin-bottom: 1rem;
-                        }
-                        .share-buttons {
-                            flex-direction: column;
-                        }
-                        .share-buttons .btn {
-                            width: 100%;
-                            margin-bottom: 8px;
-                        }
-                    }
-                `)
+                }
+            `)
             .appendTo('head');
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const navAuthSection = document.getElementById('nav-auth-section');
-            const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
-
-            //get cookie
-            const getCookie = (name) => {
-                const nameEQ = name + "=";
-                const ca = document.cookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-                }
-                return null;
-            };
-
-            //check log in
-            const getLoggedInUser = () => getCookie('loggedInUser');
-
-
-            //update vavigation bar
-            const updateNavbar = () => {
-                const loggedInUsername = getLoggedInUser();
-                navAuthSection.innerHTML = '';
-
-                if (loggedInUsername) {
-                    const users = getUsers();
-                    const user = users.find(u => u.username === loggedInUsername);
-
-                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
-                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
-
-                    navAuthSection.innerHTML = `
-                            <li class="nav-item">
-                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
-                                    ${displayName.toUpperCase()}
-                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
-                                </a>
-                            </li>
-                        `;
-                } else {
-
-                    navAuthSection.innerHTML = `
-                            <li class="nav-item">
-                                <a id="nav-signin-link" class="account nav-link" href="account.html">
-                                    SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35">
-                                </a>
-                            </li>
-                        `;
-                }
-            };
-
-            //update
-            updateNavbar();
-        });
     </script>
 </body>
 </html>
