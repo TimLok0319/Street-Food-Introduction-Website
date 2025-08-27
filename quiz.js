@@ -78,17 +78,13 @@ async function loadQuizData() {
         quizData = [];
     }
 
-    // Restore saved state
-    const saved = JSON.parse(localStorage.getItem("quizState"));
-    if (saved) {
-        currentQuestion = saved.currentQuestion ?? 0;
-        score = saved.score ?? 0;
-        answers = saved.answers ?? [];
-        stage = saved.stage ?? "welcome";
-        lastSelected = saved.lastSelected ?? null;
-    } else {
-        stage = "welcome"; // ensure welcome page shows
-    }
+    // On page load/refresh, always reset the state to the welcome page.
+    currentQuestion = 0;
+    score = 0;
+    answers = [];
+    stage = "welcome";
+    lastSelected = null;
+    clearState(); // Also clear the saved state from localStorage
 
     showCurrentSection();
 }
