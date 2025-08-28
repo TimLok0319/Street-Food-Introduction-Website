@@ -53,7 +53,7 @@
                     <form id="signInForm">
                         <div class="form-floating mb-3"><input type="text" class="form-control" id="signInUsername" placeholder="Username" required><label for="signInUsername">Username</label></div>
                         <div class="form-floating mb-3"><input type="password" class="form-control" id="signInPassword" placeholder="Password" required><label for="signInPassword">Password</label></div>
-                        <div class="d-grid"><button type="submit" class="btn btn-primary btn-lg">Sign In</button></div>
+                        <div class="d-grid"><button type="submit" class="btn btn-success btn-lg">Sign In</button></div>
                     </form>
                 </div>
                 <!-- sign up -->
@@ -80,7 +80,7 @@
                 <label for="avatarUpload" class="btn btn-primary btn-lg px-4">Change Photo</label>
                 <input type="file" id="avatarUpload" accept="image/*">
                 <button type="button" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#nameModal">Change Name</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</button>
+                <button type="button" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</button>
             </div>
 
             <div class="d-grid">
@@ -140,16 +140,16 @@
 
   
 <footer class="footer text-center text-white py-4">
-<div class="container">
-  <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
-  <div class="mt-2">
-    <a href="#" target="_blank" rel="noopener noreferrer"class="text-white mx-2"><i class="bi bi-facebook"></i></a>
-    <a href="#" target="_blank" rel="noopener noreferrer"class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
-    <a href="#" target="_blank" rel="noopener noreferrer"class="text-white mx-2"><i class="bi bi-instagram"></i></a>
-    <a href="https://github.com/TimLok0319/Street-Food-Introduction-Website" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-github"></i></a>
-  </div>
-</div>
-</footer>
+        <div class="container">
+            <p class="footer-text">© 2025 Penang One Better. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="https://github.com/TimLok0319/Street-Food-Introduction-Website" target="_blank" rel="noopener noreferrer" class="text-white mx-2"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+    </footer>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -295,7 +295,6 @@
 
             //log out
             const handleLogout = () => {
-                // localStorage.removeItem('loggedInUser');
                 deleteCookie('loggedInUser'); 
                 showPage('account');
             };
