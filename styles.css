@@ -180,12 +180,12 @@ nav {
   justify-content: center;
 }
 
-.food-recommendation .container .card-container a .list-group {
+.food-recommendation .container .card-container .list-group {
   font-size: 20px;
   font-weight: 500;
 }
 
-.food-recommendation .container a .card {
+.food-recommendation .container .card {
   margin: 20px;
 }
 
@@ -548,8 +548,9 @@ nav {
     align-items: center;
   }
 
-  .food-recommendation a{
+  .food-recommendation .card-container{
     justify-content: center;
+    align-items: center;
   }
 
   .overlay-text h1 {
