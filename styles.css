@@ -899,7 +899,7 @@ nav {
 
 /*----------------------------------------------------------------Account----------------------------------------------------------------*/
 
-/* Shared container styles */
+
 .page-container {
     max-width: 600px;
     margin: 50px auto;
@@ -913,12 +913,12 @@ body {
     background-color: #FEFAE0;
 }
 
-/* Make profile page wider */
+
 #profilePage.page-container {
     max-width: 800px;
 }
 
-/* Account page specific styles */
+
 .nav-tabs .nav-link {
     color: #495057;
 }
@@ -928,7 +928,7 @@ body {
         font-weight: bold;
     }
 
-/* Profile page specific styles */
+
 .profile-container {
     text-align: center;
 }
@@ -947,14 +947,13 @@ body {
     display: none;
 }
 
-/* Utility to hide elements */
+
 .hidden {
     display: none;
 }
 
 /*----------------------------------------------------------------About Page----------------------------------------------------------------*/
 
-/* About Hero Section */
 .about-hero-section {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(images/penang-skyline.jpg);
     background-position: center;
@@ -963,7 +962,7 @@ body {
     color: white;
 }
 
-/* Counter Section */
+
 .counter-section {
     text-align: center;
     padding: 20px;
@@ -983,7 +982,7 @@ body {
     color: #39765f;
 }
 
-/* Flip Card Section */
+
 .flip-card {
     background-color: transparent;
     height: 200px;
@@ -1029,7 +1028,7 @@ body {
     padding: 20px;
 }
 
-/* Timeline Section */
+
 .timeline-item {
     position: relative;
     margin-bottom: 30px;
@@ -1054,7 +1053,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Feature Card Section */
 .feature-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1064,7 +1062,6 @@ body {
     box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
 }
 
-/* Refactored from inline styles in about.html */
 .about-section {
     background-color: #FEFAE0;
     padding: 50px 0;
@@ -1133,7 +1130,7 @@ a.btn[style*="background-color: #39765f"] {
 }
 
 a.btn[style*="background-color: #39765f"]:hover {
-  background-color: #2a5a4a !important; /* A darker shade of the original green */
+  background-color: #2a5a4a !important;
 }
 
 .btn-custom-green {
@@ -1141,7 +1138,7 @@ a.btn[style*="background-color: #39765f"]:hover {
 }
 
 .btn-custom-green:hover {
-  background-color: #2a5a4a !important; /* A darker shade of the original green */
+  background-color: #2a5a4a !important; 
 }
 
 
