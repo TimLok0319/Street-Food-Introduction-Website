@@ -336,6 +336,28 @@ nav {
   transition: opacity 0.2s ease-in-out;
 }
 
+/* For click/tap functionality on touch devices */
+.restaurant-reco .restaurant-image-card.is-flipped .hover-img {
+  opacity: 1;
+}
+
+.restaurant-reco .restaurant-image-card.is-flipped .signature-text-overlay {
+  opacity: 1;
+}
+
+.restaurant-reco .restaurant-image-card.is-flipped .restaurant-name-overlay {
+  opacity: 0;
+}
+
+.restaurant-reco .restaurant-image-card.is-flipped {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.restaurant-reco .restaurant-image-card.is-flipped .image-container img {
+  transform: scale(1.05);
+}
+
 /*----------------------------------------------------------------Michelin----------------------------------------------------------------*/
 
 .michelin-sec {
