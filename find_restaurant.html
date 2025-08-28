@@ -992,33 +992,7 @@
             });
         }
 
-        // Update navbar with user authentication state
-        function updateNavbar() {
-            const navAuthSection = $('#nav-auth-section');
-            const loggedInUser = localStorage.getItem('loggedInUser');
-            
-            if (loggedInUser) {
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                const user = users.find(u => u.username === loggedInUser);
-                const displayName = user ? (user.nickname || user.username) : loggedInUser;
-                const avatarSrc = user ? user.avatar : 'images/user-logo.png';
-
-                navAuthSection.html(`
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
-                            ${displayName.toUpperCase()}
-                            <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
-                        </a>
-                    </li>
-                `);
-            } else {
-                navAuthSection.html(`
-                    <li class="nav-item">
-                        <a class="account nav-link" href="account.html">SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35"></a>
-                    </li>
-                `);
-            }
-        }
+       
 
         // Custom CSS for enhanced styling
         $('<style>')
@@ -1084,6 +1058,64 @@
                 }
             `)
             .appendTo('head');
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navAuthSection = document.getElementById('nav-auth-section');
+            const getUsers = () => JSON.parse(localStorage.getItem('users')) || [];
+
+            //get cookie
+            const getCookie = (name) => {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            };
+
+            //check log in
+            const getLoggedInUser = () => getCookie('loggedInUser');
+
+
+            //update vavigation bar
+            const updateNavbar = () => {
+                const loggedInUsername = getLoggedInUser();
+                navAuthSection.innerHTML = '';
+
+                if (loggedInUsername) {
+                    const users = getUsers();
+                    const user = users.find(u => u.username === loggedInUsername);
+
+                    const displayName = user ? (user.nickname || user.username) : loggedInUsername;
+                    const avatarSrc = user ? user.avatar : 'images/user-logo.png';
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-profile-link" class="nav-link d-flex align-items-center" href="account.html" title="View Profile">
+                                    ${displayName.toUpperCase()}
+                                    <img src="${avatarSrc}" alt="User Avatar" class="ms-2" height="35" width="35" style="border-radius: 50%; object-fit: cover;">
+                                </a>
+                            </li>
+                        `;
+                } else {
+
+                    navAuthSection.innerHTML = `
+                            <li class="nav-item">
+                                <a id="nav-signin-link" class="account nav-link" href="account.html">
+                                    SIGN IN <img class="user-icon" src="images/user-logo.png" height="35" width="35">
+                                </a>
+                            </li>
+                        `;
+                }
+            };
+
+            //update
+            updateNavbar();
+        });
     </script>
 </body>
 </html>
