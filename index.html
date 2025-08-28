@@ -177,7 +177,7 @@
         <!-- First Row -->
         <div class="row g-4 justify-content-center mb-4 restaurant-row-cards">
           <div class="col-12 col-lg-4 d-flex">
-            <a href="#" class="card-link restaurant-image-card">
+            <div class="card-link restaurant-image-card">
               <div class="image-container">
                 <img src="images/ghee-lian.jpeg" class="img-fluid default-img" alt="Ghee Lian Green Tomyum">
                 <img src="images/green-tomyum.jpg" class="img-fluid hover-img" alt="Signature: Tom Yum">
@@ -189,10 +189,10 @@
                 <span class="top-left">Signature Dish</span>
                 <span class="bottom-left">Green Tom Yum</span>
               </div>
-            </a>
+            </div>
           </div>
           <div class="col-12 col-lg-4 d-flex">
-            <a href="#" class="card-link restaurant-image-card">
+            <div class="card-link restaurant-image-card">
               <div class="image-container">
                 <img src="images/penang-road-famous-laksa.webp" class="img-fluid default-img" alt="Penang Road Famous Laksa">
                 <img src="images/penang-laksa-wide.jpg" class="img-fluid hover-img" alt="Signature: Asam Laksa">
@@ -204,10 +204,10 @@
                 <span class="top-left">Signature Dish</span>
                 <span class="bottom-left">Asam Laksa</span>
               </div>
-            </a>
+            </div>
           </div>
           <div class="col-12 col-lg-4 d-flex">
-            <a href="#" class="card-link restaurant-image-card">
+            <div class="card-link restaurant-image-card">
               <div class="image-container">
                 <img src="images/ah-leng-char-kway-teow.JPG" class="img-fluid default-img" alt="Ah Leng Char Kway Teow">
                 <img src="images/ah-leng-food.jpg" class="img-fluid hover-img" alt="Signature: Char Kway Teow">
@@ -219,14 +219,14 @@
                 <span class="top-left">Signature Dish</span>
                 <span class="bottom-left">Char Kway Teow</span>
               </div>
-            </a>
+            </div>
           </div>
         </div>
 
         <!-- Second Row -->
         <div class="row g-4 justify-content-center restaurant-row-cards">
           <div class="col-12 col-lg-4 d-flex">
-            <a href="#" class="card-link restaurant-image-card">
+                        <div class="card-link restaurant-image-card">
               <div class="image-container">
                 <img src="images/super-hokkien-mee.JPG" class="img-fluid default-img" alt="Super Hokkien Mee">
                 <img src="images/red-hokkien-mee.jpeg" class="img-fluid hover-img" alt="Signature: Hokkien Mee">
@@ -238,10 +238,10 @@
                 <span class="top-left">Signature Dish</span>
                 <span class="bottom-left">Hokkien Mee</span>
               </div>
-            </a>
+            </div>
           </div>
           <div class="col-12 col-lg-4 d-flex">
-            <a href="#" class="card-link restaurant-image-card">
+            <div class="card-link restaurant-image-card">
               <div class="image-container">
                 <img src="images/super-star-koay-teow-soup.jpg" class="img-fluid default-img" alt="Super Star Koay Teow Soup">
                 <img src="images/braised-chicken-feet.jpg" class="img-fluid hover-img" alt="Signature: Koay Teow Soup">
@@ -253,10 +253,10 @@
                 <span class="top-left">Signature Dish</span>
                 <span class="bottom-left">Braised Chicken</span>
               </div>
-            </a>
+            </div>
           </div>
           <div class="col-12 col-lg-4 d-flex">
-            <a href="#" class="card-link restaurant-image-card">
+            <div class="card-link restaurant-image-card">
               <div class="image-container">
                 <img src="images/nasi-beratur.jpg" class="img-fluid default-img" alt="Nasi Kandar Beratur">
                 <img src="images/Penang-Nasi-Kandar.jpg" class="img-fluid hover-img" alt="Signature: Nasi Kandar">
@@ -268,7 +268,7 @@
                 <span class="top-left">Signature Dish</span>
                 <span class="bottom-left">Nasi Kandar</span>
               </div>
-            </a>
+            </div>
           </div>
         </div>
 
@@ -423,6 +423,30 @@
 
             // update navbat
             updateNavbar();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.restaurant-image-card');
+
+            cards.forEach(card => {
+                card.addEventListener('click', (event) => {
+                    // Prevent default behavior if it were a link
+                    event.preventDefault();
+                    
+                    const wasFlipped = card.classList.contains('is-flipped');
+
+                    // Remove 'is-flipped' from all cards
+                    cards.forEach(otherCard => {
+                        otherCard.classList.remove('is-flipped');
+                    });
+
+                    // If the card was not already flipped, flip it
+                    if (!wasFlipped) {
+                        card.classList.add('is-flipped');
+                    }
+                });
+            });
         });
     </script>
 </body>
